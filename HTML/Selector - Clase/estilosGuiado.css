@@ -40,5 +40,13 @@ img[alt="segunda"]{
     border: 5px red solid;
 }
 /*Los h3 que estén antes de un párrafo y que tengan la clase "antes" ponerles de color de fondo rosa*/
-h3.anes
+
+h3.antes {
+    background-color: pink;
+}
+
 /*Los h3 que estén justo despúes de un párrafo poner de color de fondo azul*/
+
+p + h3{
+    background-color: blue;
+}
