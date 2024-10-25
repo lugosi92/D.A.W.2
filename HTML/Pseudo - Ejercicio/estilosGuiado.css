@@ -1,0 +1,80 @@
+/*Usando el selector simple table, pon borde a toda la tabla*/
+table {
+    border: 2px black solid;
+    border-collapse: collapse;
+}
+
+/*Usando los selectores simples td y th, poner borde a todas las casillas*/
+
+td,th{
+    border: 2px black solid;
+}
+
+/* Utilizando únicamente pseudoselectores da color de fondo verde a la primera columna (horas) */
+/*La primera casilla (first-child) que está en las filas del tbody debe permanecer en BLANCO*/
+
+td:first-child{
+    background-color: green; 
+}
+
+/* Utilizando únicamente pseudoselectores da color de fondo amarillo a la celda de recreo */
+/*Ojo el árbol DOM encuentra un SEGUNDO hijo, no encuentra un segundo th*/
+
+tr,th{
+    background-color: yellow;
+}
+
+
+
+/* Cambiar los estado de los enlaces para que:
+
+ Nunca estén subrayados
+ Si están visitados se muestren en rojo
+ Si no están visitado se muestren en verde */
+
+
+ 
+
+
+
+
+/* Utilizando pseudoselectores hacer que cuando pasemos el ratón sobre la columna del viernes
+aumente el tamaño de letra al doble */
+
+
+
+
+
+
+
+/* Utilizando Pseudoelementos Haz que la primera letra de los días tenga el doble de tamaño*/
+
+
+
+
+
+
+/* Añade un borde rojo que esté separado 5 px a los campos obligatorios */
+
+
+
+
+
+
+/* Añade un * en rojo detrás de las etiquetas del formulario*/
+
+
+
+
+
+
+
+/*Utilizando pseudoselectores de posición colgroup y col:.... da color azul a las columas de lunes y martes
+color verde a las columnas de miércoles y jueves
+color rojo a la columna del viernes
+Utiliza 3 reglas*/
+
+
+
+
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HOJA DE INSCRIPCION</h1>
+    <h2>EN LOS CICLOS FORMATIVOS DE GRADO SUPERIOR</h2>
+        <fieldset>
+
+            <legend>Datos Personales</legend>
+                
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+
+                <label for="nombre2"> Nombre</label>
+                <input type="text" id="nombre2" name="nombre2">
+
+                <label for= "dni"> DNI</label>
+                <input type="text" id="dni" name = "dni";>
+         
+                <label for ="Nacimiento"> Localidad de Nacimiento</label>
+                <input type="text" id="Nacimiento" nombre = "Nacimiento">
+
+                <labe for ="Provincia"> Provincia</labe>
+                <select name = "Provincia">
+                    <option value = "M">Madrid</option>
+                    <option value = "V">Valencia</option>
+                    <option value = "B">Barcelona</option>
+                </select>
+                
+                <br>
+
+                <label for="Fecha de Nacimiento">Fecha de Nacimiento</label>
+                <input type="Date" id="FechaNacimiento" nombre ="FechaNacimiento"> 
+
+                <label for = "Direccion"> Direccion</label>
+                <input type ="text" id="direccion" nombre ="direccion">
+
+                <br>
+
+                <label for ="Codigo Postal">Codigo Postal: </label>
+                <input type = "text" id="codigoPostal" nombre = "codigoPostal">
+
+        </fieldset>
+
+        <fieldset>
+            <legend> Forma de Acceso</legend>
+
+                <ul type = "none">
+                    <li>
+                        <input for ="Directo" type ="radio" name = "n1">Directo
+                        <ul type = "none">
+                            <li>
+                                <input type = "radio"  name = "n">Bachillerato Log Modalidad
+                                <input type = "text">
+                            </li>   
+
+                            <li>
+                                <input type = "radio" name = "n">Experimental
+                            </li>   
+
+                            <li>
+                                <input type = "radio"  name = "n">COU Opciom
+                                <input type = "text">
+                            </li>
+
+                            <li>
+                                <input type = "radio"  name = "n">FP2
+                            </li>
+
+                            <li>
+                                <input type = "radio"  name = "n">Otros (especifique)
+                                <input type = "text">
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <input for = "PruebaLibre" type ="radio" name = "n1">Prueba Libre
+                    </li>
+                </ul>
+        </fieldset>
+
+        <fieldset>
+            <legend>Documentos Adjuntos</legend>
+                <input type ="checkbox">Fotocopia DNI
+                <input type ="checkbox">Certificado Academico
+
+                <br>
+
+                <input type ="checkbox">Otros documentos (especifique)
+                <input type ="text">
+        </fieldset>
+
+        <br>
+        <input type = "submit" value = "Enviar Solicitud">
+</body>
+</html>
+
+
