@@ -105,10 +105,18 @@ Cuiadado con la prioridad con la que se muestra!
 */
 
 /*
-1. id img 
+1. id img1 posicion absoluta
+    1.1 Posicionado a un 20% a la derecha y de su padre a un 25%
+    1.2 Rotar -45 grados
 */
 
-
+#img1{
+    position: absolute;
+    left: 20%;
+    top: 25%;
+    transform: rotate(-45deg);
+    z-index: 4;
+}
 
 
 
@@ -119,9 +127,13 @@ debe rotar 45grados (transform: rotate(45deg)
 Cuiadado con la prioridad con la que se muestra!
 */
 
-
-
-
+#img2{
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    transform: rotate(45deg);
+    z-index: 3;
+}
 
 
 /*
@@ -131,10 +143,13 @@ debe rotar -15 grados (transform: rotate(-15deg)
 Cuiadado con la prioridad con la que se muestra!
 */
 
-
-
-
-
+#img3{
+    position: absolute;
+    left: 40%;
+    top: 35%;
+    transform: rotate(-15deg);
+    z-index: 2;
+}
 
 /*
 El id img3 debe tener una posicion absoluta y estar posicionado un 50% a la izquierda de su padre
@@ -142,12 +157,13 @@ y un 40% por debajo del extremo superior
 debe rotar 15 grados (transform: rotate(15deg)
 Cuiadado con la prioridad con la que se muestra!
 */
-
-
-
-
-
-
+#img4{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: rotate(15deg);
+    z-index: 1;
+}
 
 
 /*
@@ -160,24 +176,36 @@ El texto de sus elementos debe estar centrado
 
 */
 
+.fixed-sidebar{
+    border: solid black 2px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    font-size: 0.8em;
+    width: 40%;
+    height: 80px;
+    position: fixed;
+    top: 30%;
+    left: 0;
+    text-align: center;
+    margin: 0; /* Asegúrate de que no haya margen que lo desplace */
+    padding: 0;
+}
 
 
 
 
-
-
-/*Estilo de los elementos de la lista (sin puntero)* del menu lateral/
+/*Estilo de los elementos de la lista (sin puntero)* del menu lateral*/
 .fixed-sidebar ul {
   list-style: none;
   padding-left: 5px;
 }
 
 
-
-
 /*Estilo de la imagen del menu lateral, con un ancho del 90% de su contenedor padre*/
 
-
+.fixed-sidebar img {
+    width: 90%;
+}
 
 
 

@@ -1,29 +1,31 @@
 /*Usando el selector simple table, pon borde a toda la tabla*/
-table {
-    border: 2px black solid;
+
+table{
+    border: 1px solid black;
     border-collapse: collapse;
 }
 
-/*Usando los selectores simples td y th, poner borde a todas las casillas*/
 
-td,th{
-    border: 2px black solid;
+/*Usando los selectores simples td y th, poner borde a todas las casillas*/
+td, th{
+    border: 1px solid black;
+    ;
 }
 
 /* Utilizando únicamente pseudoselectores da color de fondo verde a la primera columna (horas) */
 /*La primera casilla (first-child) que está en las filas del tbody debe permanecer en BLANCO*/
 
 td:first-child{
-    background-color: green; 
+    background-color: green;
 }
+
 
 /* Utilizando únicamente pseudoselectores da color de fondo amarillo a la celda de recreo */
 /*Ojo el árbol DOM encuentra un SEGUNDO hijo, no encuentra un segundo th*/
 
-tr,th{
-    background-color: yellow;
+tr:nth-child(4){
+    background-color: gold;
 }
-
 
 
 /* Cambiar los estado de los enlaces para que:
@@ -33,7 +35,15 @@ tr,th{
  Si no están visitado se muestren en verde */
 
 
- 
+a{
+    text-decoration: none;
+}
+a:visited{
+    color: red;
+}
+a:link{
+    color: green;
+}
 
 
 
@@ -41,38 +51,45 @@ tr,th{
 /* Utilizando pseudoselectores hacer que cuando pasemos el ratón sobre la columna del viernes
 aumente el tamaño de letra al doble */
 
-
-
-
-
-
+tr th:nth-child(6):hover{
+    font-size: 2em;
+}
 
 /* Utilizando Pseudoelementos Haz que la primera letra de los días tenga el doble de tamaño*/
 
-
-
-
-
+tr:first-of-type th::first-letter{
+    font-size: 2em;
+}
 
 /* Añade un borde rojo que esté separado 5 px a los campos obligatorios */
 
-
-
-
-
+input:required{
+    border: 5px red solid ;
+}
 
 /* Añade un * en rojo detrás de las etiquetas del formulario*/
 
-
-
-
-
-
+p:after{
+    content: "*";
+    color: red;
+}
 
 /*Utilizando pseudoselectores de posición colgroup y col:.... da color azul a las columas de lunes y martes
 color verde a las columnas de miércoles y jueves
 color rojo a la columna del viernes
 Utiliza 3 reglas*/
+
+col:nth-child(2){
+    background-color: rgb(0, 238, 255);    
+}
+
+col:nth-child(3){
+    background-color: green;    
+}
+
+col:nth-child(4){
+    background-color: red;    
+}
 
 
 
