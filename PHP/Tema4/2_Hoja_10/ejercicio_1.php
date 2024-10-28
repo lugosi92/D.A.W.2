@@ -2,13 +2,16 @@
 
 session_start();
 
-$errBuscad = $errTipo = $errOp = "";
+$errBuscad = $errTipo = $errOp = $buscador = $tipoSeleccionado = $opcion = "";
 
 
 // es post el metodo que se ha usaod?
 // buscador tipo op
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $error = false    ;
+    $error = false;
+    $buscador =  isset($_POST['buscador'])  ? $_POST['buscador'] : ""; //Para guardar lo correcto
+    $tipoSeleccionado = isset($_POST['tipo']) ? $_POST['tipo'] : "";
+    $opcion =  isset($_POST['op'])  ?  $_POST['op'] : "";
 
     if(empty($_POST["buscador"])){
         $errBuscad ="Texto a buscar, no puede estar vacio";
@@ -73,15 +76,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class = "partOne">
         <!-- Buscar -->
         <label for= "buscador">Texto a buscar: </label>  
-        <input type = "texte" id = "buscador" name = "buscador"> 
+         <input value="<?php if(isset($buscador)) echo $buscador; ?>" 
+                type = "texte" id = "buscador" name = "buscador"> 
+
         <span class = "error"><?php echo $errBuscad; ?></span>
         <br>
 
         <!-- Filtro -->
         <label for = "tipo">Buscar por: </label>
-        <input type = "radio" id = "tipo" name = "tipo" value = "titulo">Titulo de cancion
-        <input type = "radio" id = "tipo" name = "tipo" value = "nombre">Nombre de album
-        <input type = "radio" id = "tipo" name = "tipo" value = "ambos">Ambos campos
+        <input type = "radio" id = "tipo" name = "tipo" value = "titulo"<?php if ($tipoSeleccionado== 'titulo') echo 'checked'; ?>>Titulo de cancion
+        <input type = "radio" id = "tipo" name = "tipo" value = "nombre"<?php if ($tipoSeleccionado== 'nombre') echo 'checked'; ?>>Nombre de album
+        <input type = "radio" id = "tipo" name = "tipo" value = "ambos" <?php if ($tipoSeleccionado== 'ambos') echo 'checked'; ?>>Ambos campos
         <span class = "error"><?php echo $errTipo?></span>
 
         <br>
@@ -90,16 +95,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <label for = "op">Genero musical: </label>
         <select type = "op" id = "op" name = "op"> 
             <option></option>
-            <option value = "Todos">Todos</option>
-            <option value = "Acustica">Acustica</option>
-            <option value = "Banda sonora">Banda sonora</option>
-            <option value = "Blues">Blues</option>
-            <option value = "Electronica">Electronica</option>
-            <option value = "Folk">Folk</option>
-            <option value = "Jazz">Jazz</option>
-            <option value = "New Age">New Age</option>
-            <option value = "Pop">Pop</option>
-            <option value = "Rock">Rock</option>
+            <option value = "Todos" <?php if ($opcion == "Todos") echo "selected"  ?>>Todos</option>
+            <option value = "Acustica" <?php if ($opcion == "Acustica") echo "selected"  ?>>Acustica</option>
+            <option value = "Banda" <?php if ($opcion == "Banda") echo "selected"  ?>>Banda sonora</option>
+            <option value = "Blues" <?php if ($opcion == "Blues") echo "selected"  ?>>Blues</option>
+            <option value = "Electronica" <?php if ($opcion == "Electronica") echo "selected"  ?>>Electronica</option>
+            <option value = "Folk" <?php if ($opcion == "Folk") echo "selected"  ?>>Folk</option>
+            <option value = "Jazz"<?php if ($opcion == "Jazz") echo "selected"  ?>>Jazz</option>
+            <option value = "New" <?php if ($opcion == "New") echo "selected"  ?>>New Age</option>
+            <option value = "Pop" <?php if ($opcion == "Pop") echo "selected"  ?>>Pop</option>
+            <option value = "Rock" <?php if ($opcion == "Rock") echo "selected"  ?>>Rock</option>
         </select>
         <span class = "error"><?php echo $errOp?></span>
 
