@@ -6,10 +6,9 @@
 
 /*Dar color de fondo a toda la página, por ejemplo, un gris*/
 
-body {
-    background-color: rgb(185, 184, 184);
+body{
+    background-color: rgb(209, 203, 203);
 }
-
 
 /*El div contenedor general debe tener un color de fondo verde claro,
 redondear 100px los bordes (que no sean vértices con pico)
@@ -19,15 +18,15 @@ tiene hijos que se posicionan respecto a el
 Tiene una altura de 600px
 Y un ancho del 80%
 */
-
-.contenedor {
-    background-color: green;
+.contenedor{
+    background-color: rgb(60, 221, 60);
     border-radius: 100px;
-    margin: 100px;
+    margin: 100px auto;
     position: relative;
     height: 600px;
-    width: 80%; 
+    width: 80%;
 }
+
  
 
 /*El panel de navegacion de tener un fondo gris
@@ -39,13 +38,13 @@ si bajamos en la pantalla el menu de navegacion PERMANECE pegado al margen super
 3. Ningun elemento lo puede solapar
 4. Pegado en la parte superior 
 */
-nav {
-    background-color: gray;
+
+nav{
+    background-color: rgb(94, 94, 95);
     position: sticky;
     z-index: 100;
     top: 0px;
 }
-
 
 /*Los elementos del menu de navegacion deben de tener color blanco y ponerse un al lado del otro.
 Cada uno de ellos tiene un padding de 20px y ancho del 20% respecto a su contenedor padre*/
@@ -56,7 +55,8 @@ Cada uno de ellos tiene un padding de 20px y ancho del 20% respecto a su contene
 3. Padding 20
 4. ancho de 20%
 */
-.nav-item {
+
+.nav-item{
     color: white;
     display: inline-block;
     padding: 20px;
@@ -79,21 +79,19 @@ Deben de tener un ancho del 25% de su contenedor padre
 5. Ancho del 25%
 */
 
-figure {
+figure{
     background-color: white;
-    border: 3px solid;
+    border: 1px black solid;
     padding: 10px;
     width: 25%;
-
-}
-
-figcaption{
     text-align: center;
+    
 }
+
 
 /*Todas las imagenes dentro de un figure tienen un ancho del 90% respecto a su padre*/
 
-figure img {
+figure img{
     width: 90%;
 }
 
@@ -113,11 +111,10 @@ Cuiadado con la prioridad con la que se muestra!
 #img1{
     position: absolute;
     left: 20%;
-    top: 25%;
     transform: rotate(-45deg);
-    z-index: 4;
+    top: 25%;
+    z-index: 10;
 }
-
 
 
 /*
@@ -132,7 +129,7 @@ Cuiadado con la prioridad con la que se muestra!
     left: 30%;
     top: 30%;
     transform: rotate(45deg);
-    z-index: 3;
+    z-index: 9;
 }
 
 
@@ -148,7 +145,7 @@ Cuiadado con la prioridad con la que se muestra!
     left: 40%;
     top: 35%;
     transform: rotate(-15deg);
-    z-index: 2;
+    z-index: 8;
 }
 
 /*
@@ -157,14 +154,13 @@ y un 40% por debajo del extremo superior
 debe rotar 15 grados (transform: rotate(15deg)
 Cuiadado con la prioridad con la que se muestra!
 */
+
 #img4{
     position: absolute;
     left: 50%;
     top: 40%;
     transform: rotate(15deg);
-    z-index: 1;
 }
-
 
 /*
 El menu lateral de estar encuadrado con un borde de 2px y los vertices derechos (superior e inferior) redondeados con 10px
@@ -176,41 +172,31 @@ El texto de sus elementos debe estar centrado
 
 */
 
-.fixed-sidebar{
-    border: solid black 2px;
+.fixed-sidebar ul{
+    border: 2px black solid;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     font-size: 0.8em;
-    width: 40%;
-    height: 80px;
     position: fixed;
+    height: 40%;
+    width: 80px;
     top: 30%;
-    left: 0;
     text-align: center;
-    margin: 0; /* Asegúrate de que no haya margen que lo desplace */
-    padding: 0;
 }
-
-
 
 
 /*Estilo de los elementos de la lista (sin puntero)* del menu lateral*/
-.fixed-sidebar ul {
-  list-style: none;
-  padding-left: 5px;
+
+ul li{
+    list-style: none;
+    padding-left: 5px;
 }
-
-
 /*Estilo de la imagen del menu lateral, con un ancho del 90% de su contenedor padre*/
 
-.fixed-sidebar img {
+.fixed-sidebar img{
+    margin: 5%;
     width: 90%;
 }
-
-
-
-
-
 
 
 
