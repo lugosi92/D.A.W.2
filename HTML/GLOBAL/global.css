@@ -1,106 +1,141 @@
-
-*{
+* {
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color:blue;
+    color: blue;
     font-weight: bold;
     margin: 0;
 }
 
+/* Contenedor principal para centrar contenido */
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto; /* Centra el contenido en la página */
+    padding: 0 15px; /* Añade espacio en los lados */
+}
 
 nav {
     background-color: rgb(11, 11, 105);
-    padding:  0 10px;
+    padding: 0 10px;
     display: flex;
+    justify-content: space-between; /* Distribuye los elementos a lo largo del espacio */
     position: fixed;
     z-index: 1;
     width: 100%;
 }
-
 
 .navegacion {
     color: rgb(192, 121, 145);
     margin: 15px;
 }
 
-img{
+/* Imagen principal */
+img {
     width: 100%;
-    position: static;
+    max-width: 100%; /* Limita el ancho para que no se estire más allá de su contenedor */
+}
+
+.frase p {
+    position: absolute;
+    top: 30%;
+    right: 15%;
+    background-color: blue;
+    border-radius: 100px;
+    color: palevioletred;
+    width: 15em;
+    text-align: center;
 }
 
 .enlace {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(/pista.jpg);
-}
-
-p {
-    position: absolute;
-    top: 15%;
-    left: 70%;
-    color: #d87093;
-    padding-left: 20px;
-    padding-right: 20px;
-    
-}
-
-.enlace{
     background-color: blue;
     color: palevioletred;
     border-radius: 10px;
-
 }
 
-
-/* Resultado 2 */
-
-h3{
+/* Título */
+h1 {
     text-align: center;
     color: black;
 }
 
-.contenedor{
-    position: absolute;
+.linea-roja, .linea-roja_2 {
+    width: 15em;
+    border: solid 1px red;
+    margin: 0 auto; /* Centra las líneas */
 }
 
-.linea-roja{
-    margin-left: 30%;
-    margin-right: 30%;
-    border: 1px solid black;
-    border-color: red;
+/* Imágenes en fila */
+.img {
+    display: flex;
+    justify-content: center;
+    gap: 5%; /* Espacio entre las imágenes */
+    margin: 20px auto;
 }
 
-.imagenes img{  
-    width: 189px;
-    height: 265px;
+.img div img {
+    width: 100%; /* Ajusta automáticamente dentro del contenedor */
+    max-width: 150px;
+    height: auto; /* Mantiene la proporción */
 }
 
-.imagenes{
+.img h3 {
+    text-align: center;
+    color: black;
+}
+
+/* Parrafos con imagen flotante */
+.parrafos img {
     float: left;
-    padding: 20px;
-    align-items: center;
-
+    width: 22%;
+    margin-right: 20px;
 }
 
-.imagenes p {
-
-    margin-top: 10px;
-    font-size: 1em;
-    color: #333;
-    display: block;
-    margin: auto;
+.juntos {
+    padding: 10px;
+    color: black;
 }
 
+.separados {
+    margin-left: 22%;
+    color: black;
+}
 
-.linea-roja2{
-    display: block;
-    top: 50%;
-    margin-left: 30%;
-    margin-right: 30%;
-    border: 1px solid black;
-    border-color: red;
+/* Formato para el primer caracter de los parrafos */
+.parrafos p::first-letter {
+    color: pink;
+    font-size: 2em;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    padding-right: 10px;
+}
+
+/* Galería de imágenes */
+.imagenes4 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1%; /* Espacio entre las imágenes */
+}
+
+.imagenes4 img {
+    width: 15%; /* Ajusta para mostrar varias en una fila */
+    max-width: 120px;
+    height: auto;
+}
+
+.redes img {
+    width: 20px;
+    float: right;
+}
+
+footer {
+    background-color: blue;
+    color: pink;
+    padding: 10px;
+    text-align: center;
 }
