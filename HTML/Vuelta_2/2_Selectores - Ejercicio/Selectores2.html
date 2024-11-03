@@ -4,22 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link href="css/estilos.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="Selectores2.css">
 </head>
-<style>
-        
-    table {
-        border: black solid 2px;
-        border-collapse: collapse;
 
-    }
-    th, td{
-        border: black solid 1px;
-    }
-
-</style>
 <body>
+    <h1 id = "titulo">Titulo</h1>
     <table>
         <tr>
             <th> </th>
@@ -28,16 +17,16 @@
         </tr>
 
         <tr>
-            <th>Capacidad</th>
-            <td>2GB</td>
-            <td>4GB</td>
-            <td>8GB</td>
-            <td colspan = "1">32GB</td>
-            <td>2GB</td>
+            <th class = "rojo" id = "cap">Capacidad</th>
+            <td class = "gb">2GB</td>
+            <td class = "gb">4GB</td>
+            <td class = "gb">8GB</td>
+            <td colspan = "1" class = "gb">32GB</td>
+            <td class = "gb">2GB</td>
         </tr>
 
         <tr>
-            <th>Colores</th>
+            <th class = "rojo">Colores</th>
             <th>Blanco</th>
             <td>
                 <li>Negro</li>
@@ -56,15 +45,15 @@
         </tr>
 
         <tr>
-            <th>Pantalla</th>
+            <th class = "rojo">Pantalla</th>
             <th colspan = "3"> 3 pulgadas</th>
             <th colspan = "2"> 7 pulgadas</th>
         </tr>
 
         <tr>
-            <th rowspan="2">Tiempo de carga</th>
+            <th rowspan="2" class = "rojo">Tiempo de carga</th>
             <th rowspan = "2" colspan="3"> 1 hora</th>
-            <th colspan="2">5 horas</th>
+            <th colspan="2" id = "cinco">5 horas</th>
         </tr>
 
         <tr>

@@ -91,8 +91,8 @@ h1 {
 /* Parrafos con imagen flotante */
 .parrafos img {
     float: left;
-    width: 22%;
-    margin-right: 20px;
+    width: 13%;
+    margin-right: 5%;
 }
 
 .juntos {
@@ -101,7 +101,7 @@ h1 {
 }
 
 .separados {
-    margin-left: 22%;
+    margin-left: 18%;
     color: black;
 }
 

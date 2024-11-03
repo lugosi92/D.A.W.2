@@ -1,0 +1,7 @@
+th, td: Aplica estilos a todas las celdas <th> (encabezados) y <td> (datos) de la tabla.
+
+th > td: Selecciona elementos <td> que son hijos directos de <th>. Esto casi nunca se usa porque <td> no suele ir dentro de <th>.
+
+th + td: Selecciona el primer <td> que viene justo después de un <th> en el mismo nivel, como celdas adyacentes en una fila.
+
+th ~ td: Selecciona todos los <td> que estén después de un <th> en la misma fila, incluso si no están justo al lado.
