@@ -33,9 +33,10 @@ console.log(Ej2);
 
     // Ejercicio 3 
     console.log("           Ejercicio 3");
+
     let precio = "49.99";
     console.log("Precio " + precio);
-    
+        
     precio = parseFloat(precio);
     console.log("Tipos de dato: " + typeof precio);
 
