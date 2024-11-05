@@ -116,16 +116,16 @@ h1 {
 
 /* Galería de imágenes */
 .imagenes4 {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1%; /* Espacio entre las imágenes */
+    position: relative;
+    width: 70%;
+    margin: 20px auto;
 }
 
 .imagenes4 img {
-    width: 15%; /* Ajusta para mostrar varias en una fila */
+    width: 20%; /* Ajusta para mostrar varias en una fila */
     max-width: 120px;
     height: auto;
+    float: left;
 }
 
 .redes img {
@@ -133,9 +133,11 @@ h1 {
     float: right;
 }
 
-footer {
+.redes {
+    position: relative;
     background-color: blue;
     color: pink;
     padding: 10px;
     text-align: center;
+    
 }

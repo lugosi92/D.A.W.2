@@ -1,0 +1,265 @@
+/*Ajustar tamaño de todas las cajas*/
+*{
+    box-sizing: border-box;
+}
+
+/*Estilo de fuentes en todo el cuerpo de la página: cambria y todo en negrita (bold) y de color azul*/
+
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    color:blue;
+}
+
+/*Barra de nevagcion, cabecera, contendor y pie de página, deben de tener un ancho máximo de 12000x
+Centrar horizontalmente estos elementos*/
+
+nav, .contenedor, header, footer{
+    max-width: 12000px; 
+    margin: 0px auto;
+}
+
+
+/*Barra de navegacion con color de fondo azul, color de letra rosa
+Tamaño de letra 1.4 em
+Padding 10px
+Debe responder a scroll, pero no desaparecer de la página (se queda pegada al extremo superior)
+*/
+
+nav{
+    background-color: blue;
+    color:pink;
+    font-size: 1.4em;
+    padding: 10px;
+    position:sticky;
+    top: 0px;
+    z-index: 100;
+}
+
+
+/*Elementos de la barra de navegacion*/
+nav div {
+    text-align: center;
+    display: inline-block;
+    padding: 5px;
+}
+
+/*Estilos de la cabecera: posicionada y centrada*/
+
+
+
+
+
+
+
+/*Banner compra aqui
+Color de fondo y de letra el mismo que antes
+Se debe posicionar respecto a su padre
+Separada un 15% de su derecha y un 30% de arriba
+Con un ancho del 20%
+*/
+
+
+#banner{
+    position: absolute;
+    background-color: blue;
+    color:pink;
+    right: 15%;
+    top: 30%;
+    width: 20%;
+}
+
+
+
+/*
+El enlace del banner debe de cambiar de color cuando pasar el ratón por encima
+*/
+a:hover{
+    color: red;
+}
+
+header img{
+    width: 100%;
+}
+
+/* RESULTADO 2 */
+/*
+El elemento principal, esta centrado horizontalmente. Tiene un ancho del 80%
+*/
+
+main{
+    margin: 0px auto;
+    width: 80%;
+}
+
+h1{
+    text-align: center;
+    color: black
+}
+
+/*Kineas de separacion, despues del h1 del main y despues del main*/
+
+main h1::after, main::after{
+    background-color: red;
+    display: block;
+    width: 30%;
+    height: 1px;
+    content: "";
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+/*Manejo de desbordamiento (el main es mas pequeño que su contenido)*/
+
+.fip{
+    overflow: auto;
+}
+
+
+
+/*Colocación de cada uno de los divs de las imagenes de la Federacion de Padel*/
+
+.fip .fip-item{
+    display:inline-block;
+    margin-top: auto;
+    margin-right: 0px auto;
+    color: black;
+}
+
+.fip{
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+
+
+
+/*Ajuste de ancho a 189px y alto a 265px de las imagenes de los fip-item*/
+
+.fip-item img{
+    width: 189px;
+    height: 265px;
+}
+
+
+
+
+/*
+La seccion de las palas se ajusta al 70% del ancho de su contenedor padre
+centrada horizontalmente
+Se debe manejar el desbordamiento en altura
+*/
+
+.pala{
+    width: 70%;
+    margin: 0px auto;
+    overflow: auto;
+}
+
+
+/*Se deben de colocar los elementos de tal forma que floten con respecto a la imagen
+La imagen tiene un ancho del 20% y guarda un margen izquierdo del 10%
+*/
+
+.pala img{
+    float: left;
+    width: 20%;
+    margin-left: 10%;
+}
+
+
+
+
+/*Los elementos que hay dentro de la seccion, flotan con la imagen
+Tienen un margen superior del 20% y un ancho del 50%
+El texto está justificado
+*/
+.pala div{
+    margin-top: 20px;
+    width: 50%;
+    float: left;
+    color:black;
+}
+
+
+
+
+
+/*La primera linea de texto que hay en los div que estan en la clase pala, deben de ser:
+el doble de grandes de la fuente
+del color rosa usado previamente
+en negrita
+recuadrados solamante en el borde derecho e inferior con bordes de 1px, continuo y de color azul,
+ademas deben de guardar un margen derecho (continuacion de línea) de 10px y padding derecho de 10px*/
+
+.pala div::first-letter{
+    font-size: 2em;
+    margin-right: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+    color: pink;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.pala div:last-of-type{
+    margin-top: 5%;
+
+}
+
+/*La galeria de imagenes debe de estar centrada horizontalmente (guarda 20px de margen superior e inferior)
+Manejo de desbordamiento en altura
+Tiene un ancho del 70%
+*/
+
+.imagenes{
+    margin: 0px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: auto;
+    width: 70%;
+}
+
+/*Colocacion de las imagenes de la galeria que deben de tener un ancho cada una del 20%*/
+
+.imagenes img{
+    width: 20%;
+}
+
+
+/*Estilos del pie de pagina, es un elemento NO flotante
+Manejo de desbordamiento*/
+
+footer{
+    background-color: #121867;
+    color: palevioletred;
+    clear: both;
+    overflow: auto;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+
+/*Estilos del div de la direccion. Definir altura y anchura*/
+
+.direccion{
+    background-color: #121867;
+    color: palevioletred;
+    float: left;
+    text-align: center;
+    width: 20%;
+    height: 100%;
+    padding-left: 1px;
+}
+
+
+
+
+
+/*Colocar y dimensionar adecuadamente el icono de la red social de instagram*/
+
+.redes img{
+    float: right;
+    width: 40px;
+    height: 40px;
+}
