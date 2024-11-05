@@ -144,7 +144,6 @@ console.log(Ej4);
     Hosting();
 
     // Scope
-
     function scope(){
         var f = 8;
     }
