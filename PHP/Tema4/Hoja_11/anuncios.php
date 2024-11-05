@@ -1,80 +1,31 @@
 <?php
-// Inicializar variables y mensajes de error
+
+/*
+1. Validacion de campos (formatos correctos)
+    1.1 Validacion de datos segun reglas de negocio
+2. Manejo de Errores
+3. Subida de fotos en /img
+4. Mostrar resultados
+*/
+session_start();
+
+// Inicializacion de variables
 $titulo = $texto = $categoria = "";
-$tituloError = $textoError = $categoriaError = $imagenError = "";
-$isValid = true;
-$categorias = ["promociones", "locales comerciales", "nueva construcción", "pisos", "naves industriales", "terrenos"];
+$categoria = ["promociones", "locales comerciales", "nueva construcción", "pisos",
+"naves industriales", "terrenos"];
 
-// Comprobar si el formulario ha sido enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $isValid = true; 
+$errTitulo = $errTexto = $errCategoria = $errImagenes = "";
+$isValid = "true";
 
-// Validar el campo Título
-    $titulo = $_POST["titulo"] ?? ''; 
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    if (empty($titulo)) {
-        $tituloError = "El campo Título es obligatorio.";
-        $isValid = false;
-    } elseif (strlen($titulo) < 15 || strlen($titulo) > 25 || strtoupper($titulo) !== $titulo || !ctype_alpha($titulo)) {
-        $tituloError = "El título debe estar en mayúsculas y contener entre 15 y 25 caracteres alfabéticos.";
-        $isValid = false;
-    }
+
+    //Validacion de datos
+
+
+
+
 }
-
-// Validar el campo Texto
-    if (empty($_POST["texto"])) {
-        $textoError = "El campo Texto es obligatorio.";
-        $isValid = false;
-    } elseif (strlen($_POST["texto"]) < 50) {
-        $textoError = "El texto debe contener al menos 50 caracteres.";
-        $isValid = false;
-    } else {
-        $texto = $_POST["texto"];
-}
-
-// Validar la categoría (debe seleccionar al menos una categoría válida)
-if (empty($_POST["categoria"]) || !in_array($_POST["categoria"], $categorias)) {
-    $categoriaError = "Seleccione al menos una categoría válida.";
-    $isValid = false;
-} else {
-    $categoria = $_POST["categoria"];
-}
-
-// Validar la(s) imagen(es)
-if (empty($_FILES['imagen']['name'][0])) {
-    $imagenError = "Debe subir al menos una imagen.";
-    $isValid = false;
-} else {
-    $uploadDir = 'img/';
-}
-
-
-foreach ($_FILES['imagen']['name'] as $index => $fileName) {
-        $fileTmp = $_FILES['imagen']['tmp_name'][$index];
-        $fileDestination = $uploadDir . basename($fileName);
-            
-        if (!move_uploaded_file($fileTmp, $fileDestination)) {
-        $imagenError = "Hubo un problema subiendo las imágenes.";
-        $isValid = false;
-        break;
-        }
-    }
-
-
-// Mostrar resultados si todos los datos son válidos
-    if ($isValid) {
-        echo "<p>Noticia insertada con éxito:</p>";
-        echo "<ul>";
-        echo "<li><strong>Título:</strong> " . htmlspecialchars($titulo) . "</li>";
-        echo "<li><strong>Texto:</strong> " . htmlspecialchars($texto) . "</li>";
-        echo "<li><strong>Categorías:</strong> " . implode(", ", $categoria) . "</li>";
-        echo "<li><strong>Imágenes subidas:</strong></li><ul>";
-        
-        foreach ($_FILES['imagen']['name'] as $fileName) {
-            echo "<li>" . htmlspecialchars($fileName) . "</li>";
-        }
-            echo "</ul></ul>";
-        }
 
 ?>
 
@@ -84,31 +35,38 @@ foreach ($_FILES['imagen']['name'] as $index => $fileName) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Noticias</title>
+    <title>Noticias</title>
+
+    <h1>Subida de ficheros</h1>
+
+    <h2>Insertar nueva noticia</h2>
     <style>
         .form-container {
             border: 1px solid #ccc;
             padding: 20px;
             width: 300px;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
         }
-        input[type="text"],
-        textarea,
-        select {
+
+        input[type="text"],textarea,select {
             width: 100%;
             padding: 5px;
             box-sizing: border-box;
         }
+
         textarea {
             resize: vertical;
             height: 80px;
         }
+
         .form-group button {
             padding: 8px 12px;
             background-color: #ddd;
@@ -134,8 +92,11 @@ foreach ($_FILES['imagen']['name'] as $index => $fileName) {
                 <label for="categoria">Categoría:</label>
                 <select id="categoria" name="categoria">
                     <option value="promociones">promociones</option>
-                    <option value="eventos">eventos</option>
-                    <option value="noticias">noticias</option>
+                    <option value="locales">locales comerciales</option>
+                    <option value="construccion">nueva construcción</option>
+                    <option value="pisos">pisos</option>
+                    <option value="naves">naves industriales</option>
+                    <option value="terrenos">terrenos</option>
                 </select>
             </div>
             <!-- IMAGEN -->
