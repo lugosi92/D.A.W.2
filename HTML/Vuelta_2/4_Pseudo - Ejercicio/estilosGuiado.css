@@ -1,0 +1,106 @@
+/*Usando el selector simple table, pon borde a toda la tabla*/
+table{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+/*Usando los selectores simples td y th, poner borde a todas las casillas*/
+
+td, th{
+    border: 1px solid black;
+}
+
+
+/* Utilizando únicamente pseudoselectores da color de fondo verde a la primera columna (horas) */
+/*La primera casilla (first-child) que está en las filas del tbody debe permanecer en BLANCO*/
+
+td:first-child{
+    background-color: green;
+}
+
+
+
+/* Utilizando únicamente pseudoselectores da color de fondo amarillo a la celda de recreo */
+/*Ojo el árbol DOM encuentra un SEGUNDO hijo, no encuentra un segundo th*/
+
+tr:nth-child(4) {
+    background-color: yellow;
+}
+
+
+/* Cambiar los estado de los enlaces para que:
+
+ Nunca estén subrayados
+ Si están visitados se muestren en rojo
+ Si no están visitado se muestren en verde */
+
+a:link{
+    text-decoration: none;
+    color:green;
+}
+
+a:visited{
+    color: red;
+}
+
+
+ 
+
+
+
+
+/* Utilizando pseudoselectores hacer que cuando pasemos el ratón sobre la columna del viernes
+aumente el tamaño de letra al doble */
+
+tr:first-of-type:hover
+th:last-child:hover{
+    font-size: 2em;
+}
+
+
+/* Utilizando Pseudoelementos Haz que la primera letra de los días tenga el doble de tamaño*/
+
+tr:first-of-type 
+th:first-letter{
+    font-size: 2em;
+}
+
+/* Añade un borde rojo que esté separado 5 px a los campos obligatorios */
+
+input:required{
+    border: 1px red solid;
+    padding: 5px;
+}
+
+
+
+
+/* Añade un * en rojo detrás de las etiquetas del formulario*/
+
+
+label::after{
+    content: "*";
+    color:red;
+}
+
+/*Utilizando pseudoselectores de posición colgroup y col:.... da color azul a las columas de lunes y martes
+color verde a las columnas de miércoles y jueves
+color rojo a la columna del viernes
+Utiliza 3 reglas*/
+
+colgroup col:nth-child(2) {
+    background-color: lightblue;
+  }
+
+  colgroup col:nth-child(3) {
+    background-color: green;
+  }
+
+  colgroup col:nth-child(4) {
+    background-color: red;
+  }
+
+
+
+
+
