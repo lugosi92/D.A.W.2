@@ -1,19 +1,20 @@
 <?php
 
 /*
-1. Validacion de campos (formatos correctos)
-    1.1 Validacion de datos segun reglas de negocio
+1. Validacion de campos (formatos correctos e inicializados)
+    1.1 Validacion de datos segun reglas de negocio 
 2. Manejo de Errores
 3. Subida de fotos en /img
 4. Mostrar resultados
 */
 session_start();
 
-// Inicializacion de variables
+// Inicializacion validazion
 $titulo = $texto = $categoria = "";
 $categoria = ["promociones", "locales comerciales", "nueva construcción", "pisos",
 "naves industriales", "terrenos"];
 
+// Inicializacion errores
 $errTitulo = $errTexto = $errCategoria = $errImagenes = "";
 $isValid = "true";
 
@@ -22,6 +23,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     //Validacion de datos
 
+    // TITULO
+        $titulo = isset($_POST['titulo']) ? $_POST['titulo'] : "";
+    // TEXTO
+        $texto = isset($_POST['texto']) ? $_POST['texto'] : "";
+    // CATEGORIA
+        $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : array(); 
 
 
 
@@ -51,10 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             margin-bottom: 15px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
+     
 
         input[type="text"],textarea,select {
             width: 100%;
@@ -80,19 +84,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <!-- TITULO -->
             <div class="form-group">
                 <label for="titulo">Título: *</label>
-                <input type="text" id="titulo" name="titulo" required>
+                <!-- REPINTADO TITULO -->
+                <input value = "<?php if(isset($titulo)) echo $titulo?>"
+                type="text" id="titulo" name="titulo" required>
             </div>
             <!-- TEXTO -->
             <div class="form-group">
                 <label for="texto">Texto: *</label>
-                <textarea id="texto" name="texto" required></textarea>
+                <!-- REPINTADO -->
+                <textarea id="texto" name="texto" required>
+                <?php if(isset($texto)) echo $texto?></textarea>
             </div>
             <!-- CATEGORIA -->
             <div class="form-group">
                 <label for="categoria">Categoría:</label>
-                <select id="categoria" name="categoria">
-                    <option value="promociones">promociones</option>
-                    <option value="locales">locales comerciales</option>
+                <select id="categoria" name="categoria[]">
+                    <option value="promociones" <?php if ($categoria == 'promociones') echo 'selected';?>>promociones</option>
+                    <option value="locales" <?php if($categoria == 'locales') echo 'selected' ?>;>locales comerciales</option>
                     <option value="construccion">nueva construcción</option>
                     <option value="pisos">pisos</option>
                     <option value="naves">naves industriales</option>
