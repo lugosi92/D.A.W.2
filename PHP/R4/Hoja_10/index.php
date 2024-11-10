@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-$nombre = $contraseña =$tipo = $año =  $ciudad = "";
-$check = array(); 
-$check2 = array(); 
-$errNom = $errCont = $errTipo = $errCheck  = $errCheck2 = $errAnio = $errCiudades = "";
+$nombre = $contraseña =$tipo = $año  = "";
+$check = array();  
+$ciudad = array();
+
+$errNom = $errCont = $errTipo = $errCheck = $errAnio = $errCiudades = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     
@@ -20,17 +21,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : "";
 
         //CHECKBOX
-        if(isset($_POST['check'])){
+        // Verifica si hay un valor en 'check'
+        if (isset($_POST['check']) && count($_POST['check']) === 1) {
             $check = $_POST['check'];
-        }else if(isset($_POST['check2'])){
-            $check2 =  $_POST['check2'];
-        }else{
-            array();
+        } else {
+            $errCheck = "Por favor selecciona solo una opción de publicidad.";
         }
       
-        //SELECT
-        $año = isset($_POST['año']) ? $_POST['año'] : "";
-        $ciudad =isset($_POST['ciudad']) ? $_POST['ciudad'] : "";
+        //SELECT SIMPLE
+        if(isset($_POST['año'])){
+            $año = $_POST['año'];
+        }else{
+            $errAnio = "Introduzca el año";
+        }
+
+        //SELECT MUTLIPLE
+        if(isset($_POST['ciudad']) && !empty($_POST['ciudad'])){
+            $ciudad = $_POST['ciudad'];
+        }else{
+            $errCiudades = "Selecciona la/s ciudad/es";
+        }
 
         
 
@@ -50,20 +60,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
         //CHECKBOX
-        if(count($check) <= 0){
-            $errCheck = "Recibir la publicidad";
-        }else if(count($check2) <= 0){
-            $errCheck = "Recibir la ";
-        }
+       
 
         //SELECT
-        if(empty($_POST['año'])){
-            $errAnio = "Introduzca el año";
-        }
-
-        if(empty($_POST['ciudad'])){
-            $errCiudades = "Selecciona la/s ciudad/es";
-        }
+       
 
 }
 
@@ -108,10 +108,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                 <!-- ERROR NOMBRE -->
                 <span class = "error"><?php echo $errNom?></span>  
+
                 <br>
+
                 <label for = "contraseña">Contraseña<br>
-
-
                 <!-- REPINTADO CONTRASEÑA -->
                 <input value = "<?php if(isset($contraseña)) echo $contraseña; ?>"  
                 type = "text" id = "contraseña" name = "contraseña">
@@ -128,6 +128,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <input type= "radio" name = "tipo" value = "rojo" <?php if ($tipo == 'rojo') echo 'checked'; ?>>  Rojo
             <input type= "radio" name = "tipo" value = "naranja" <?php if ($tipo == 'naranja') echo 'checked'; ?>>  Naranja 
             <input type= "radio" name = "tipo" value = "verde" <?php if ($tipo == 'verde') echo 'checked'; ?>> Verde 
+            
             <!-- ERROR TIPO -->
             <span class = "error"><?php echo $errTipo?></span>
     </fieldset>
@@ -135,13 +136,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <!-- CHECKBOX -->
     <fieldset class = "checkbox">
         <legend>CHECKBOX</legend>
+
             <input type ="checkbox" value = "publicidad" name = "check[]" 
             <?php if (isset($check) && in_array("publicidad", $check)) echo 'checked'; ?>>Quiero recibir publicidad
-
-            <input type ="checkbox" value = "publicidad2" name = "check2[]" 
-            <?php if (isset($check2) && in_array("publicidad2", $check2)) echo 'checked'; ?>>Quiero recibir publicidad de verdad
-
-
+            
             <!-- ERROR CHECK -->
             <span class = "error"><?php echo $errCheck?></span>
     </fieldset>
@@ -159,18 +157,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <option value = "2018" <?php if ($año == '2018') echo 'selected'; ?>>2018</option>
                     <option value = "2017" <?php if ($año == '2017') echo 'selected'; ?>>2017</option>
                 </select>
+
+
                 <!-- ERROR AÑOS -->
                 <span class = "error"><?php echo $errAnio?></span>
 
 
             <h2>Multiple:</h2>
-                <select id = "ciudad" name = "ciudad">
-                    <option value="Madrid">Madrid</option>
-                    <option value="Barcelona">Barcelona</option>
-                    <option value="Valencia">Valencia</option>
-                    <option value="Valencia">Zaragoza</option>
-                    <option value="Valencia">Galicia</option>
+                <select id = "ciudad" name = "ciudad[]" multiple>
+                    <option value="Madrid" <?php if (in_array("Madrid", $ciudad)) echo 'selected'; ?>>Madrid</option>
+                    <option value="Barcelona" <?php if (in_array("Barcelona", $ciudad)) echo 'selected'; ?>>Barcelona</option>
+                    <option value="Valencia" <?php if (in_array("Valencia", $ciudad)) echo 'selected'; ?>>Valencia</option>
+                    <option value="Zaragoza" <?php if (in_array("Zaragoza", $ciudad)) echo 'selected'; ?>>Zaragoza</option>
+                    <option value="Galicia" <?php if (in_array("Galicia", $ciudad)) echo 'selected'; ?>>Galicia</option>
                 </select>
+
                  <!-- ERROR CIUDADES -->
                  <span class = "error"><?php echo $errCiudades?></span>
     </fieldset>
