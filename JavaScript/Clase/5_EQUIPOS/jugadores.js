@@ -31,9 +31,29 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         jugadores.add(linea);
     });
 
-    console.log(jugadores);
 
-    const masculino = [];
-    const femenino = [];
+    console.log(jugadores);
+   
+
+
+    // INSERTAR JUGADORES MASCULINO
+    for(let i=0; i <= jugadores.lenght; i++){
+        
+        const jugador = jugador[i];
+        
+    }
+    console.log(masculino);
+
+
+
+
+
+
+
+
+
+
+
+
 
 }, false);
