@@ -1,0 +1,46 @@
+nav ul , li{
+    list-style: none;
+    display: inline-block;
+}
+
+nav ul li , a{
+color:red;
+}
+nav{
+    background-color: pink;
+}
+
+nav,header{
+    border: 10px red solid;
+}
+
+header{
+    text-align: center;
+    color: white;
+    background-color: black;
+    padding: 50px;
+
+}
+
+.productos h2{
+    font-style: italic;
+    font-size: 2em;
+    text-decoration: underline rgba(228, 238, 139, 0.973) 5px;
+
+}
+.productos{
+    text-align: center;
+    border: 1px black solid;
+    margin-top: 5px;
+}
+.producto{
+    background-color: rgba(228, 238, 139, 0.973);
+    display: inline-block;
+    border: 3px black groove;
+    margin: 2%;
+    padding: 50px;
+}
+
+img{
+    border: 5px dotted black;
+}

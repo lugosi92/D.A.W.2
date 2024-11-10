@@ -1,0 +1,114 @@
+.bordes{
+    border: dashed 1px black;
+    border: dotted;
+    border: solid;
+    border: double;
+    border: groove;
+    border: ridge;
+    border: inset;
+    border: outset;
+    border: none;
+    border: hidden;
+
+    border-style: solid;
+    border-color: blue;
+
+    /* Medidas */
+    border-radius: 5px;
+
+    /* Medidas relativas */
+    border-width: 2em;
+    border-width: 2rem;
+
+}
+
+.fondo{
+    /* Transparencias */
+    background-color: rgba(0,0,0);
+    opacity: 0.3;
+
+    /* Imagenes de fonod */
+    background-image: url('');
+    background-size: auto; /*Automatico*/
+    background-size: cover; /*Adecuada*/
+
+    /*Mantiene dentro de los pixeles*/
+    background-size: contain; 
+    height: 200px;
+
+    /* Dimensiones */
+    background-size: ancho alto;
+    background-size: 200px 200px;
+
+    /* repetir */
+    background-repeat: repeat-x o repeat-y;
+    background-position: center botton;
+}
+
+
+.margin{
+     /* arriba abajo iquierda derecha */
+    margin: 15px;
+    padding: 15px;
+    border: 15px;
+
+    /* Desvordmiento */
+    overflow: hidden scroll ;
+
+    /* OUTLINE */
+     outline: 1px solid red;
+}
+
+.text{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    /* Agrega espacio entr palabras para usar todo el ancho */
+    text-align: justify;
+
+    text-decoration: underline overline line-through; /*lineas en textoo */
+
+    /* sombreado de color */
+    text-shadow: 3px 5px blue; 
+}
+
+
+/* ORDEN NO MODIFICABLE */
+a:link{
+    /* No visitados */
+    color: red;
+} 
+a:visited{
+    /* No visitados */
+    color: red;
+} 
+a:hover{
+    /* No visitados */
+    color: red;
+} 
+a:active{
+    /* No visitados */
+    color: red;
+} 
+
+
+/* TABLAS */
+ul{
+    /* Qutar puntos de la lista */
+    list-style-type: none;  
+}
+
+#position{
+    position: relative;
+    left: 20px;
+
+}
+
+
+/* POSICIONAR CENTRADO */
+
+.centrar{
+    padding: 50px 0;
+    text-align: center;
+    width: 200px;
+    margin: 0 auto;
+}

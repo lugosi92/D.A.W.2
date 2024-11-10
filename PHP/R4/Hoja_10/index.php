@@ -4,11 +4,12 @@ session_start();
 $nombre = $contraseña =$tipo = $año =  $ciudad = "";
 $check = array(); 
 $check2 = array(); 
-$errNom = $errCont = $errTipo = $errCheck = $errAnio = $errCiudades = "";
+$errNom = $errCont = $errTipo = $errCheck  = $errCheck2 = $errAnio = $errCiudades = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     
-
+    
+        
     // Para guardar los valores e inicializar 
 
         // INICIO DE SESION
@@ -19,13 +20,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : "";
 
         //CHECKBOX
-        $check = isset($_POST['check']) ? $_POST['check'] : array();
-        $check2 = isset($_POST['check2']) ? $_POST['check2'] : array();
-
+        if(isset($_POST['check'])){
+            $check = $_POST['check'];
+        }else if(isset($_POST['check2'])){
+            $check2 =  $_POST['check2'];
+        }else{
+            array();
+        }
+      
         //SELECT
         $año = isset($_POST['año']) ? $_POST['año'] : "";
         $ciudad =isset($_POST['ciudad']) ? $_POST['ciudad'] : "";
 
+        
 
     //Manejo de errores
 
@@ -45,9 +52,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         //CHECKBOX
         if(count($check) <= 0){
             $errCheck = "Recibir la publicidad";
-        }
-        if(count($check2) <= 0){
-            $errCheck2 = "Recibir la publicidad";
+        }else if(count($check2) <= 0){
+            $errCheck = "Recibir la ";
         }
 
         //SELECT
@@ -94,6 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         <legend>INICIO DE SESION</legend>
             <label for = "nombre">Nombre<br>
+            
 
                 <!-- REPINTADO NOMBRE -->
                 <input value = "<?php if(isset($nombre)) echo $nombre; ?>" 
@@ -128,11 +135,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <!-- CHECKBOX -->
     <fieldset class = "checkbox">
         <legend>CHECKBOX</legend>
-            Quiero recibir publicidad<input type ="checkbox" value = "publicidad" name = "check[]" 
-            <?php if (isset($check) && in_array("publicidad", $check)) echo 'checked'; ?>>
+            <input type ="checkbox" value = "publicidad" name = "check[]" 
+            <?php if (isset($check) && in_array("publicidad", $check)) echo 'checked'; ?>>Quiero recibir publicidad
 
-            Quiero recibir publicidad de verdad<input type ="checkbox" value = "publicidad2" name = "check2[]" 
-            <?php if (isset($check2) && in_array("publicidad", $check2)) echo 'checked'; ?>>
+            <input type ="checkbox" value = "publicidad2" name = "check2[]" 
+            <?php if (isset($check2) && in_array("publicidad2", $check2)) echo 'checked'; ?>>Quiero recibir publicidad de verdad
 
 
             <!-- ERROR CHECK -->
