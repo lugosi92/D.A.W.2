@@ -31,23 +31,44 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         jugadores.add(linea);
     });
 
-
     console.log(jugadores);
-   
 
+    // PASAR DE CONJUNTO A ARRAY
+    const participantes = Array.from(jugadores);
+    console.log(participantes);
 
-    // INSERTAR JUGADORES MASCULINO
-    for(let i=0; i <= jugadores.lenght; i++){
+    // INSERTAR JUGADORES MASCULINO Y FEMENINOS
+
+    const masculino = [];
+    const femenino = [];
+
+    for(let i= 0; i< participantes.length;i++){
+
+        const jugador = participantes[i];
+        const dato = jugador.split(';');
+        const genero = dato[1];
+
+        console.log( "Dato: " +genero);
         
-        const jugador = jugador[i];
-        
+        if (genero === 'M') {
+            masculino.push(jugador);
+        } else if (genero === 'F') {
+            femenino.push(jugador);
+        }
     }
-    console.log(masculino);
+
+    const masculinos = masculino.join('\n');
+    const femeninos = femenino.join('\n');
+    console.log("Jugadores masculinos: " + masculinos);
+    console.log("Jugadores femeninos: " + femeninos);
 
 
+    // DIVIDR UN ARRAY POR CAMPOS
 
+      
+    const jugadorMasc = masculinos.split("\n").map
 
-
+    
 
 
 
