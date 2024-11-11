@@ -37,7 +37,7 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     const participantes = Array.from(jugadores);
     console.log(participantes);
 
-    // INSERTAR JUGADORES MASCULINO Y FEMENINOS
+    // LISTADO JUGADORES MASCULINO Y FEMENINOS
 
     const masculino = [];
     const femenino = [];
@@ -47,8 +47,6 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         const jugador = participantes[i];
         const dato = jugador.split(';');
         const genero = dato[1];
-
-        console.log( "Dato: " +genero);
         
         if (genero === 'M') {
             masculino.push(jugador);
@@ -63,18 +61,53 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     console.log("Jugadores femeninos: " + femeninos);
 
 
-    // DIVIDR UN ARRAY POR CAMPOS
+    // DIVIDR UN ARRAY POR DATOS
 
-      
-    const jugadorMasc = masculinos.split("\n").map
 
+    const jugadorMasc = masculinos.split("\n").map(linea =>{
+        const[nombre, sexo, apellido, posicion, grupo] = linea.split(";");
+        return { nombre, sexo, apellido, posicion, grupo };
+    });
+
+    console.log(jugadorMasc);
     
+    const jugadorFem = femeninos.split("\n").map(linea =>{
+        const[nombre, sexo, apellido, posicion, grupo] = linea.split(";");
+        return { nombre, sexo, apellido, posicion, grupo };
+    });
+    
+    console.log(jugadorFem);
 
+    // CLASIFICAMOS JUGADORES POR POSICIONES
 
+    const porteros = jugadorMasc.filter(j => j.posicion === 'Portero');
+    const defensas =jugadorMasc.filter(j => j.posicion === 'Defensa');
+    const centros = jugadorMasc.filter(j => j.posicion === 'Centro');
+    const delanteros = jugadorMasc.filter(j => j.posicion === 'Delantero');
 
+    console.log(porteros);
+    console.log(defensas);
+    console.log(centros);
+    console.log(delanteros);
 
+    // EQUIPOS Y RESERVAS
 
+    const equipos = [];
+    const reservas = [];
 
+    // CREA que exita 1 portero, 4 defensas ... que siga creando equipos
+    while(porteros.length >= 1 && defensas.length >= 4 &&
+          centros.length >= 3 && delanteros.length >= 3){
+
+            const equipo = {
+                Portero: porteros.splice(0,1),
+                Defensa: defensas.splice(0,4),
+                Centro: centros.splice(0,3),
+                Delantero: centros.splice(0,3),
+            }
+        equipos.push(equipo);
+        }
+    reservas.push(...porteros,...defensas,...centros,...delanteros);
 
 
 }, false);
