@@ -42,7 +42,7 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     const masculino = [];
     const femenino = [];
 
-    for(let i= 0; i< participantes.length;i++){
+    for(let i= 0; i< participantes.length;i++){//imperativa
 
         const jugador = participantes[i];
         const dato = jugador.split(';');
@@ -59,7 +59,7 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     const femeninos = femenino.join('\n');
     console.log("Jugadores masculinos: " + masculinos);
     console.log("Jugadores femeninos: " + femeninos);
-
+// cambiar desde aqui a declaraitva(arriba)
 
     // DIVIDR UN ARRAY POR DATOS
 
@@ -109,5 +109,6 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         }
     reservas.push(...porteros,...defensas,...centros,...delanteros);
 
-
+        console.log("Equipos: " +equipos);
+        console.log("Reservas: " +reservas);
 }, false);
