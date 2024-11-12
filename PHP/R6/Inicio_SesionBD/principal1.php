@@ -6,12 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="file" id="file-input" />
-		<h3>Contenido del archivo:</h3>
-		<p id="contenido-archivo"></p>
-
-
-    <script src = "jugadores2.js"></script>
+    
+    <h1>BIENVENIDO</h1>
 </body>
 </html>
-
