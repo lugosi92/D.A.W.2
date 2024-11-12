@@ -1,56 +1,61 @@
 <?php
-/*si va bien redirige a principal.php 
-si va mal, mensaje de error */  
-
 session_start();
 
-    // 1. CONEXION CON LA BASE DE DATOS
-    $usuarioBD = 'root';   // Nombre de usuario
-    $contraseña = '';   // Contraseña
+// 1. CONEXION CON LA BASE DE DATOS
+$usuarioBD = 'root';   // Nombre de usuario
+$contraseñaBD = '';    // Contraseña
 
-    try {
-        $bd = new PDO('mysql:host=localhost;dbname=usuarios', $usuarioBD, $contraseña);
-    } catch (PDOException $e) {
-        print "¡Error!: " . $e->getMessage() . "<br/>";
-        die();
+try {
+    $bd = new PDO('mysql:host=localhost;dbname=usuarios', $usuarioBD, $contraseñaBD);
+    // Habilitar excepciones para manejar errores
+    $bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    print "¡Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+
+// 2. COMPROBAR ERROR Y REPINTADO
+$errUsuario = $errContraseña = "";
+$user = $clave = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // REPINTADO Y ERROR
+    if(empty($_POST['usuario'])){
+        $errUsuario = "Introduzca usuario";
+    } else {
+        $user = $_POST['usuario'];
+    }
+    if(empty($_POST['clave'])){
+        $errContraseña = "Introduzca contraseña";
+    } else {
+        $clave = $_POST['clave']; // Guardamos el valor de la contraseña
     }
 
-   
-    // 2. COMPROBAR ERROR Y REPINTADO
-    $errUsuario = $errContraseña = "";
-    $user = $clave = ""; 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {  	
-
-        // REPINTADO Y ERROR
-        if(empty($_POST['usuario'])){
-            $errUsuario = "Introduzca usuario";
-        }else{
-            $user = $_POST['usuario'];
-        }
-        if(empty($_POST['clave'])){
-            $errContraseña = "Introduzca contraseña";
-        } else {
-            $clave = $_POST['clave']; // Guardamos el valor de la contraseña
-        }
-
     // 3. SENTENCIAS PREPARADAS
+    $query = $bd->prepare("SELECT * FROM usuario WHERE usuario = :usuario AND contraseña = :contraseña");
 
-    $query = $bd->prepare("SELECT * FROM usuarios WHERE user = :usuario AND clave = :contraseña");
+    // VINCULAR PARAMETROS
     $query->bindParam(':usuario', $user);
     $query->bindParam(':contraseña', $clave);
-    $query->execute();
+
+
+    // DEPURACIÓN: Verificar los valores de $user y $clave
+    var_dump($user, $clave);
+
+        // Ejecutar consulta
+        $query->execute();
 
         // Si devuelve 1 o mas es que existe 
-        if ($query->rowCount()) { 
+        if ($query->rowCount()) {
             $_SESSION['usuario'] = $user; //Guardamos 
-            header("Location: principal1.php");
+            header("Location: 2_formulario.php");
             exit();
         } else {
             echo "Contraseña incorrecta.";
         }
-
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +83,7 @@ session_start();
 
         <label for = "contraseña"> Introducir contraseña: </label>
         <input value = "<?php if(isset($clave)) echo $clave;?>"
-        type = "password" id = "password" name = "clave">
+        type = "text" id = "password" name = "clave">
         <span class = "error"> <?php echo $errContraseña; ?></span>
 
         <br>
