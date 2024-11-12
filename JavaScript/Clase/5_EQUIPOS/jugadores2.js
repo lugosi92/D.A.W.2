@@ -37,11 +37,31 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
 
 // LISTADO MASCULINO Y FEMENINO
 
+const femenino = [];
+const masculino = [];
+
 arrayJugadores.forEach(linea => {
     const dato = linea.split(";");
-    if(dato[1] === 'M'){
-        
-    }
-    
+    dato[1] === 'M' ?  masculino.push(linea) : "";
+    dato[1] === 'F' ?  femenino.push(linea) : "";
 });
+
+// JUGADORES MACULINOS
+console.log("JUGADORES MASCULINOS");
+console.log(masculino);
+// JUGADORES FEMENINOS
+console.log("JUGADORES FEMENINOS");
+console.log(femenino);
+
+//LISTADO DE POSICIONES MASCULINO
+
+const porteros = [];
+
+arrayJugadores.forEach(linea => {
+    const dato = linea.split(";");
+    dato[3] === 'Portero' ?  porteros.push(linea) : "";
+});
+console.log("PORTEROS");
+console.log(porteros);
+
 }, false);
