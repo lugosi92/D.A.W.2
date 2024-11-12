@@ -109,5 +109,4 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         }
     reservas.push(...porteros,...defensas,...centros,...delanteros);
 
-
 }, false);
