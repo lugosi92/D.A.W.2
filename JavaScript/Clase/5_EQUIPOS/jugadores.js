@@ -22,94 +22,100 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     console.log(contenido);
     mostrarContenido(contenido);
 
-    // ELIMINAR DUPLICADOS
-    const lineas = contenido.split('\r\n');
+// ELIMINAR DUPLICADOS
 
-    jugadores = new Set([]);
+    const lineas = contenido.split("\r\n");
 
-    lineas.forEach(linea => {
-        jugadores.add(linea);
+    jugadores = new Set(lineas);
+    jugadores.delete("");
+
+// PASAR DE CONJUNTO A ARRAY
+    arrayJugadores = [...jugadores];
+    console.log("ARRAY JUGADORES")
+    console.log(arrayJugadores);
+
+// LISTADO MASCULINO Y FEMENINO
+
+const femenino = [];
+const masculino = [];
+
+arrayJugadores.forEach(linea => {
+    const dato = linea.split(";");
+    dato[1] === 'M' ?  masculino.push(linea) : "";
+    dato[1] === 'F' ?  femenino.push(linea) : "";
+});
+
+// JUGADORES MACULINOS
+console.log("JUGADORES MASCULINOS");
+console.log(masculino);
+// JUGADORES FEMENINOS
+console.log("JUGADORES FEMENINOS");
+console.log(femenino);
+
+//LISTADO DE POSICIONES MASCULINO
+    const porteros = [];
+    const defensas = [];
+    const delanteros = [];
+    const centros = [];
+
+    masculino.forEach(linea => {
+        const dato = linea.split(";");
+        dato[3] === 'Portero' ?  porteros.push(linea) : "";
+        dato[3] === 'Defensa' ?  defensas.push(linea) : "";
+        dato[3] === 'Delantero' ?  delanteros.push(linea) : "";
+        dato[3] === 'Centro' ?  centros.push(linea) : "";
     });
-
-    console.log(jugadores);
-
-    // PASAR DE CONJUNTO A ARRAY
-    const participantes = Array.from(jugadores);
-    console.log(participantes);
-
-    // LISTADO JUGADORES MASCULINO Y FEMENINOS
-
-    const masculino = [];
-    const femenino = [];
-
-    for(let i= 0; i< participantes.length;i++){//imperativa
-
-        const jugador = participantes[i];
-        const dato = jugador.split(';');
-        const genero = dato[1];
-        
-        if (genero === 'M') {
-            masculino.push(jugador);
-        } else if (genero === 'F') {
-            femenino.push(jugador);
-        }
-    }
-
-    const masculinos = masculino.join('\n');
-    const femeninos = femenino.join('\n');
-    console.log("Jugadores masculinos: " + masculinos);
-    console.log("Jugadores femeninos: " + femeninos);
-// cambiar desde aqui a declaraitva(arriba)
-
-    // DIVIDR UN ARRAY POR DATOS
-
-
-    const jugadorMasc = masculinos.split("\n").map(linea =>{
-        const[nombre, sexo, apellido, posicion, grupo] = linea.split(";");
-        return { nombre, sexo, apellido, posicion, grupo };
-    });
-
-    console.log(jugadorMasc);
-    
-    const jugadorFem = femeninos.split("\n").map(linea =>{
-        const[nombre, sexo, apellido, posicion, grupo] = linea.split(";");
-        return { nombre, sexo, apellido, posicion, grupo };
-    });
-    
-    console.log(jugadorFem);
-
-    // CLASIFICAMOS JUGADORES POR POSICIONES
-
-    const porteros = jugadorMasc.filter(j => j.posicion === 'Portero');
-    const defensas =jugadorMasc.filter(j => j.posicion === 'Defensa');
-    const centros = jugadorMasc.filter(j => j.posicion === 'Centro');
-    const delanteros = jugadorMasc.filter(j => j.posicion === 'Delantero');
-
+    // PORTEROS
+    console.log("PORTEROS");
     console.log(porteros);
+
+    // DEFENSAS
+    console.log("DEFENSAS");
     console.log(defensas);
-    console.log(centros);
+
+    // DELANTEROS
+    console.log("DELANTERO");
     console.log(delanteros);
 
-    // EQUIPOS Y RESERVAS
+    // CENTROS
+    console.log("CENTROS");
+    console.log(centros);
 
+
+    // METER JUGADORES Y QUITAR 
     const equipos = [];
     const reservas = [];
+    while( porteros.length >= 1 && defensas.length >= 4 
+        && delanteros.length >= 3 && centros.length >= 3){
 
-    // CREA que exita 1 portero, 4 defensas ... que siga creando equipos
-    while(porteros.length >= 1 && defensas.length >= 4 &&
-          centros.length >= 3 && delanteros.length >= 3){
+         const equipo = [];
 
-            const equipo = {
-                Portero: porteros.splice(0,1),
-                Defensa: defensas.splice(0,4),
-                Centro: centros.splice(0,3),
-                Delantero: centros.splice(0,3),
-            }
-        equipos.push(equipo);
+        equipo.push(porteros.pop());
+
+        for(i=1; i<=4 ; i++){
+            equipo.push(defensas.pop());
         }
-    reservas.push(...porteros,...defensas,...centros,...delanteros);
 
-        console.log("Equipos: " +equipos);
-        console.log("Reservas: " +reservas);
+        for(i=1; i<=3; i++){
+            equipo.push(centros.pop());
+            equipo.push(delanteros.pop());
+        }
+        equipos.push(equipo);
+    }
 
+    console.log(equipos);
+
+    // RESERVAS
+    while( porteros.length >= 1 || defensas.length >= 1 
+        || delanteros.length >= 1 || centros.length >= 1){
+            
+            reservas.push(porteros.pop());
+            reservas.push(defensas.pop());
+            reservas.push(delanteros.pop());
+            reservas.push(centros.pop());
+
+    }
+
+    console.log(reservas);
+ 
 }, false);
