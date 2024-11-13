@@ -87,7 +87,36 @@ array.forEach(linea => {
 
 
 }
+const equipos = [];
+const reservas = [];
+
+function equipos(porteros, defensas, delanteros, centros){
+
+while( porteros.length >= 1 && defensas.length >= 4 
+    && delanteros.length >= 3 && centros.length >= 3){
+
+    const equipo = [];
+
+    equipo.push(porteros.pop());
+
+    for(i=1; i<=4 ; i++){
+        equipo.push(defensas.pop());
+    }
+
+    for(i=1; i<=3; i++){
+        equipo.push(centros.pop());
+        equipo.push(delanteros.pop());
+    }
+    equipos.push(equipo);
+}
+// EQUIPOS
+console.log(equipos);
+}
+
+
+
 posiciones(femenino);
+
 
 
 

@@ -85,10 +85,11 @@ console.log(femenino);
     // METER JUGADORES Y QUITAR 
     const equipos = [];
     const reservas = [];
+
     while( porteros.length >= 1 && defensas.length >= 4 
         && delanteros.length >= 3 && centros.length >= 3){
 
-         const equipo = [];
+        const equipo = [];
 
         equipo.push(porteros.pop());
 
@@ -103,6 +104,7 @@ console.log(femenino);
         equipos.push(equipo);
     }
 
+    // EQUIPOS
     console.log(equipos);
 
     // RESERVAS
@@ -116,6 +118,7 @@ console.log(femenino);
 
     }
 
+    // RESERVAS
     console.log(reservas);
  
 }, false);
