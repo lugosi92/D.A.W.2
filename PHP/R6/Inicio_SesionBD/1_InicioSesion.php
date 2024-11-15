@@ -1,18 +1,7 @@
 <?php
 session_start();
 
-// 1. CONEXION CON LA BASE DE DATOS
-$usuarioBD = 'root';   // Nombre de usuario
-$contraseñaBD = '';    // Contraseña
 
-try {
-    $bd = new PDO('mysql:host=localhost;dbname=usuarios', $usuarioBD, $contraseñaBD);
-    // Habilitar excepciones para manejar errores
-    $bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    print "¡Error!: " . $e->getMessage() . "<br/>";
-    die();
-}
 
 // 2. COMPROBAR ERROR Y REPINTADO
 $errUsuario = $errContraseña = "";
@@ -31,29 +20,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $clave = $_POST['clave']; // Guardamos el valor de la contraseña
     }
 
-    // 3. SENTENCIAS PREPARADAS
-    $query = $bd->prepare("SELECT * FROM usuario WHERE usuario = :usuario AND contraseña = :contraseña");
 
-    // VINCULAR PARAMETROS
-    $query->bindParam(':usuario', $user);
-    $query->bindParam(':contraseña', $clave);
+// 1. CONEXION CON LA BASE DE DATOS
+$usuarioBD = 'root';   // Nombre de usuario
+$contraseñaBD = '';    // Contraseña
+    
+try {
+    $bd = new PDO('mysql:host=localhost;dbname=clientes', $usuarioBD, $contraseñaBD);
 
+    // $pass=$bd->prepare("SELECT * FROM usuario WHERE usuario='$user' AND contraseña='$clave'");
 
-    // DEPURACIÓN: Verificar los valores de $user y $clave
-    var_dump($user, $clave);
+    $query=$bd->prepare("SELECT * FROM usuario WHERE  usuario ='$user'");
+    $result = $bd->query($query);
+    $hash=$result->fetchColumn();
 
-        // Ejecutar consulta
-        $query->execute();
+    if (password_verify($clave, $hash)){
 
-        // Si devuelve 1 o mas es que existe 
-        if ($query->rowCount()) {
-            $_SESSION['usuario'] = $user; //Guardamos 
-            header("Location: 2_formulario.php");
-            exit();
-        } else {
-            echo "Contraseña incorrecta.";
-        }
+        header("Location: principal.php");
+
+    }else{
+        $err=true;
+    }
+} catch (PDOException $e) {
+    print "¡Error!: " . $e->getMessage() . "<br/>";
+    die();
 }
+}
+
+
 ?>
 
 <!DOCTYPE html>
