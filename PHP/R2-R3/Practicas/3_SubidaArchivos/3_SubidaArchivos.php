@@ -1,9 +1,11 @@
 <?php
+
     $archivo = $_FILES["fichero"]["type"];
     echo $archivo;
 
     $tam = $_FILES["fichero"]["size"];
-	if($tam > 256 *1024){
+
+	if($tam > 256 * 1024){
 		echo "<br>Demasiado grande";
 		return;
 	}

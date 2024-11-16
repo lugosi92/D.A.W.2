@@ -1,37 +1,67 @@
 <?php
-
-/*
-1. Validacion de campos (formatos correctos e inicializados)
-    1.1 Validacion de datos segun reglas de negocio 
-2. Manejo de Errores
-3. Subida de fotos en /img
-4. Mostrar resultados
-*/
 session_start();
 
 // Inicializacion validazion
-$titulo = $texto = $categoria = "";
-$categoria = ["promociones", "locales comerciales", "nueva construcción", "pisos",
-"naves industriales", "terrenos"];
+$titulo = $texto = $categoria = $imagenes = "";
 
 // Inicializacion errores
 $errTitulo = $errTexto = $errCategoria = $errImagenes = "";
-$isValid = "true";
+$isValid = true;
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-
-    //Validacion de datos
-
+// REPINTADO Y ERRORES
     // TITULO
-        $titulo = isset($_POST['titulo']) ? $_POST['titulo'] : "";
-    // TEXTO
-        $texto = isset($_POST['texto']) ? $_POST['texto'] : "";
+    if(empty($_POST['titulo'])){
+        $errTitulo = "Debes insertar un titulo";
+    }else{
+        $titulo = $_POST['titulo'];
+    }
+
+    // Texto
+    if(empty($_POST['texto'])){
+        $errTexto = "Debes insertar un texto";
+    }else{
+        $texto = $_POST['texto'];
+    }
+
     // CATEGORIA
-        $categoria = isset($_POST['categoria']) ? $_POST['categoria'] : array(); 
+    if(empty($_POST['categoria'])){
+        $errCategoria = "Introduzca una categoria";
+    }else{
+        $categoria = $_POST['categoria'];
+    }
 
+    // IMAGENES
+    if(empty($_FILES['imagen']['name'])){
+        $errImagenes = "Es obligatorio subir una imagen";
+    }else{
+        // SUBIR IMAGEN
+            // Tamaño
+            $tamaño = $_FILES['imagen']['size'];
 
+            if( $tamaño > 256 * 1024){
+                echo "Demasiado grande";
+                return;
+            }
 
+            // Subir 
+            $temporal = $_FILES['imagen']['tmp_name'];
+            $destino = "img/" . $_FILES['imagen']['name'];
+
+            if(move_uploaded_file($temporal,$destino)){
+                echo "Subida exitosa";
+            }else{
+                echo "Error en la subida";
+            }
+    }
+
+// Redireccion
+if($isValid){
+    header("Location: mostrar.php");
+    exit();
+}
 }
 
 ?>
@@ -71,47 +101,60 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             height: 80px;
         }
 
-        .form-group button {
-            padding: 8px 12px;
-            background-color: #ddd;
-            border: 1px solid #aaa;
+        .error{
+            color: red;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"  enctype="multipart/form-data">
+
             <!-- TITULO -->
             <div class="form-group">
                 <label for="titulo">Título: *</label>
                 <!-- REPINTADO TITULO -->
-                <input value = "<?php if(isset($titulo)) echo $titulo?>"
-                type="text" id="titulo" name="titulo" required>
+                <input type="text" id="titulo" name="titulo"
+                value = "<?php if(isset($titulo)) echo $titulo;?>">
+                <!-- ERROR -->
+                <span class = "error"> <?php echo $errTitulo ?> </span>
             </div>
+
             <!-- TEXTO -->
             <div class="form-group">
                 <label for="texto">Texto: *</label>
                 <!-- REPINTADO -->
-                <textarea id="texto" name="texto" required>
-                <?php if(isset($texto)) echo $texto?></textarea>
+                <textarea id="texto" name="texto"
+                ><?php if(isset($texto)) echo $texto;?></textarea>
+                <!-- ERROR -->
+                <span class = "error"><?php echo $errTexto ?></span>
             </div>
+
             <!-- CATEGORIA -->
             <div class="form-group">
                 <label for="categoria">Categoría:</label>
-                <select id="categoria" name="categoria[]">
-                    <option value="promociones" <?php if ($categoria == 'promociones') echo 'selected';?>>promociones</option>
-                    <option value="locales" <?php if($categoria == 'locales') echo 'selected' ?>;>locales comerciales</option>
-                    <option value="construccion">nueva construcción</option>
-                    <option value="pisos">pisos</option>
-                    <option value="naves">naves industriales</option>
-                    <option value="terrenos">terrenos</option>
+                <select id="categoria" name="categoria">
+                    <option></option>
+                    <option value="promociones" <?php if($categoria == "promociones") echo 'selected'; ?>>promociones</option>
+                    <option value="locales" <?php if($categoria === "locales") echo 'selected'; ?>>locales comerciales</option>
+                    <option value="construccion" <?php if($categoria === "construccion") echo 'selected'; ?>>nueva construcción</option>
+                    <option value="pisos" <?php if($categoria === "pisos") echo 'selected'; ?>>pisos</option>
+                    <option value="naves" <?php if($categoria === "naves") echo 'selected'; ?>>naves industriales</option>
+                    <option value="terrenos" <?php if($categoria === "terrenos") echo 'selected'; ?>>terrenos</option>
                 </select>
+                <!-- ERRORES -->
+                <span class = "error"> <?php echo $errCategoria; ?> </span>
             </div>
+
             <!-- IMAGEN -->
             <div class="form-group">
                 <label for="imagen">Imagen:</label>
                 <input type="file" id="imagen" name="imagen">
+
+                <!-- ERRORES -->
+                 <span class = "error"> <?php echo $errImagenes; ?> </span>
             </div>
+
             <!-- ENVIAR -->
             <div class="form-group">
                 <button type="submit">Insertar noticia</button>
