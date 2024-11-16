@@ -1,6 +1,6 @@
 <?php
 
-$titulo = $_POST['titulo'];
+$titulo = if(isset[$_SESSION['titulo']]) ? $_SESSION['titulo'] : ""; 
 
 ?>
 <!DOCTYPE html>
