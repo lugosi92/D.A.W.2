@@ -13,8 +13,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 // REPINTADO Y ERRORES
     // TITULO
+    
     if(empty($_POST['titulo'])){
         $errTitulo = "Debes insertar un titulo";
+        $isValid = false;
     }else{
         $titulo = $_POST['titulo'];
     }
@@ -22,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Texto
     if(empty($_POST['texto'])){
         $errTexto = "Debes insertar un texto";
+        $isValid = false;
     }else{
         $texto = $_POST['texto'];
     }
@@ -29,39 +32,51 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // CATEGORIA
     if(empty($_POST['categoria'])){
         $errCategoria = "Introduzca una categoria";
+        $isValid = false;
     }else{
         $categoria = $_POST['categoria'];
     }
 
+
     // IMAGENES
-    if(empty($_FILES['imagen']['name'])){
-        $errImagenes = "Es obligatorio subir una imagen";
-    }else{
-        // SUBIR IMAGEN
-            // Tamaño
-            $tamaño = $_FILES['imagen']['size'];
-
-            if( $tamaño > 256 * 1024){
-                echo "Demasiado grande";
-                return;
-            }
-
-            // Subir 
+// Después de procesar la subida de la imagen
+    if (!isset($_FILES['imagen']) || $_FILES['imagen']['error'] !== UPLOAD_ERR_OK) {
+        $errImagenes = "Es obligatorio subir una imagen válida.";
+        $isValid = false;
+    } else {
+        // Tamaño
+        $tamaño = $_FILES['imagen']['size'];
+        
+        if ($tamaño > 256 * 1024) { // Máximo 256 KB
+            $errImagenes = "El archivo es demasiado grande. Máximo 256 KB.";
+            $isValid = false;
+        } else {
+            // Procesar la subida de la imagen
             $temporal = $_FILES['imagen']['tmp_name'];
-            $destino = "img/" . $_FILES['imagen']['name'];
-
-            if(move_uploaded_file($temporal,$destino)){
+            $destino = "img/" . basename($_FILES['imagen']['name']);
+        
+            if (move_uploaded_file($temporal, $destino)) {
                 echo "Subida exitosa";
-            }else{
-                echo "Error en la subida";
+                // Guardar el nombre de la imagen en la sesión
+                $_SESSION['imagen'] = $destino;  // Guarda el destino de la imagen
+            } else {
+                $errImagenes = "Error al mover la imagen al destino.";
+                $isValid = false;
             }
+        }
     }
 
-// Redireccion
-if($isValid){
+// Redirecciona solo si todo es válido
+if ($isValid) {
+    $_SESSION['titulo'] = $titulo;
+    $_SESSION['texto'] = $texto;
+    $_SESSION['categoria'] = $categoria;
+    $_SESSION['imagen'] = $imagenes;
     header("Location: mostrar.php");
     exit();
 }
+
+
 }
 
 ?>
