@@ -58,6 +58,7 @@ const delanteros = [];
 const centros = [];
 
 
+//Funcion crear posiciones
 function posiciones(array){
 
     array.forEach(linea => {
@@ -84,18 +85,13 @@ function posiciones(array){
     console.log(centros);
     }
 
-    console.log(posiciones(masculino));
-
 // Funcion equipos
-
-const equipos = [];
-const reservas = [];
-
-function equiposJ(porteros, defensas, delanteros, centros){
+function CrearEquipos(porteros, defensas, delanteros, centros){
 
 while( porteros.length >= 1 && defensas.length >= 4 
     && delanteros.length >= 3 && centros.length >= 3){
 
+    const equipos = [];
     const equipo = [];
 
     equipo.push(porteros.pop());
@@ -115,8 +111,23 @@ while( porteros.length >= 1 && defensas.length >= 4
 console.log(equipos);
 }
 
-posiciones(femenino);
+//Funcion reservas
+function CrearReservas(porteros, defensas, delanteros, centros){
+while( porteros.length >= 1 || defensas.length >= 1 
+    || delanteros.length >= 1 || centros.length >= 1){
 
+
+    const reservas = [];
+        
+        reservas.push(porteros.pop());
+        reservas.push(defensas.pop());
+        reservas.push(delanteros.pop());
+        reservas.push(centros.pop());
+
+}
+}
+
+console.log(posiciones(femenino));
 
 
 
