@@ -8,7 +8,8 @@ if (!isset($_SESSION['titulo'], $_SESSION['texto'], $_SESSION['categoria'])) {
 $titulo = $_SESSION['titulo'];
 $texto = $_SESSION['texto'];
 $categoria = $_SESSION['categoria'];
-$imagen = $_SESSION['imagen'];
+$imagen = $_SESSION['
+'];
 
 
 
