@@ -10,7 +10,7 @@ body{
 button{
     display: inline-block;
     text-align: center;
-    margin-right: 20px;
+    margin: 20px;
     border: none;
     border-radius: 8px;
     width: 160px;
@@ -23,6 +23,23 @@ button span{
     color: white;
 }
 
-button:first-child{
+button:first-of-type{
     background: linear-gradient(to right, rgb(20, 5, 218), rgb(8, 129, 185));
 }
+
+button:nth-child(2){
+    background: linear-gradient(to right, rgb(58, 58, 58), rgb(133, 133, 133));
+}
+
+button:nth-child(3){
+    background: linear-gradient(to right, rgb(63, 201, 8), rgb(4, 216, 4));
+}
+
+button:nth-child(4){
+    background: linear-gradient(to right, rgb(214, 195, 18), rgb(148, 134, 7));
+}
+
+button:last-of-type{
+    background: linear-gradient(to right, rgb(185, 14, 14), rgb(163, 73, 73));
+}
+
