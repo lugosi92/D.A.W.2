@@ -52,6 +52,7 @@ console.log(femenino);
 
 
 // FUNCION POSICIONES
+function posiciones(array){
 const porteros = [];
 const defensas = [];
 const delanteros = [];
@@ -59,7 +60,6 @@ const centros = [];
 
 
 //Funcion crear posiciones
-function posiciones(array){
 
     array.forEach(linea => {
         const dato = linea.split(";");
@@ -68,63 +68,49 @@ function posiciones(array){
         dato[3] === 'Delantero' ?  delanteros.push(linea) : "";
         dato[3] === 'Centro' ?  centros.push(linea) : "";
     });
-    // PORTEROS
-    console.log("PORTEROS");
-    console.log(porteros);
 
-    // DEFENSAS
-    console.log("DEFENSAS");
-    console.log(defensas);
-
-    // DELANTEROS
-    console.log("DELANTERO");
-    console.log(delanteros);
-
-    // CENTROS
-    console.log("CENTROS");
-    console.log(centros);
-    }
+    return { porteros, defensas, delanteros, centros };
+    
+}
 
 // Funcion equipos
 function CrearEquipos(porteros, defensas, delanteros, centros){
-
-while( porteros.length >= 1 && defensas.length >= 4 
-    && delanteros.length >= 3 && centros.length >= 3){
-
+    
     const equipos = [];
-    const equipo = [];
 
-    equipo.push(porteros.pop());
+    while( porteros.length >= 1 && defensas.length >= 4 
+        && delanteros.length >= 3 && centros.length >= 3){
 
-    for(i=1; i<=4 ; i++){
-        equipo.push(defensas.pop());
+        const equipo = [];
+
+        equipo.push(porteros.pop());
+
+        for(i=1; i<=4 ; i++){
+            equipo.push(defensas.pop());
+        }
+
+        for(i=1; i<=3; i++){
+            equipo.push(centros.pop());
+            equipo.push(delanteros.pop());
+        }
+        equipos.push(equipo);
     }
-
-    for(i=1; i<=3; i++){
-        equipo.push(centros.pop());
-        equipo.push(delanteros.pop());
-    }
-    equipos.push(equipo);
-}
-
-// EQUIPOS
-console.log(equipos);
+    return equipos;
 }
 
 //Funcion reservas
 function CrearReservas(porteros, defensas, delanteros, centros){
+    const reservas = [];
 while( porteros.length >= 1 || defensas.length >= 1 
     || delanteros.length >= 1 || centros.length >= 1){
 
-
-    const reservas = [];
-        
         reservas.push(porteros.pop());
         reservas.push(defensas.pop());
         reservas.push(delanteros.pop());
         reservas.push(centros.pop());
 
-}
+    }
+    return reservas;
 }
 
 console.log(posiciones(femenino));
