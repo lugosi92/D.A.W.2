@@ -105,6 +105,7 @@ console.log(femenino);
     }
 
     // EQUIPOS
+    console.log("EQUIPOS")
     console.log(equipos);
 
     // RESERVAS

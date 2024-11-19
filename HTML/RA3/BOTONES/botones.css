@@ -1,0 +1,28 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+body{
+    text-align: center;
+}
+
+button{
+    display: inline-block;
+    text-align: center;
+    margin-right: 20px;
+    border: none;
+    border-radius: 8px;
+    width: 160px;
+    height: 60px;
+    box-shadow: 2px 2px 20px 1px rgb(0, 0, 0,486);
+}
+
+button span{
+    vertical-align: middle;
+    color: white;
+}
+
+button:first-child{
+    background: linear-gradient(to right, rgb(20, 5, 218), rgb(8, 129, 185));
+}
