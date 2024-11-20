@@ -1,0 +1,129 @@
+/* En una página web simple con un contenedor principal
+Crea  10 divs de 180 píxeles de ancho y de alto, incluye un texto en su interior y aplícale un color de fondo distinto a cada uno. Realiza las siguientes transiciones cuando el usuario pase por encima del contenedor el puntero del ratón:
+
+Cambia el color de fondo del contenedor.
+Cambia el tamaño de las letras del contenedor.
+Cambia el color de las letras del contenedor.
+Cambia el valor del interlineado.
+Cambia el valor de la propiedad border-radius del contenedor.
+Cambia el valor de la sombra del contenedor.
+Cambia la opacidad del contenedor.
+Cambia tres propiedades más a tu elección.
+
+
+En la parte superior de la página generar un menú (Inicio, Quienes somos, Productos y Contacto) horizontal.
+Se debe de crear una línea horizontal de colores diferentes encima de cada elemento. El fondo del menú es de color negro. Se debe de incluir una transición para cambiar el ancho de esa línea al 100% del contenedor de forma gradual*/ 
+
+ul{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+}
+
+span{
+    margin: 10px;
+}
+
+/*-------------------------------------------- */
+
+div{
+    margin: 10px;
+}
+div:hover{
+    font-size: 2em;
+    color: white;
+    line-height: 3em;
+    border-radius: 10%;
+    box-shadow:  2px 2px 20px 1px rgb(0, 0, 0,486);
+    opacity: 0.5;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: black;
+}
+.cont1{
+    height: 180px;
+    width: 180px;
+    background-color:green;
+}
+.cont1:hover{
+    background-color: pink;
+}
+
+.cont2{
+    height: 180px;
+    width: 180px;
+    background-color: red;
+}
+
+.cont2:hover{
+    background-color: blue;
+}
+.cont3{
+    height: 180px;
+    width: 180px;
+    background-color: burlywood;
+}
+.cont3:hover{
+    background-color: aqua;
+}
+
+.cont4{
+    height: 180px;
+    width: 180px;
+    background-color: yellow;
+}
+.cont4:hover{
+    background-color: bisque;
+}
+
+.cont5{
+    height: 180px;
+    width: 180px;
+    background-color: purple;
+}
+.cont5:hover{
+    background-color: green;
+}
+
+.cont6{
+    height: 180px;
+    width: 180px;
+    background-color: greenyellow;
+}
+.cont6:hover{
+    background-color: aquamarine;
+}
+
+.cont7{
+    height: 180px;
+    width: 180px;
+    background-color: blue;
+}
+.cont7:hover{
+    background-color: rebeccapurple;
+}
+.cont8{
+    height: 180px;
+    width: 180px;
+    background-color: grey;
+}
+.cont8:hover{
+    background-color: peru;
+}
+.cont9{
+    height: 180px;
+    width: 180px;
+    background-color: aqua;
+}
+.cont9:hover{
+    background-color: palegreen;
+}
+.cont10{
+    height: 180px;
+    width: 180px;
+    background-color: goldenrod;
+}
+.cont10:hover{
+    background-color: darkorchid;
+}
