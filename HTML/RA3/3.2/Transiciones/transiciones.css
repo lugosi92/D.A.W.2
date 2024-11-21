@@ -27,9 +27,21 @@ span{
 
 /*-------------------------------------------- */
 
-div{
-    margin: 10px;
+main div{
+    display: inline-block;
 }
+
+div p{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: auto 0;
+    height: 180px; 
+    width: 180px; 
+    
+}
+
+
 div:hover{
     font-size: 2em;
     color: white;
@@ -41,10 +53,13 @@ div:hover{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: black;
 }
+
+/*-------------------------------------------- */
 .cont1{
     height: 180px;
     width: 180px;
     background-color:green;
+
 }
 .cont1:hover{
     background-color: pink;
