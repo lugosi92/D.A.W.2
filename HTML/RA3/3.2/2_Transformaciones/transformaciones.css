@@ -1,0 +1,125 @@
+/*En una página web simple con un contenedor principal
+Crea  8 divs de 180 píxeles de ancho y de alto, incluye un texto en su interior y aplícale un color de fondo distinto a cada uno. 
+Realiza las siguientes transiciones cuando el usuario pase por encima del contenedor el puntero del ratón:
+
+Modifica la escala del contenedor.
+Modifica la rotación del contenedor.
+Modifica la posición del elemento mediante “translate” en el eje horizontal.
+Modifica la posición del elemento mediante “translate” en el eje vertical.
+Distorsiona el contenedor mediante “skew” en el eje horizontal.
+Distorsiona el contenedor mediante “skew” en el eje vertical.
+Distorsiona el contenedor mediante “perspective” en el eje vertical.
+Distorsiona el contenedor mediante “perspective” en el eje horizontal.*/
+
+
+/*-----------------CENTRAR--------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: Arial, sans-serif;
+}
+
+div{
+    border-radius: 30px;
+    margin: 10px;
+    display: inline-block;
+}
+div p{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: auto 0;
+    height: 180px; 
+    width: 180px; 
+}
+
+/*-----------------EJERCICIO--------------------------- */
+
+.cont1{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(182, 30, 30);
+
+}
+.cont1:hover{
+    transform: scale(0.5); /*1. Modificar escala del contenedor*/
+}
+
+.cont2{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(45, 30, 182);
+}
+.cont2:hover{
+    transform: rotate(45deg); /*2. Modifica la rotación del contenedor.*/
+}
+
+.cont3{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(170, 149, 29);
+}
+.cont3:hover{
+    transform: translate(100px); /*3. Modifica la posición horizontal*/
+}
+
+.cont4{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(111, 77, 17);
+}
+.cont4:hover{
+    transform: translate(0px, 100px); /*3. Modifica la posición vertical*/
+}
+
+.cont5{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(152, 29, 142);
+}
+.cont5:hover {
+    transform: skew(30deg); /* Distorsiona en horizontal*/
+}
+
+.cont6{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(21, 121, 111);
+}
+.cont6:hover{
+    transform: skew(0deg, 30deg); /* Distorsiona en veetical*/
+}
+
+
+.cont7-pers {
+    perspective: 1000px; /* Añadir perspectiva al contenedor */
+}
+
+.cont7 {
+    width: 180px;
+    height: 180px;
+    background-color: rgb(97, 164, 123);
+    transition: transform 0.5s;
+}
+
+.cont7:hover {
+    transform: rotate(45deg); /* Aplica rotación 3D en el eje Y */
+}
+
+
+.cont8-pers{
+    perspective: 1000px;
+}
+.cont8{
+    width: 180px;
+    height: 180px;
+    background-color: rgb(153, 125, 66);
+    transition: transform 0.5s;
+}
+.cont8:hover{
+    transform: rotateY(30deg);
+}
