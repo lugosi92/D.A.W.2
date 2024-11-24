@@ -1,4 +1,7 @@
 /*
+Por valor
+Por referncia
+
 || verfifca si es falso o verdader
 ?? verfica si esta inicializada o no
 */

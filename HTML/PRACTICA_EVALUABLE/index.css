@@ -1,0 +1,83 @@
+/* Reset de márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuentes y colores generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* Cabecera */
+header {
+    width: 100%;
+    height: 80px;
+    background-color: transparent; 
+    padding: 10px 20px;
+    position: absolute; /* Para los elementos posicionados absolutamente */
+    
+}
+
+/* Logo */
+.logo {
+    float: right;
+}
+
+.logo img {
+    width: 100px;
+}
+
+/* Menú */
+.menu {
+    float: left;
+    margin-top: 25px; /* Ajuste para alinear verticalmente los elementos */
+}
+
+/* Enlaces del menú */
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #00aaff;
+}
+
+/* Estilos para el campo de búsqueda */
+.buscador {
+    padding: 5px;
+    margin-right: 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Limpiar flotado (clearfix) */
+header::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 768px) {
+    .menu {
+        float: none;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .menu a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .buscador {
+        margin: 10px 0;
+    }
+}

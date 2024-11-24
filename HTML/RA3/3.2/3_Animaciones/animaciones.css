@@ -1,0 +1,54 @@
+/* 1. Realizar una animación en una web (por ejemplo la de vuestro proyecto) en la que el logo situado en la esquina
+superior izquierda se encuentre rotando de manera indefinida
+
+2.Realizar una animación de una pelota "botando". Se consigue con un solo div en HTML (redondearle las esquinas al 50%)
+
+3.Realizar una animación de un círculo "semiabierto" girando, como si estuviera cargando una página. Se consigue con un HTML en el DIV y en el CSS indicando que el borde superior es transparente y redondeando las esquinas.
+
+4. Realizar (a partir del HTML dado), la introducción de StarWars (ver en clase) e incluir el audio de la canción de la intro
+
+5. Realizar una animación de ondas de audio (ver en clase).
+HTML. Cinco etiquetas span, cada uno representando una barra de audio.
+CSS. El efecto se consigue animando la altura de cada elemento de 5px a 30px. La etiqueta también se mueve hacia abajo en el eje Y por 15px para dar el efecto que está creciendo desde el centro. Por defecto la animación de cada etiqueta sucede al mismo tiempo.
+
+6. Enunciado: Crea una animación en la que las letras de un mensaje se deslicen desde fuera de la pantalla y se desplieguen de manera suave, una por una, para formar una palabra o frase. Las letras deben aparecer de manera secuencial, como si estuvieran escribiéndose.
+ */
+
+
+.img img{
+    animation: girar  2s infinite ;
+}
+
+@keyframes girar {
+    0% {
+        transform: rotateY(0deg); 
+    }
+    100% {
+        transform: rotateY(360deg); 
+    }
+}
+
+/* PELOTA */
+
+.pelota{
+    border: 1px black solid;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    margin-left: 10%;
+}
+
+.pelota{
+    animation: botar 0.5s infinite alternate;
+}
+
+@keyframes botar {
+    from {
+        transform: translateY(0px); 
+    }
+    to {
+        transform: translateY(200px); 
+    }
+}
+
+/* CARGA */
