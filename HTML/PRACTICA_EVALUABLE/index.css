@@ -12,17 +12,16 @@ body {
     color: #333;
 }
 
-/* Cabecera */
+/* ---------------------------------------CABECERA--------------------------------------- */
 header {
+    position: fixed;
+    text-align: center;
     width: 100%;
     height: 80px;
     background-color: transparent; 
-    padding: 10px 20px;
-    position: absolute; /* Para los elementos posicionados absolutamente */
-    
 }
 
-/* Logo */
+/*-------Logo-------*/
 .logo {
     float: right;
 }
@@ -30,54 +29,51 @@ header {
 .logo img {
     width: 100px;
 }
-
-/* Menú */
-.menu {
-    float: left;
-    margin-top: 25px; /* Ajuste para alinear verticalmente los elementos */
+.logo img{
+    animation: girar  2s infinite ;
 }
 
-/* Enlaces del menú */
+@keyframes girar {
+    0% {
+        transform: rotateY(0deg); 
+    }
+    100% {
+        transform: rotateY(360deg); 
+    }
+}
+
+/*-------Categoria-------*/
+.categoria{
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+/*-------Menú-------*/
+.menu {
+    display: inline-block;
+    margin-top: 30px;
+
+}
+
 .menu a {
     color: white;
     text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
+    margin: 100px;
 }
 
 .menu a:hover {
-    color: #00aaff;
+    color: #9b9b9b;
 }
 
-/* Estilos para el campo de búsqueda */
+
 .buscador {
     padding: 5px;
     margin-right: 15px;
     border: none;
-    border-radius: 5px;
+    background-color: transparent;
+    border-bottom: 1px solid white;
 }
 
-/* Limpiar flotado (clearfix) */
-header::after {
-    content: "";
-    display: table;
-    clear: both;
-}
 
-/* Estilos responsivos */
-@media screen and (max-width: 768px) {
-    .menu {
-        float: none;
-        margin-top: 10px;
-        text-align: center;
-    }
 
-    .menu a {
-        display: block;
-        margin: 10px 0;
-    }
 
-    .buscador {
-        margin: 10px 0;
-    }
-}
