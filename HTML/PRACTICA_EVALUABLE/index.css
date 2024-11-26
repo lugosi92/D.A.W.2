@@ -26,8 +26,15 @@ header {
     
 }
 
-.scroll-change{
-    color:black;
+/* CABECERA CAMBIO */
+header.scroll-active {
+    transition: background-color 0.3s ease; /* Suaviza la transición */
+}
+
+header.scroll-active .menu a,
+header.scroll-active .buscador,
+header.scroll-active .categoria {
+    color: black; /* Cambia el color de los textos */
 }
 
 /*-------Logo-------*/
@@ -142,49 +149,55 @@ header {
     font-size: 20px;
 }
 
-/* ---------------------------------------PAGINA 1--------------------------------------- */
+/* ---------------------------------------PAGINA 1-2--------------------------------------- */
 
 /* INTRODUCCION */
-.pag1{
+.pag1, .pag2{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: black;
     text-align: center;
     margin-top: 80px;
+    
 }
-.pag1 h1{
+.pag1 h1, .pag2 h1{
     margin-top: 150px;
+    font-size: 5em;
 }
 
-.pag1 p{
+.pag1 p, .pag2 p{
     margin-top: 50px;
+    font-size: 1.5em;
 }
 
-.pag1 h4{
-    margin-right: 1350px;
-    font-size: 1.5em;
+.pag1 h4, .pag2 h4{
+    margin-right: 1100px;
+    font-size: 3em;
     margin-top: 20px;
 }
 
 /* ETIQUETAS */
-.productos {
+.productos , .productos2{
     text-align: center; /* Centra los elementos */
-    height: 80vh;
+    height: 60vh;
     margin-top: 150px;
+    border: 6px solid black;
+    margin: 90px;
 }
 
-.productos div {
+.productos div, .productos2 div {
     display: inline-block; 
     width: 15%; 
     vertical-align: middle; 
-    border: 2px solid black; 
+    border: 1px solid black; 
     margin: 0px auto;
 }
 
-.productos div img {
+.productos div img, .productos2 div img {
     width: 100%;
+    
 }
 
-.productos div h5 {
+.productos div h5, .productos2 div h5 {
     display: inline-block; 
     vertical-align: middle;
     margin-bottom: 10px;
@@ -193,13 +206,145 @@ header {
     
 }
 
-.productos div .icono {
+.productos div .icono, .productos2  div .icono{
     display: inline-block; 
     color: black;
-    vertical-align: middle; 
-    font-weight: bold;
    
-  
 }
 
+/* ---------------------------------------PAGINA 3-4--------------------------------------- */
+
+/* INTRODUCCION */
+.pag3, .pag4{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    text-align: center;
+    margin-top: 80px;
+    
+}
+.pag3 h1, .pag4 h1{
+    margin-top: 150px;
+    font-size: 5em;
+}
+
+.pag3 p, .pag4 p{
+    margin-top: 50px;
+    font-size: 3em;
+}
+
+.pag3 h4, .pag4 h4{
+    margin-right: 1100px;
+    font-size: 3em;
+    margin-top: 20px;
+}
+
+/* ETIQUETAS */
+.productos3 , .productos4{
+    text-align: center; /* Centra los elementos */
+    height: 60vh;
+    margin-top: 150px;
+    border: 6px solid black;
+    margin: 90px;
+}
+
+.productos3 div, .productos4 div {
+    display: inline-block; 
+    width: 15%; 
+    vertical-align: middle; 
+    border: 1px solid black; 
+    margin: 0px auto;
+}
+
+.productos3 div img, .productos4 div img {
+    width: 100%;
+    
+}
+
+.productos3 div h5, .productos4 div h5 {
+    display: inline-block; 
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-right: 100px;
+    font-size: 20px;
+    
+}
+
+.productos3 div .icono, .productos4  div .icono{
+    display: inline-block; 
+    color: black;
+   
+}
+
+
+/* ---------------------------------------FOOTER--------------------------------------- */
+
+
+/* Pie de página */
+footer {
+    background-color: #000;
+    padding-top: 40px;
+    color: #fff;
+}
+
+.pie {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cat {
+    width: 22%;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2%;
+}
+
+.cat:last-child {
+    margin-right: 0;
+}
+
+.cat h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.cat ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cat ul li {
+    margin-bottom: 5px;
+}
+
+.cat ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.cat ul li a:hover {
+    text-decoration: underline;
+}
+
+.loc-nov input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.info {
+    text-align: center;
+    width: 100%;
+    font-size: 0.8em;
+    color: #949494;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-style: oblique;
+}
 
