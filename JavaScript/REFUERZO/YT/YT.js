@@ -47,3 +47,24 @@ function tabla(num, hasta){
     }
 
     tabla(8, 10);
+
+
+// Multiplos de 4
+
+function filtrar(){
+
+    let array = [];
+    let num = [];
+
+    for(let i = 1; i<=100; i++){
+        array.push(i);
+    }
+
+    array.filter((elemento)=> {
+        if(elemento % 3 ===0)
+            num.push(elemento)
+    });
+    console.log(num);
+}
+
+filtrar();
