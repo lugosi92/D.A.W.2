@@ -41,50 +41,33 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     // nombre = prompt("Introduce nombre perro");
 
     nombre = "Lila";
-    let lineaMadre = "";
-    padre = "";
-    madre = "";
-
-    abueloM = null;
-    abuelaM = null;
-
-    abueloP = null;
-    abuelaP = null;
 
 
 
-    // PADRES
-    arrayPerros.forEach(linea => {
-        const dato = linea.split(";");
 
-        if (nombre == dato[2] || nombre == dato[3] || nombre == dato[4]
-            || nombre == dato[5] || nombre == dato[6]) {
-            madre = dato[1];
-            padre = dato[0];
-        }
-    });
+function familia(array, nombre){
+    familiarF = null;
+    familiarM = null;
 
-    // ABUELOS
-    arrayPerros.forEach(linea => {
-        const dato = linea.split(";")
-        // BUSCAR ABUELOS MATERNOS
-        if (madre == dato[2] || madre == dato[3] || madre == dato[4]
-            || madre == dato[5] || madre == dato[6]) {
-            abueloM = dato[0];
-            abuelaM = dato[1];
-        }
+    array.forEach(linea => {
+        dato = linea.split(";")
+    
 
-        // BUSCAR ABUELOS PATERNOS
-        if (padre == dato[2] || padre == dato[3] || padre == dato[4]
-            || padre == dato[5] || padre == dato[6]) {
-            abueloP = dato[0];
-            abuelaP = dato[1];
-        }
-    });
+    if (nombre == dato[2] || nombre == dato[3] || nombre == dato[4]
+        || nombre == dato[5] || nombre == dato[6]) {
+        familiarF = dato[1];
+        familiarM = dato[0];
+    }
+});
 
- 
+    console.log("Padre: " + familiarM +  " Madre: " + familiarF)
+}
+
+familia(arrayPerros, "Bonzo");
 
 
+
+familia(arrayPerros);
     // HIJOS
     const hijos = [];
     // Tyson;Lila;Tux;Kiwi;Moka;Pochita;Bonzo
@@ -105,26 +88,6 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         }
     });
 
-   
-
-
-
-
-    // PADRES
-    console.log((padre ?? "desconocido") + " " +(madre ?? "desconocido"));
-
-    // ABUELOS
-    MabueloM = "Abuelo Materna: " + (abueloM ?? "desconocido");
-    MabuelaM = "Abuela Materna: " + (abuelaM ?? "desconocido");
-
-    MabueloP = "Abuelo Paterno: " + (abueloP ?? "desconocido");
-    MabuelaP = "Abuela Paterna: " + (abuelaP ?? "desconocido");
-
-    // Abulos Maternos
-    console.log((MabueloM)  + " " + (MabuelaM));
-
-    // Abuelos Paternos
-    console.log( (MabueloP) + " " + (MabuelaP));
 
      //HIJOS;
      console.log("HIJOS");

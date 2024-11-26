@@ -44,10 +44,10 @@ CSS. El efecto se consigue animando la altura de cada elemento de 5px a 30px. La
 
 @keyframes botar {
     from {
-        transform: translateY(0px); 
+        transform: translateY(200px); 
     }
     to {
-        transform: translateY(200px); 
+        transform: translateY(0px); 
     }
 }
 
