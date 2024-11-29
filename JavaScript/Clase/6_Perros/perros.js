@@ -22,6 +22,12 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     console.log(contenido);
     mostrarContenido(contenido);
 
+    /*
+    Si son +7
+    Funciones foreach
+    Hijoss con metodo string-> slice
+    promt
+    */
 
     // ELIMINAR DUPLICADOS
 

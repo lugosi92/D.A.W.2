@@ -33,41 +33,59 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
 
     // PASAR DE CONJUNTO A ARRAY
     arrayPerros = [...perros];
-    console.log("ARRAY perros")
+    console.log("PERROS")
     console.log(arrayPerros);
 
     // INTRODUCIR NOMBRE
 
-    // nombre = prompt("Introduce nombre perro");
-
-    nombre = "Lila";
+    nombre = prompt("Introduce nombre perro");
 
 
-
-
-function familia(array, nombre){
-    familiarF = null;
-    familiarM = null;
+// PADRES
+function padres(array, ...args){
+    padre = null;
+    madre = null;
 
     array.forEach(linea => {
         dato = linea.split(";")
     
-
-    if (nombre == dato[2] || nombre == dato[3] || nombre == dato[4]
-        || nombre == dato[5] || nombre == dato[6]) {
-        familiarF = dato[1];
-        familiarM = dato[0];
+    for(let i=2; i <= dato.length; i++){
+        if(nombre === dato[i]){
+            padre = dato[0];
+            madre = dato[1];
+        }
     }
+   
 });
 
-    console.log("Padre: " + familiarM +  " Madre: " + familiarF)
+return (madre ?? "desconocido") + " " + (padre ?? "desconocido");
+
 }
+console.log("Padres: " + padres(arrayPerros, nombre));
 
-familia(arrayPerros, "Bonzo");
+// ABUELOS
+function abuelos(array, subyascente){
+    abuelo = null;
+    abuela = null;
 
+    arrayPerros.forEach(linea => {
+        const dato = linea.split(";")
 
+        for(let i=2; i <= dato.length; i++){
+            if(subyascente === dato[i]){
+                abuelo = dato[0];
+                abuela = dato[1];
+            }
+        }
+    });
 
-familia(arrayPerros);
+    return (abuelo ?? "desconocido")  + " " + (abuela ?? "desconocido");
+}
+console.log("Abuelos maternos: " + abuelos(arrayPerros, madre));
+console.log("Abuelos paternos: " + abuelos(arrayPerros, padre));
+
+// HIJOS
+function hijos(arrayPerros){
     // HIJOS
     const hijos = [];
     // Tyson;Lila;Tux;Kiwi;Moka;Pochita;Bonzo
@@ -77,8 +95,8 @@ familia(arrayPerros);
 
         if (linea.includes(nombre)) {
 
-            console.log(linea);
-            console.log(dato.indexOf(nombre));
+            // console.log(linea);
+            // console.log(dato.indexOf(nombre));
 
             if (dato.indexOf(nombre) < 2) {
                 for (let i = 2; i < dato.length; i++) {
@@ -88,10 +106,12 @@ familia(arrayPerros);
         }
     });
 
+    return hijos;
+}
 
-     //HIJOS;
-     console.log("HIJOS");
-     console.log(hijos);
+console.log(hijos(arrayPerros));
+
+
 
 
 
