@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+     <title>Manual de iniciación a PHP</title>
+     <meta name="generator" content="notepad++" />
+	 <link rel="stylesheet" type="text/css" href="man.css" />
+	 <style type="text/css">
+	    article ul {
+			list-style: square;
+			margin: 10px; margin-left: 30px;
+		}   
+		article a:link {
+			text-decoration: underline;
+		}
+	 </style>
+   </head>
+
+  <body>
+     <header>
+       <h1>Manual de iniciación a PHP</h1>
+	 </header>
+	 
+	 <nav>
+       <ul>
+        <li><a href="man1.html">1. DEFINICIÓN</a></li>
+        <li><a href="man2.html">2. ETIQUETAS PHP</a></li>
+		<li><a href="man3.html">3. INSTRUCCIONES PHP</a></li>
+		<li><a href="man4.html">4. EJECUCIÓN DE UN SCRIPT PHP</a></li>
+	    <li><a href="man5.html">5. VARIABLES</a></li>
+	    <li><a href="man6.html">6. ÁMBITO DE VARIABLES</a></li>
+	    <li><a href="man7.html">7. VARIABLES SUPERGLOBALES</a></li>
+	    <li><a href="man8.html">8. CONSTANTES</a></li>
+	    <li><a href="man9.html">9. VISUALIZACIÓN</a></li>
+	    <li><a href="man10.html">10. PALABRAS RESERVADAS</a></li>
+	    <li><a href="man11.html">11. OPERADORES ESPECIALES</a></li>
+	    <li><a href="man12.html">12. TIPOS DE DATOS</a></li>
+	    <li><a href="man13.html">13. ESTRUCTURAS DE CONTROL</a></li>
+	    <li><a href="man14.html">14. FUNCIONES</a></li>
+	    <li><a href="man15.html">15. MANEJO DE CADENAS</a></li>
+	    <li><a href="man16.html">16. MANEJO DE FECHAS</a></li>
+	    <li><a href="anexo1.html">Anexo 1. TIPOS DE ERRORES EN PHP</a></li>
+       </ul>
+     </nav>
+	 
+	 <section id="content">
+	   <article>
+		<h2>4. EJECUCIÓN DE UN SCRIPT PHP</h2>
+		<p>Pasos necesarios para ejecutar un archivo php:</p>
+		<ul>
+		  <li>	Los archivos deben tener la extensión  ".php" </li>
+		  <li>Los archivos deben desplegarse en el directorio raíz de archivos del sitio Web: C:/xampp/htdocs <br>
+			  Este directorio puede cambiarse mediante la directiva DocumentRoot, que se encuentra en el archivo de configuración C:\xampp\apache\conf\httpd.conf<br>
+		  <li>El servidor Web (Apache) con el módulo para PHP debe estar iniciado <br>
+		      Comprobar mediante http:/localhost y phpinfo()</li>
+		  <li>En el cliente web, es decir, en la barra de direcciones del navegador, debemos escribir la ruta al archivo mediante el protocolo http.<br>
+		      (Comprobar en el navegador: file:///C:/xampp/htdocs/manual/primer.php)
+		  </li>
+		</ul>
+		<p>Ejemplos: <br>
+			- Para pruebas locales <a href="http://localhost/manual/prueba.php"> http://localhost/manual/prueba.php</a> <br>
+			- Para pruebas en remoto se debe indicar la dirección IP o el nombre de dominio si  es un dominio registrado, 
+			  como <a href="http://www.juanmacr.es/manual/prueba.php" target="_blank"> http://www.juanmacr.es/manual/prueba.php </a> <br>
+		</p>
+		<p>Actividad: <br>
+		   Copia el ejemplo anterior en un archivo llamado prueba.php y guárdalo en el directorio C:\xampp\htdocs\manual <br>
+	       Arranca el servidor Apache y escribe: <a href="http://localhost/manual/prueba.php"> http://localhost/manual/prueba.php</a> en el navegador
+	    </p>
+		<img src="img/prueba.png"></img>
+	   </article>
+	 </section>
+	 
+	 <footer>
+	    <a href="man3.html"><img src="img/anterior.jpg"></img> <a/>
+	    <a href="man5.html"><img src="img/siguiente.jpg"></img> <a/>
+	 </footer>
+	 
+  </body>
+ </html>

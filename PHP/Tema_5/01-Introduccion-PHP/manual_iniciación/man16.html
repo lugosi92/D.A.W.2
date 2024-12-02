@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+     <title>Manual de iniciación a PHP</title>
+     <meta name="generator" content="notepad++" />
+	 <link rel="stylesheet" type="text/css" href="man.css" />
+	 <style type="text/css">	 </style>
+   </head>
+
+  <body>
+     <header>
+       <h1>Manual de iniciación a PHP</h1>
+	 </header>
+	 
+	 <nav>
+       <ul>
+        <li><a href="man1.html">1. DEFINICIÓN</a></li>
+        <li><a href="man2.html">2. ETIQUETAS PHP</a></li>
+		<li><a href="man3.html">3. INSTRUCCIONES PHP</a></li>
+		<li><a href="man4.html">4. EJECUCIÓN DE UN SCRIPT PHP</a></li>
+	    <li><a href="man5.html">5. VARIABLES</a></li>
+	    <li><a href="man6.html">6. ÁMBITO DE VARIABLES</a></li>
+	    <li><a href="man7.html">7. VARIABLES SUPERGLOBALES</a></li>
+	    <li><a href="man8.html">8. CONSTANTES</a></li>
+	    <li><a href="man9.html">9. VISUALIZACIÓN</a></li>
+	    <li><a href="man10.html">10. PALABRAS RESERVADAS</a></li>
+	    <li><a href="man11.html">11. OPERADORES</a></li>
+	    <li><a href="man12.html">12. TIPOS DE DATOS</a></li>
+	    <li><a href="man13.html">13. ESTRUCTURAS DE CONTROL</a></li>
+	    <li><a href="man14.html">14. FUNCIONES</a></li>
+	    <li><a href="man15.html">15. MANEJO DE CADENAS</a></li>
+	    <li><a href="man16.html">16. MANEJO DE FECHAS</a></li>
+	    <li><a href="anexo1.html">Anexo 1. TIPOS DE ERRORES EN PHP</a></li>
+       </ul>
+     </nav>
+	 
+	 <section id="content">
+	   <article>
+		 <h2>16. MANEJO DE FECHAS</h2>
+		 <p>En PHP no existe el tipo de datos fecha, se trabaja con cadenas de caracteres 
+		 y funciones que extraen la fecha y hora del sistema.</p>
+		 <ul>
+		   <li> <b>date</b> (formato, [timestamp]) devuelve una cadena con el formato especificado 
+		   y que contiene la fecha indicada por el entero “timestamp”.<br>
+		   “timestamp” es opcional y si se omite la función toma la fecha/hora del sistema</li>
+		   <li> <b>strtotime</b>(string) devuelve un entero que representa la fecha indicada en la cadena</li>
+		   <li> <b>mktime</b>(h, i, sa, m, d, Y) devuelve un entero que representa la fecha indicada por los argumentos</li>
+		 </ul>
+		 <p>(h=horas, i=minutos, sa=segundos, m=mes, d=día, Y=año)</p>
+		 <div id="codigo">
+		    <img src="img/fecha.jpg"></img> <a href="fecha.php" target="_blank">fecha.php</a>
+		 </div>
+		 <img src="img/fecha.png"></img>
+		</article>
+	 </section>
+	 
+	 <footer>
+	    <a href="man15.html"><img src="img/anterior.jpg"></img> <a/>
+	    <a href="anexo1.html"><img src="img/siguiente.jpg"></img> <a/>
+	 </footer>
+	 
+  </body>
+ </html>

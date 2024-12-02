@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+     <title>Manual de iniciación a PHP</title>
+     <meta name="generator" content="notepad++" />
+	 <link rel="stylesheet" type="text/css" href="man.css" />
+	 <style type="text/css">	 </style>
+   </head>
+
+  <body>
+     <header>
+       <h1>Manual de iniciación a PHP</h1>
+	 </header>
+	 
+	 <nav>
+       <ul>
+        <li><a href="man1.html">1. DEFINICIÓN</a></li>
+        <li><a href="man2.html">2. ETIQUETAS PHP</a></li>
+		<li><a href="man3.html">3. INSTRUCCIONES PHP</a></li>
+		<li><a href="man4.html">4. EJECUCIÓN DE UN SCRIPT PHP</a></li>
+	    <li><a href="man5.html">5. VARIABLES</a></li>
+	    <li><a href="man6.html">6. ÁMBITO DE VARIABLES</a></li>
+	    <li><a href="man7.html">7. VARIABLES SUPERGLOBALES</a></li>
+	    <li><a href="man8.html">8. CONSTANTES</a></li>
+	    <li><a href="man9.html">9. VISUALIZACIÓN</a></li>
+	    <li><a href="man10.html">10. PALABRAS RESERVADAS</a></li>
+	    <li><a href="man11.html">11. OPERADORES</a></li>
+	    <li><a href="man12.html">12. TIPOS DE DATOS</a></li>
+	    <li><a href="man13.html">13. ESTRUCTURAS DE CONTROL</a></li>
+	    <li><a href="man14.html">14. FUNCIONES</a></li>
+	    <li><a href="man15.html">15. MANEJO DE CADENAS</a></li>
+	    <li><a href="man16.html">16. MANEJO DE FECHAS</a></li>
+	    <li><a href="anexo1.html">Anexo 1. TIPOS DE ERRORES EN PHP</a></li>
+       </ul>
+     </nav>
+	 
+	 <section id="content">
+	   <article>
+		 <h2>11. OPERADORES</h2>
+		 <p>Además de los operadores tradicionales PHP dispone de unos operadores de comparación específicos 
+		   que no suelen aparecer en otros lenguajes:</p>
+		 <table>
+            <thead> <td>Operador</td><td>Nombre</td><td>Definición</td> </thead>
+			<tr> <td>$a === $b</td><td>Identidad</td><td>Cierto si el valor y el tipo de los operandos es igual</td> </tr>
+		    <tr> <td>$a !== $b</td><td>No Identidad</td><td>Cierto si el valor o el tipo de los operandos es distinto</td> </tr>
+		 </table>
+		 <p>El operador { } sirve para indicar al intérprete cual es la parte que debe procesar, 
+		    dentro de una cadena entre comillas dobles.<br/> Se puede utilizar para visualizar matrices, funciones, 
+		    métodos de objetos, etc. dentro de cadenas de caracteres.<br/>
+			Vamos a ver un ejemplo con matrices, en el primer caso el parser se equivoca por la ausencia de llaves
+			y deja de procesar en los primeros corchetes:
+		 <p>
+		 <div id="codigo">
+		    <img src="img/sin_llaves.jpg"></img> <a href="sin_llaves.php" target="_blank">sin_llaves.php</a>
+			<img src="img/sin_llaves.png"></img> 
+			<img src="img/con_llaves.jpg"></img> <a href="con_llaves.php" target="_blank">con_llaves.php</a>
+			<img src="img/con_llaves.png"></img> 
+	   </article>
+	 </section>
+	 
+	 <footer>
+	    <a href="man10.html"><img src="img/anterior.jpg"></img> <a/>
+	    <a href="man12.html"><img src="img/siguiente.jpg"></img> <a/>
+	 </footer>
+	 
+  </body>
+ </html>

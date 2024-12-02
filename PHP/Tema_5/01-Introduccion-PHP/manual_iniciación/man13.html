@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+     <title>Manual de iniciación a PHP</title>
+     <meta name="generator" content="notepad++" />
+	 <link rel="stylesheet" type="text/css" href="man.css" />
+	 <style type="text/css">	 </style>
+   </head>
+
+  <body>
+     <header>
+       <h1>Manual de iniciación a PHP</h1>
+	 </header>
+	 
+	 <nav>
+       <ul>
+        <li><a href="man1.html">1. DEFINICIÓN</a></li>
+        <li><a href="man2.html">2. ETIQUETAS PHP</a></li>
+		<li><a href="man3.html">3. INSTRUCCIONES PHP</a></li>
+		<li><a href="man4.html">4. EJECUCIÓN DE UN SCRIPT PHP</a></li>
+	    <li><a href="man5.html">5. VARIABLES</a></li>
+	    <li><a href="man6.html">6. ÁMBITO DE VARIABLES</a></li>
+	    <li><a href="man7.html">7. VARIABLES SUPERGLOBALES</a></li>
+	    <li><a href="man8.html">8. CONSTANTES</a></li>
+	    <li><a href="man9.html">9. VISUALIZACIÓN</a></li>
+	    <li><a href="man10.html">10. PALABRAS RESERVADAS</a></li>
+	    <li><a href="man11.html">11. OPERADORES</a></li>
+	    <li><a href="man12.html">12. TIPOS DE DATOS</a></li>
+	    <li><a href="man13.html">13. ESTRUCTURAS DE CONTROL</a></li>
+	    <li><a href="man14.html">14. FUNCIONES</a></li>
+	    <li><a href="man15.html">15. MANEJO DE CADENAS</a></li>
+	    <li><a href="man16.html">16. MANEJO DE FECHAS</a></li>
+	    <li><a href="anexo1.html">Anexo 1. TIPOS DE ERRORES EN PHP</a></li>
+       </ul>
+     </nav>
+	 
+	 <section id="content">
+	   <article>
+		 <h2>13. ESTRUCTURAS DE CONTROL</h2>
+		 <p>- Condicionales: if-elseif-else	y switch</p>
+		 <div id="codigo">
+		    <img src="img/if.jpg"></img> <a href="if.php" target="_blank">if.php</a>
+			<img src="img/switch.jpg"></img> <a href="switch.php" target="_blank">switch.php</a>
+		  </div>
+		</article>
+		
+		<article>
+		  <p>- Bucles: while y do while</p>
+		   <div id="codigo">
+		    <img src="img/while.jpg"></img> <a href="while.php" target="_blank">while.php</a>
+			<img src="img/do_while.jpg"></img> <a href="do_while.php" target="_blank">do_while.php</a>
+		  </div>
+		</article>
+		  
+		<article>
+		  <p>- Bucle: for</p>
+		   <div id="codigo">
+		    <img src="img/for.jpg"></img> <a href="for.php" target="_blank">for.php</a>
+		  </div>
+		  <img src="img/for.png"></img>
+		</article>
+		
+		<article>
+		  <p>- Bucle: foreach</p>
+		  <p>Hay dos formas posibles de usar el bucle foreach:<br>
+			 1.	foreach ($nombre_array   as   $valor) {  <br>
+				sentencias;  }
+
+			Este bucle recorre el array indicado en $nombre_array.<br>
+			En cada iteración el elemento actual del array se guarda en $valor y se incrementa el puntero interno del array.
+		  </p>
+		  <div id="codigo">
+		    <img src="img/foreach1.jpg"></img> <a href="foreach1.php" target="_blank">foreach1.php</a>
+		  </div>
+		  <img src="img/foreach1.png"></img>
+		  
+		  <p>2.	foreach ($nombre_array   as   $clave=>$valor) {	<br>
+				sentencias;   }<br>
+				Este bucle recorre el array indicado en $nombre_array.<br>
+				En cada iteración el elemento actual del array se guarda en $valor, la clave se guarda en $clave y se incrementa el puntero interno del array
+		  </p>
+		  <div id="codigo">
+		    <img src="img/foreach2.jpg"></img> <a href="foreach2.php" target="_blank">foreach2.php</a>
+		  </div>
+		  <img src="img/foreach2.png"></img>
+		</article>
+		
+		<article>
+		  <p>- require y require_once</p>
+		  <p>Sirve para insertar en nuestro documento y en la posición exacta donde está require,
+		     el código contenido en un archivo externo, antes de ser ejecutado por el servidor.<br>
+             En caso de no encontrar el archivo especificado, se produce un FATAL ERROR que interrumpe la ejecución.<br>
+			 (require_once solo inserta la primera vez aparece)
+          </p>
+		  <p>- include e include_once</p>
+		  <p>Sirve para pegar en nuestro documento y en la posición exacta donde está include,
+		     el código contenido en un archivo externo, antes de ser ejecutado por el servidor.<br>
+			 En caso de no encontrar el archivo especificado se envía un WARNING pero continúa la ejecución.<br>
+			 (include_once solo inserta la primera vez que aparece)
+          </p>
+		  <div id="codigo">
+		    <img src="img/header.jpg"></img> <a href="header.php" target="_blank">header.php</a>
+			<img src="img/menu.jpg"></img> <a href="menu.html" target="_blank">menu.html</a><br/>
+			<img src="img/include.jpg"></img> <a href="include.php" target="_blank">include.php</a>
+		  </div>
+		  <img src="img/include.png"></img>
+		</article>
+		
+	 </section>
+	 
+	 <footer>
+	    <a href="man12.html"><img src="img/anterior.jpg"></img> <a/>
+	    <a href="man14.html"><img src="img/siguiente.jpg"></img> <a/>
+	 </footer>
+	 
+  </body>
+ </html>
