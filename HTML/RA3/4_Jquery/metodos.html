@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Incluir jQuery localmente -->
+    <script src="libs/jquery-3.6.0.min.js"></script>  
+
+
+</head>
+<body>
+    <input id="ej" type="text" value="valor1">
+
+    <!-- pag 11 - 16 -->
+    <script>
+        $(document).ready(function(){
+
+            console.log($("#ej").attr("value"));
+            console.log($("#ej").prop("value"));
+            console.log($("#ej").attr("disabled"));
+            console.log($("#ej").prop("disabled"));
+            $("#ej").val("valor2");
+            console.log($("#ej").attr("value"));
+
+        });
+    </script>
+</body>
+</html>

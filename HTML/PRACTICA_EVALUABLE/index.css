@@ -29,13 +29,19 @@ header {
 /* CABECERA CAMBIO */
 header.scroll-active {
     transition: background-color 0.3s ease; /* Suaviza la transición */
+    background-color: #000;
 }
 
-header.scroll-active .menu a,
+header.scroll-active .logo img {
+    filter: invert(1);
+    filter:brightness(0) saturate(100%) contrast(100%)
+}
+
+/* header.scroll-active .menu a,
 header.scroll-active .buscador,
 header.scroll-active .categoria {
-    color: black; /* Cambia el color de los textos */
-}
+
+} */
 
 /*-------Logo-------*/
 .logo {

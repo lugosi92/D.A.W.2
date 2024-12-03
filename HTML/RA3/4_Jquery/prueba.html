@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
+    <title>Document</title>
 
     <!-- Incluir jQuery localmente -->
     <script src="libs/jquery-3.6.0.min.js"></script>  
-    
-    <!-- Incluir jQuery desde servidor remoto -->
-    <src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-    <div id="miDiv">Texto inicial</div>
+
+    <article>Articulo 1</article>
+    <article>Articulo 2</article>
+    <article>Articulo 3</article>
+    
 
     <script>
-        $(document).ready(function() {
-            // Cambiar el texto del div cuando la página esté lista
-            $('#miDiv').text('¡Hola, jQuery!');
+        $(document).ready(function(){
+
+            // console.log($("article").html());
+            // console.log($("article").html("holis"));
+            // console.log($("article:nth-child(2)").html("holis"));
+
+            // Imprirmi todos los valores
+
+            $("article").each(function(index, elemento){
+                console.log($(elemento).html());
+            })
+
         });
     </script>
+    
 </body>
 </html>

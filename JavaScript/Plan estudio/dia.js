@@ -70,3 +70,17 @@ for(let i = 0; i < array2.length; i++){
 
 console.log(array2);
 
+
+let texto = "JavaScript es genial";
+console.log("AQUI");
+console.log(texto.toLowerCase().indexOf("ES"));
+
+
+let frutas = "manzana,pera,uva";
+let resultado = frutas.split(",").map(f => f.toUpperCase());
+console.log(resultado[1]);
+
+let arr = [1, 2, 3, 4];
+arr.pop();
+arr.push(arr.shift());
+console.log(arr);
