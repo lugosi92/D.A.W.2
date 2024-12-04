@@ -1,4 +1,3 @@
-// GUARDAR ARCHIVO
 async function leerArchivo(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -8,9 +7,9 @@ async function leerArchivo(file) {
     });
 }
 
-function mostrarContenido(contenido) {
-    var elemento = document.getElementById('contenido-archivo');
-    elemento.innerHTML = contenido;
+function mostrarContenidoEnPantalla(texto) {
+    const elemento = document.getElementById('contenido-archivo');
+    elemento.innerHTML = texto;
 }
 
 document.getElementById('file-input').addEventListener('change', async (e) => {
@@ -18,111 +17,121 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
     if (!archivo) {
         return;
     }
+
     const contenido = await leerArchivo(archivo);
     console.log(contenido);
-    mostrarContenido(contenido);
+    mostrarContenidoEnPantalla(contenido);
 
 
-    // ELIMINAR DUPLICADOS
+/*------------------------CODIGO-----------------*/ 
+ // ELIMINAR DUPLICADOS
 
     // Separamos por lineas y retorno de carro
     const lineas = contenido.split("\r\n");
     // Creamos conjunto
-    perros = new Set(lineas);
+    const perros = new Set(lineas);
     perros.delete("");
 
     // PASAR DE CONJUNTO A ARRAY
-    arrayPerros = [...perros];
-    console.log("PERROS")
-    console.log(arrayPerros);
+    const arrayPerros = [...perros];
 
-    // INTRODUCIR NOMBRE
-
-    nombre = prompt("Introduce nombre perro");
+    // PREGUNTAMOS POR EL NOMBRE DEL PERRO
+    const nombre = prompt("Introduce nombre perro");
 
 
-// PADRES
-function padres(array, ...args){
-    padre = null;
-    madre = null;
+// Funcion para obtener los padres
+function obtenerPadres(array, nombrePerros) {
+    // Declaradas con NULL por si no existe padre que se impriea deconocido
+    let padre = null;
+    let madre = null;
 
-    array.forEach(linea => {
-        dato = linea.split(";")
-    
-    for(let i=2; i <= dato.length; i++){
-        if(nombre === dato[i]){
-            padre = dato[0];
-            madre = dato[1];
-        }
-    }
-   
-});
+    /* 
+    Dividimos en lineas
+    Cada linea la dividmos en dato, cada posicion es 1 perro */
+    array.forEach((linea) => {
+        const dato = linea.split(";");
+            /*Selecciona a partir de la posicion 2, asi nos aseguramos que sean hijos siempre
+            Si en los hijos en alguna linea se encuentra el nombre, se guardan los padres */
+            if (dato.slice(2).includes(nombrePerros)) {
+                padre = dato[0];
+                madre = dato[1];
+            }
+    });
 
-return (madre ?? "desconocido") + " " + (padre ?? "desconocido");
-
+    // Guardamos los abuelos si exiten, sino apaece desconocido
+    return {
+        madre: madre ?? "desconocido",
+        padre: padre ?? "desconocido",
+    };
 }
-console.log("Padres: " + padres(arrayPerros, nombre));
 
-// ABUELOS
-function abuelos(array, subyascente){
-    abuelo = null;
-    abuela = null;
+    
+// FUNCION OBTENER ABUELOS
+function abuelos(array, nombreProgenitor) {
+    let abuelo = null;
+    let abuela = null;
 
-    arrayPerros.forEach(linea => {
-        const dato = linea.split(";")
-
-        for(let i=2; i <= dato.length; i++){
-            if(subyascente === dato[i]){
+    array.forEach((linea) => {
+        const dato = linea.split(";");
+        /* Si se encuentra el nombre de algun padre a partir de la posicon 2
+        en la parte de hijos, la posicion 1 y 2 serian los abuelos paternos, idem con los maternos */
+            if (dato.slice(2).includes(nombreProgenitor)) {
                 abuelo = dato[0];
                 abuela = dato[1];
-            }
         }
     });
 
-    return (abuelo ?? "desconocido")  + " " + (abuela ?? "desconocido");
+    return {
+            abuelo: abuelo ?? "desconocido",
+            abuela: abuela ?? "desconocido",
+    };
 }
-console.log("Abuelos maternos: " + abuelos(arrayPerros, madre));
-console.log("Abuelos paternos: " + abuelos(arrayPerros, padre));
 
-// HIJOS
-function hijos(arrayPerros){
-    // HIJOS
-    const hijos = [];
-    // Tyson;Lila;Tux;Kiwi;Moka;Pochita;Bonzo
+// FUNCION OBTENER HIJOS
+function obtenerHijos(array, nombrePerro) {
+        const hijos = [];
 
-    arrayPerros.forEach(linea => {
-        const dato = linea.split(";")
-
-        if (linea.includes(nombre)) {
-
-            // console.log(linea);
-            // console.log(dato.indexOf(nombre));
-
-            if (dato.indexOf(nombre) < 2) {
-                for (let i = 2; i < dato.length; i++) {
-                    hijos.push(dato[i]);
-                }
-            }
+    array.forEach((linea) => {
+        const datos = linea.split(";");
+        /* Si el dato(cada perro), coincide con el nombre del perro y 
+        la longitud en la que se encuentra es inferiro a 2 es decir que no es un hijo sino un padre una madre*/
+        if (datos.includes(nombrePerro) && datos.indexOf(nombrePerro) < 2) {
+            hijos.push(...datos.slice(2));
         }
     });
+    
+    return hijos.sort((a, b) => b.localeCompare(a));
 
-    return hijos;
 }
 
-console.log(hijos(arrayPerros));
+
+//Llamamaos a las funciones y la asiganamos a una variable ara usarla en el tag p
+const { madre, padre } = obtenerPadres(arrayPerros, nombre);
+
+const { abuelo: abueloMaterno, abuela: abuelaMaterna } = abuelos(arrayPerros, madre);
+const { abuelo: abueloPaterno, abuela: abuelaPaterna } = abuelos(arrayPerros, padre);
+
+const hijos = obtenerHijos(arrayPerros, nombre);
+
+// Imprimimos por consola
+console.log( obtenerPadres(arrayPerros, nombre));
+console.log(abuelos(arrayPerros, madre));
+console.log(abuelos(arrayPerros, padre));
+console.log(obtenerHijos(arrayPerros, nombre));
 
 
+// Mostrar resultados a partir tag<p>
+    const resultado = `
+        <p><strong>Información de ${nombre}:</strong></p>
+        <p>Madre: ${madre}</p>
+        <p>Padre: ${padre}</p>
+        <p>Abuela materna: ${abuelaMaterna}</p>
+        <p>Abuelo materno: ${abueloMaterno}</p>
+        <p>Abuela paterna: ${abuelaPaterna}</p>
+        <p>Abuelo paterno: ${abueloPaterno}</p>
+        <p>Hijos: ${hijos.length ? hijos.join(", ") : "Sin hijos conocidos"}</p>
+    `;
 
 
-
-
-
-
-
-
-
-
-
-
-
+    mostrarContenidoEnPantalla(resultado);
 }, false);

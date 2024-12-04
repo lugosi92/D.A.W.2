@@ -46,16 +46,16 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
 
     // nombre = prompt("Introduce nombre perro");
 
-    nombre = "Lila";
-    let lineaMadre = "";
-    padre = "";
-    madre = "";
+    const nombre = "Lila";
+   
+    let padre = "";
+    let madre = "";
 
-    abueloM = null;
-    abuelaM = null;
+    let abueloM = null;
+    let abuelaM = null;
 
-    abueloP = null;
-    abuelaP = null;
+    let abueloP = null;
+    let abuelaP = null;
 
 
 
