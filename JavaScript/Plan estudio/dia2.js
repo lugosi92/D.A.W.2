@@ -57,14 +57,6 @@ console.log(fecha.toISOString().slice(0, 10));
 
 let text = " JavaScript es genial ";
 
-let limpio = text.trim();
 
-let parte = limpio.toUpperCase().slice(0,4).toLowerCase();
-console.log(parte);
-
-let posicion = limpio.indexOf("es");
-let resultado2 = limpio.slice(0, posicion) + "es increible" + (posicion + 2);
-
-console.log(resultado2); 
 
 /*-----------------EJERCICO 2-------------------*/
