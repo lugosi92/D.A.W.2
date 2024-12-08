@@ -36,6 +36,7 @@ console.log(texto.slice(0,4));
 let texto1 = "JavaScript es genial";
 let resultado = texto.split("").reverse().join("").slice(0, 10);
 console.log(resultado);
+
 /*-----------------ARRAYS-------------------*/
 
 let numero = [2,3,4];
@@ -49,16 +50,63 @@ numero.pop(); //[2,3,4] Elimina el ultimo elemento
 
 // Aplica una función a cada elemento y devuelve un nuevo array
 numero.map(num => num * 2); //[4,6,8]
+
 // Filtra elementos según una condición
 numero.filter(num => num  % 2 === 0); //[2,4] todos son pares
+// .filter((e, index) => index % 2 !== 0);
+
 //Crea un array desde el indice 1
 let num2 = numero.slice(1) 
-console.log(num2);
+    console.log(num2);
+
 //[2,3,4] 9
 let suma = numero.reduce((acumulador, valor) => acumulador + valor, 0); 
-console.log(suma);
+    console.log(suma);
+
 // Orden descendente
 let ordenadosPorEdad = mayoresDe30.sort((a, b) => b.edad - a.edad);
+
+/*-----------------CONJUNTOS-------------------*/
+
+// Metodo size
+const conjunto4 = new Set([1, 2, 3, 4, 5]);
+    console.log(conjunto4.size); // Devuelve: 5
+
+// MAP (clave valor)
+const mapa = new Map();
+mapa.set("a", 1);
+mapa.set("b", 2);
+mapa.set("c", 3);
+    
+console.log(mapa.size); // Devuelve: 3
+    
+// Añadir eliminar a conjutno
+const conjunto5 = new Set();
+conjunto5.add(1);
+conjunto5.add(2);
+conjunto5.add(3);
+conjunto5.delete(3);
+console.log(conjunto5); // Set(3) { 1, 2, 3 }
+
+// Verificar la Existencia con has()
+const conjunto6 = new Set([1, 2, 3, 4]);
+console.log(conjunto6.has(2)); // true
+console.log(conjunto6.has(5)); // false
+
+// Limpiar Todos los Elementos con clear()
+const conjunto7 = new Set([1, 2, 3, 4]);
+conjunto7.clear();
+console.log(conjunto7); // Set(0) {}
+
+//  Iterar sobre un Conjunto
+const conjunto8 = new Set([1, 2, 3, 4]);
+conjunto8.forEach(valor => console.log(valor));
+
+for (let valor of conjunto8) {
+    console.log(valor);
+  }
+  
+
 
 /*-----------------FECHAS-------------------*/
 
@@ -78,7 +126,7 @@ fecha.setDate(fecha.getDate()+30);
 // fecha.setDate(fecha.getDate() + 30);
 console.log(fecha.toISOString().slice(0, 10));
 
-/*------------------------------------------------------------------------DIA 3--------------------------------------------------------------------*/
+/*------------------------------------------------------------------------DIA 3-4--------------------------------------------------------------------*/
 
 /*----------------1. Manejo de Arrays y Conjuntos-------------------------*/
 /*-----------------Arrays-------------------*/
@@ -96,19 +144,18 @@ console.log(unido); // [1, 2, 3, 4]
 /*-----------------Conjuntos-------------------*/
 /*Un set es una colección de valores únicos, es decir, no permite duplicados.*/ 
 
-// CREAR UN COJUNTO
-let conjunto = new Set([1, 2, 3]);
-console.log(conjunto); // Set(3) { 1, 2, 3 }
+const conjuntoA = new Set([1, 2, 3, 4]);
+const conjuntoB = new Set([3, 4, 5, 6]);
 
-// UNIR 2 CONJUNTOS
-let conjunto1 = new Set([1, 2]);
-let conjunto2 = new Set([2, 3]);
-let union = new Set([...conjunto1, ...conjunto2]);
-console.log(union); // Set(3) { 1, 2, 3 }
-
-// Intersección de conjuntos
-let interseccion = new Set([...conjunto1].filter(x => conjunto2.has(x)));
-console.log(interseccion); // Set(1) { 2 }
+// UNIR
+const union = new Set([...conjuntoA, conjuntoB]);
+    console.log(union);
+// INTERSECCION
+const interseccion = new Set([...conjuntoA].filter(x => conjuntoB.has(x)));
+    console.log(interseccion);
+// DIFERENCIA
+const diferencia = new Set([...conjuntoA].filter(x => !conjuntoB.has(x)));
+    console.log(diferencia);
 
 
 
@@ -228,4 +275,4 @@ Funciones: Pueden ser tradicionales, flecha o anónimas. Entender parámetros y 
 Bucles y control de flujo: Permiten manejar la lógica de repetición y controlar el flujo del programa.
 */
 
-/*------------------------------------------------------------------------DIA 4--------------------------------------------------------------------*/
+/*------------------------------------------------------------------------DIA 5-6--------------------------------------------------------------------*/
