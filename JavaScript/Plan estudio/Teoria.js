@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------DIA 1--------------------------------------------------------------------*/
 
-// let x = 5;       // x es un número
-// x = "Hola";      // Ahora x es un string
+let x1 = 5;       // x es un número
+x1 = "Hola";      // Ahora x es un string
+// let f = 5;
+// let f = 10; // Error
 
 var z = 5;
 var z = 10; // Permitido
 
-// let f = 5;
-// let f = 10; // Error
 
-// const x = 5;
-// x = 10; // Error
+const x = 5;
+x = 10; // Error
 
 "5" == 5; // true
 
