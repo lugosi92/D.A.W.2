@@ -2,6 +2,7 @@
 
 const conjunto1 = new Set([10, 20, 30, 40, 50]);
 const conjunto2 = new Set([30, 40, 50, 60, 70]);
+
 const interseccion = new Set([...conjunto1].filter(e => conjunto2.has(e)));
 const union = new Set([...conjunto1, ...conjunto2]);
 const diferencia = new Set([...conjunto2].filter(e => !conjunto1.has(e)));
@@ -39,7 +40,7 @@ for (let i = 1; i < 15; i++) {
   }
 }
 
-console.log(numeros);
+console.log(numeros);//3,6,9
 
 /*----------------Pregunta 5: Arrays y Operaciones Combinadas---------------*/
 const numeros = [2, 4, 6, 8];

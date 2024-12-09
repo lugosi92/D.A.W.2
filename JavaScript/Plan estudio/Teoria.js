@@ -254,7 +254,7 @@ for (let clave in objeto) {
 }
 
 
-/*-----------------3.2 Control de flujo-------------------*/Ç
+/*-----------------3.2 Control de flujo-------------------*/
 
 // BREAK
 for (let i = 0; i < 5; i++) {
@@ -276,3 +276,118 @@ Bucles y control de flujo: Permiten manejar la lógica de repetición y controla
 */
 
 /*------------------------------------------------------------------------DIA 5-6--------------------------------------------------------------------*/
+
+/*-----------------0. Conversión de Tipos en JavaScript-------------------*/
+
+// NUMBER
+console.log(Number("123")); // 123
+console.log(Number(true));  // 1
+console.log(Number(false)); // 0
+console.log(Number("abc")); // NaN (Not a Number)
+
+// parseInt() y parseFloat()
+console.log(parseInt("123"));    // 123
+console.log(parseInt("123.45")); // 123
+console.log(parseFloat("123.45"));// 123.45
+console.log(parseInt("abc"));    // NaN
+
+
+// toString()
+console.log((123).toString()); // "123"
+console.log(true.toString()); // "true"
+
+
+// String()
+console.log(String(123));  // "123"
+console.log(String(false)); // "false"
+
+
+// Convertir a Booleano
+console.log(Boolean(0));       // false
+console.log(Boolean("hello")); // true
+
+
+/*-----------------1. Spread Operator (...)-------------------*/
+
+// Combinar Arrays
+const arry1 = [1, 2, 3];
+const arry2 = [4, 5, 6];
+const combinado = [...arr1, ...arr2];
+console.log(combinado); // [1, 2, 3, 4, 5, 6]
+
+// Copiar Objetos
+
+const obj1 = { a: 1, b: 2 };
+const copia = { ...obj1, c: 3 };
+console.log(copia); // { a: 1, b: 2, c: 3 }
+
+
+
+/*-----------------2. Operador Nullish Coalescing (??)-------------------*/
+const valor = null ?? "Valor por defecto";
+console.log(valor); // "Valor por defecto"
+
+const valor2 = 0 ?? 42;
+console.log(valor2); // 0 (porque no es null ni undefined)
+
+
+
+/*-----------------3. Operador OR (||)-------------------*/
+const nombre = "" || "Anónimo";
+console.log(nombre); // "Anónimo"
+
+const edad = 0 || 18;
+console.log(edad); // 18
+
+
+/*------------------------------------------------------------------------DIA 7--------------------------------------------------------------------*/
+
+// FACTORIAL
+function calcularFactorial(num) {
+    let resultado = 1;
+    for (let i = 2; i <= num; i++) {
+      resultado *= i;
+    }
+    return resultado;
+  }
+  
+  console.log(calcularFactorial(5)); // Devuelve 120
+
+// PRIMOS = Un número es primo si es mayor que 1 y solo es divisible entre 1 y sí mismo.
+function esPrimo(num) {
+    if (num <= 1) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false;
+    }
+    return true;
+  }
+  console.log(esPrimo(7)); // true
+  console.log(esPrimo(4)); // false
+  
+
+// FIBONACCI = La secuencia de Fibonacci es una secuencia donde cada número es la suma de los dos anteriores:
+function generarFibonacci(n) {
+    const secuencia = [0, 1];
+    for (let i = 2; i < n; i++) {
+      secuencia.push(secuencia[i - 1] + secuencia[i - 2]);
+    }
+    return secuencia;
+  }
+  
+  console.log(generarFibonacci(5)); // Devuelve [0, 1, 1, 2, 3]
+  
+
+  /*-----------------2. Redondeo con Math-------------------*/
+
+//Devuelve el mayor entero menor o igual a un número.
+console.log(Math.floor(4.7)); // 4
+console.log(Math.floor(-4.2)); // -5
+
+// Devuelve el menor entero mayor o igual a un número.
+console.log(Math.ceil(4.1)); // 5
+console.log(Math.ceil(-4.7)); // -4
+
+
+// Redondea al número entero más cercano.
+console.log(Math.round(4.7)); // 5
+console.log(Math.round(4.2)); // 4
