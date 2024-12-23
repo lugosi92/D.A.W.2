@@ -29,9 +29,9 @@ let texto = "Hola mundo";
 console.log(texto.toLowerCase());
 console.log(texto.toUpperCase());
 console.log(texto.indexOf("Hola"));
-console.log(texto.split(" ")); //Sepera por espacion en balcnpo
-console.log(texto.trim(" ")); //Elimina espacios en balncoi
-console.log(texto.slice(0,4));
+console.log(texto.split(" ")); //Convierte la cadena en un array de caracteres.
+console.log(texto.trim(" ")); //Invierte el orden de los elementos en el array creado con split("").
+// console.log(texto.slice(0,4)); Convierte el array invertido de nuevo en una cadena
 
 let texto1 = "JavaScript es genial";
 let resultado = texto.split("").reverse().join("").slice(0, 10);
@@ -379,15 +379,19 @@ function generarFibonacci(n) {
 
   /*-----------------2. Redondeo con Math-------------------*/
 
-//Devuelve el mayor entero menor o igual a un número.
-console.log(Math.floor(4.7)); // 4
-console.log(Math.floor(-4.2)); // -5
+  console.log(Math.floor(4.7));  // 4
+  console.log(Math.floor(-4.7)); // -5
+  
+  console.log(Math.ceil(4.1));  // 5
+  console.log(Math.ceil(-4.1)); // -4
+  
 
-// Devuelve el menor entero mayor o igual a un número.
-console.log(Math.ceil(4.1)); // 5
-console.log(Math.ceil(-4.7)); // -4
 
+  console.log(Math.round(4.5));  // 5
+  console.log(Math.round(4.4));  // 4
+  console.log(Math.round(-4.5)); // -4
 
-// Redondea al número entero más cercano.
-console.log(Math.round(4.7)); // 5
-console.log(Math.round(4.2)); // 4
+  
+  console.log(Math.trunc(4.7));  // 4
+console.log(Math.trunc(-4.7)); // -4
+
