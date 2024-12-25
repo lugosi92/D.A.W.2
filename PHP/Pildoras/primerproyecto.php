@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+
     <?php 
     
     echo "Mi primer proyecto <br>"; 
@@ -34,7 +35,7 @@
     // 3. Imprimir (print o echo && concatenacion )
 
     print "El nombre de usuario es : " .  $nombre . "<br>";
-    print "La edad de $nombre es $edad ";
+    print "La edad de $nombre es $edad <br> ";
     
 
 /*------------------------------------VIDEO 5 FDLUJO DE EJECUCION---------------------------------------------------*/
@@ -44,8 +45,35 @@
         3. Introduccion include y requiere
     */
 
-    // El flujo va de arriba abajo
+    /* 2
+    El flujo va de arriba abajo, 
+    la unica vez que se ve alterado con condiconales, funciones y bucles*/
+
+    // Las funciones se pueden aislar
+
+    function dameDatos(){
+
+        echo "CONTENIDO DE LA FUNCION <br>";
+    }
+   
+    dameDatos();
+    dameDatos();
+    dameDatos();
     ?>
+
+<?php 
+ /* 3
+    Para agregar archivos externoos coomo fopciones.php
+        innclude si no el archivo sigue ejecutando
+        require si no existe el archivo deja de ejecutar*/
+
+    include ("fopciones.php");
+    require ("fopciones.php");
+
+    
+    opciones();
+    ?>
+
 
 </body>
 </html>
