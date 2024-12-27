@@ -33,11 +33,15 @@ $variable1 = "CASA";
 $variable2 = "casa";
 
 $resultado = strcmp($variable1, $variable2); // Sensible a mayúsculas y minúsculas
-echo $resultado . "\n";
+echo $resultado . "<br>";
 
 $resultado2 = strcasecmp($variable1, $variable2); // Ignora mayúsculas y minúsculas
-echo $resultado2 . "\n";
+echo $resultado2 . "<br>";
 
+$operacion = "suma";
+$resultado3 = strcasecmp("Suma", $operacion);
+
+echo $resultado3;
 
 
 
