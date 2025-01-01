@@ -14,11 +14,10 @@ if(isset($_POST["button"])){
     $numero2 = (float) $_POST["num2"];
     $operacion = $_POST["operacion"];
     
-    calcular($operacion);
-
- }
-
- function calcular(){
+    calcular($operacion); 
+}
+    
+function calcular(){
 
     global $numero1, $numero2, $operacion;
     $resultado = null;
