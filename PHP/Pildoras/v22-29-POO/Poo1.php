@@ -26,96 +26,138 @@
 */
 
 // Clase
-class Coche{
+// class Coche{
 
-  /*  private $rueda;
-    private $color;
-    private $motor;
+//   /*  private $rueda;
+//     private $color;
+//     private $motor;
 
-    // CONSTRUCTOR
-    public function __construct(){
-        $this->ruedas= 4;
-        $this->color= "";
-        $this->motor= 1600;
+//     // CONSTRUCTOR
+//     public function __construct(){
+//         $this->ruedas= 4;
+//         $this->color= "";
+//         $this->motor= 1600;
 
-    }*/
+//     }*/
 
-// CONSTRUCTOR - ATRIBUTOS
-    public function __construct(
-        private int $rueda,
-        private String $color,
-        private int $motor
-    ){}
+// // CONSTRUCTOR - ATRIBUTOS
+//     public function __construct(
+//         private int $rueda,
+//         private String $color,
+//         private int $motor
+//     ){}
 
 
-    // METODOS
-    function arrancar(){
-        echo "Arrancando motores";
-    }
+//     // METODOS
+//     function arrancar(){
+//         echo "Arrancando motores";
+//     }
 
-    function girar(){
-        echo "Estoy girando";
-    }
+//     function girar(){
+//         echo "Estoy girando";
+//     }
 
-    function frenar(){
-        echo "Estoy frenando ";
-    }
+//     function frenar(){
+//         echo "Estoy frenando ";
+//     }
 
-    function establecer_color($color_coche){
-        $this->color = $color_coche;
-        echo "Color coche " .  $this->color;
-    }
+//     function establecer_color($color_coche){
+//         $this->color = $color_coche;
+//         echo "Color coche " .  $this->color;
+//     }
 
-}
+// }
 
-// Instancias
-$renault = new Coche(4, "Rojo", 1600);
-$mercedes = new Coche(4, "Negro", 1800);
-
-// Usando un método de la clase
-$mercedes->girar();
-$mercedes->establecer_color("LILA");
 
 /*------------------------------------VIDEO 24 Otras clases parecidas---------------------------------------------------*/
 
-class Camion{
-  // CONSTRUCTOR - ATRIBUTOS
-      public function __construct(
-          private int $rueda,
-          private String $color,
-          private int $motor
-      ){}
+// class Camion{
+//   // CONSTRUCTOR - ATRIBUTOS
+//        public function __construct(
+//           private int $rueda,
+//           private String $color,
+//           private int $motor
+//       ){}
   
   
-      // METODOS
-      function arrancar(){
-          echo "Arrancando motores";
-      }
+//       // METODOS
+//       function arrancar(){
+//           echo "Arrancando motores";
+//       }
   
-      function girar(){
-          echo "Estoy girando";
-      }
+//       function girar(){
+//           echo "Estoy girando";
+//       }
   
-      function frenar(){
-          echo "Estoy frenando ";
-      }
+//       function frenar(){
+//           echo "Estoy frenando ";
+//       }
   
-      function establecer_color($color_camion){
-          $this->color = $color_coche;
-          echo "Color coche " .  $this->color;
-      }
+//       function establecer_color($color_camion){
+//           $this->color = $color_coche;
+//           echo "Color coche " .  $this->color;
+//       }
   
-  }
+//   }
 
 
 /*------------------------------------VIDEO 25 HERENCIAS---------------------------------------------------*/
+/*------------------------------------VIDEO 26 MODIFICADORES DE ACCESO---------------------------------------------------*/
 
+    // Encapsular --> Solo es accesible desde la propia clase
+
+    /*
+        1. Public: cualquier parte
+        2. Private: la propia clase
+        3. Protected: clases heredadas 
+    */
+
+ class Coche{
+    // Constructor con propiedades privadas
+    public function __construct(
+        protected int $rueda,
+        protected string $color,
+        protected int $motor
+    ) {}
+
+    // Métodos getter
+    function get_rueda(){
+        return $this->rueda; // Usar $this-> para acceder a las propiedades
+    }
+
+    function get_color(){
+        return $this->color;
+    }
+
+    function get_motor(){
+        return $this->motor;
+    }
+
+    // Métodos de acción
+    function arrancar(){
+        echo "Arrancando motores" . "<br>";
+    }
+
+    function girar(){
+        echo "Estoy girando" . "<br>";
+    }
+
+    function frenar(){
+        echo "Estoy frenando " . "<br>";
+    }
+
+    // Método para establecer el color
+    function establecer_color($color_coche){
+        $this->color = $color_coche;
+        echo "Color del coche cambiado a: " . $this->color . "<br>";
+    }
+}
 class Camion extends Coche{
 
     public function __construct(
-        private int $rueda,
-        private String $color,
-        private int $motor
+        protected int $rueda,
+        protected String $color,
+        protected int $motor
     ){}
 
     function establecer_color($color_camion){
@@ -126,9 +168,52 @@ class Camion extends Coche{
     function arrancar(){
         parent::arrancar();
 
-        echo "Arrancando camion";
+        echo "Arrancando camion". "<br>";
     }
 }
+
+
+// Crear una instancia de la clase
+$renault = new Coche(4, "Rojo", 1600);
+$iveco = new Camion(7, "Blanco", 4000);
+
+// Cambiar el color del coche
+// $renault->establecer_color("Lila");
+
+// Mostrar el color actual del coche
+echo "Color actual del coche: " . $renault->get_color() . "<br>";
+echo "Color actual del camion: " . $iveco->get_color() . "<br>";
+
+// Llamar a otros métodos
+$renault->arrancar();
+$renault->girar();
+
+
+
+
+
+/*------------------------------------VIDEO 26 VARIABLES Y METODOS DE ACCESO---------------------------------------------------*/
+
+
+/*
+    Cada objeto almacena una infromacion diferente en cada metodo, 
+    Si usamos static almacenan lo mismo ya que pertene a la clae no al objeto,
+    por ejemplo si existiera una ayuda para comprar el coche es la misma simepre
+*/
+include("Concesionario.php");
+
+// Compra realizada por Antonio
+$compra_Antonio = new Compra_vehiculo("compacto");
+$compra_Antonio->climatizador();
+$compra_Antonio->tapiceria_cuero("blanco");
+echo $compra_Antonio->precio_final() . "<br>";
+
+// Compra realizada por Ana
+$compra_Ana = new Compra_vehiculo("compacto");
+$compra_Ana->climatizador();
+$compra_Ana->tapiceria_cuero("rojo");
+echo $compra_Ana->precio_final();
 ?>
+
 </body>
 </html>

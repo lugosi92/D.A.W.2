@@ -258,6 +258,36 @@ $cadena = "hOLa MunDo";
 
 echo cambia_mayus($cadena);
 
+
+/*------------------------------------VIDEO 30-32 ARRAYS---------------------------------------------------*/
+
+
+/*
+    1. Verificar si es arrya
+    2. Recorrer array
+    3. Añadir elemento
+    4. Ordenar array
+*/
+
+$dato = arrya("Nombre"=> "Juan","Appellido" => "Gomez","Edad" => "21")
+
+is_array($dato)? "Si" : "no";
+
+// RECORRER ARRAY
+
+foreach($dato as $clave => $valor){
+    echo "A $clave le corresponde a $valor <br>"
+}
+
+// Añadir elemento a array asociativo
+
+$dato["Pais"] = "España";
+
+
+// Ordenar elementos 
+
+ sort($dato);
+
 ?>
 
 
