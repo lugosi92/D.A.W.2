@@ -7,6 +7,9 @@
 
     <!-- Incluir jQuery localmente -->
     <script src="libs/jquery-3.6.0.min.js"></script>  
+
+    <!-- Incluir jQuery remoto -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
 </head>
 <body>
 
@@ -18,15 +21,32 @@
     <script>
         $(document).ready(function(){
 
-            // console.log($("article").html());
-            // console.log($("article").html("holis"));
-            // console.log($("article:nth-child(2)").html("holis"));
 
-            // Imprirmi todos los valores
+            // RECORRER 
+            $each(collection, function(index, value){
 
-            $("article").each(function(index, elemento){
-                console.log($(elemento).html());
-            })
+            });
+
+            // RECORRER + SELECTOR
+            $(article).$each(collection, function(index, value){
+
+            });
+
+            // RECORRER + ARRAY
+            var array = ["manzana", "platano", "cereza"];
+
+            $each(array, function(index, value){
+                console.log("El índice es: " + index + ", el valor es:" + value);
+            });
+
+            // RECORRER + ARRAY + SELECTOR
+            var array = ["manzana", "platano", "cereza"];
+
+            $(p).$each(array, function(index, value){
+                console.log("El párrafo número " + (index + 1) + "tiene el siguiente contenido: " + $(element).text());
+            });
+
+
 
         });
     </script>
