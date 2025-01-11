@@ -288,6 +288,98 @@ $dato["Pais"] = "España";
 
  sort($dato);
 
+
+ 
+/*------------------------------------VIDEO 33 BBDD---------------------------------------------------*/
+
+/*
+1. Multihilos: multiples peticiones
+2. Multiusuraio
+3. Relacional
+*/
+
+// Hemos creado 1 base de datos en phpmyadmin
+ 
+/*------------------------------------VIDEO 34 BBDD---------------------------------------------------*/
+
+/*
+1. Crear eliminar tablas
+2. Mostrar campos de tabla
+3. Primeras instrucciones del lenguaje
+*/
+
+/*------------------------------------VIDEO 36 Conexion BD---------------------------------------------------*/
+/*
+1. 4 variables
+    Direccion del servidor
+    Nombre de la base de datos
+    Usuario
+    Contraseña
+2. Conexion 2 formas con Poo o procediminetos
+
+3. 
+*/
+
+// 1 VARIABLES
+$db_host = "localhost";
+$db_usuario = "admin1";
+$db_contra= "";
+$db_nombre = "curso_php";
+
+
+// 2. CONEXION
+
+// Procedimientos
+$conexion= mysqli_connect($db_host,$db_usuario,$db_contra,$db_nombre);
+
+
+// 3. CONSULTA PRUEBA
+
+$consulta = "SELECT * FROM datosusuario";
+
+    // 3.1 Ejecutar consulta
+
+    $resultados = mysqli_query($conexion, $consulta);
+
+    // 3.2 Tabla virtual devuelve la infromacion de la consutla
+    while ($fila = mysqli_fetch_row($resultados)) {
+        echo "ID: " . $fila[0] . " - Nombre: " . $fila[1] .  " -Apellido: " . $fila[2] ."<br>";
+    }
+
+/*------------------------------------VIDEO 37 Conexion BD---------------------------------------------------*/
+/*
+1. Manejo de errores
+2. Manejo de erroes con excepciones
+*/
+
+
+// HABILITAR EXCEPCIONES EN MYSQLI
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+try{
+    // Conexion
+    $conexion= mysqli_connect($db_host,$db_usuario,$db_contra,$db_nombre);
+    echo "Conexion exitosa";
+
+    // Consulta 
+    $consulta = "SELECT * FROM datosusuario";
+    $resultados = mysqli_query($conexion, $consulta);
+
+    // Imprimir consulta
+    while ($fila = mysqli_fetch_row($resultados)) {
+        echo "ID: " . $fila[0] . " - Nombre: " . $fila[1] .  " -Apellido: " . $fila[2] ."<br>";
+    }
+
+} catch (mysqli_sql_exception $e){
+
+    echo "Error al conectar con la base de datos: " . $e->getMessage();
+// Opcional
+}finally {
+    // Cerrar conexión
+    if (isset($conexion) && $conexion) {
+        mysqli_close($conexion);
+    }
+}
 ?>
 
 
