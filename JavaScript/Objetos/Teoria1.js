@@ -118,14 +118,14 @@ function Cliente(nombre, apellido, ciudad, telefono, viaje) {
     };
 }
     
-const javier = new Cliente("Javier", "Pedrosa", "Madrid", "666666666", "Avila");
+const javier = new Cliente("Javier", "Pedrosa", "Madrid", "666666666", "Burgos");
     
-console.log(javier.contratado());  // true si tiene un viaje asignado
+console.log(javier.contratado()); 
     
 // Imprimir propiedades
 for (const key in javier) {
     if (typeof javier[key] !== "function") {
-        console.log(key+ " es " + viaje[key]);
+        console.log(key+ " es " + javier[key]);
     }
 }
 
