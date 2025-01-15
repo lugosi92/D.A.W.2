@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y Contenido</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <!-- 
+        Ejercicio 4: Manipulación de Contenido
+        Descripción: Crea un formulario donde el usuario pueda introducir su nombre. 
+        Al hacer clic en un botón, el nombre debe aparecer en un párrafo y el contenido del párrafo debe ser limpio y sin etiquetas HTML. 
+        Además, permite que el usuario vacíe el párrafo.
+    -->
+    <h1>Introduce tu Nombre</h1>
+    <input type="text" id="nombre" placeholder="Escribe tu nombre">
+    <button id="mostrarNombre">Mostrar Nombre</button>
+    <button id="vaciar">Vaciar</button>
+    <p id="resultado"></p>
+
+    <script>
+        $(document).ready(function() {
+            
+            $("#mostrarNombre").click(function() {
+                const nombre = $("#nombre").val();
+                if(nombre == "jesus" || nombre == "Jesus" ){
+                    $("#resultado").text("es enano ");
+                }else{
+                    $("#resultado").text(nombre);
+                }
+               
+            });
+
+            $("#vaciar").click(function() {
+                $("#resultado").empty();
+            });
+        });
+    </script>
+</body>
+</html>
