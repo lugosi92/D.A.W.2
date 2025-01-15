@@ -95,7 +95,7 @@ console.log("---------");
 clientes.forEach(cliente => { 
     
         viajes.forEach(viaje => {
-
+    
         if(cliente.miViaje === viaje ){
             cliente.__proto__=roma
             console.log(cliente);
