@@ -53,7 +53,7 @@ protected Boolean mayorDeEdad(String _fechaNac) {
 	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nombre = request.getParameter("nombre");
+	
 		String clave = request.getParameter("clave");
 		String genero = request.getParameter("genero");
 		String fechaNacimiento = request.getParameter("fechaNacimiento");
