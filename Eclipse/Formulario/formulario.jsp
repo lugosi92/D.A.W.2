@@ -55,8 +55,8 @@
 	    <p style="color: red"><%= error %></p>
  	
 	    
-    	
-<form action="EnviaYRecibe" method="post">
+ <!-- AÑADIMOS enctype para que se envien los parametros de forma multipart/form-data -->
+<form action="EnviaYRecibe" method="post" enctype="multipart/form-data">
   
     <div class = "formulario">
     

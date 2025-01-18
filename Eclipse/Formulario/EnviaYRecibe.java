@@ -1,10 +1,13 @@
 package Servlet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -13,6 +16,10 @@ import java.text.SimpleDateFormat;
  * Servlet implementation class EnviaYRecibe
  */
 @WebServlet("/EnviaYRecibe")
+@MultipartConfig(location = "C:\\Users\\Khalid\\Desktop\\Formulario1Subidas", 
+				maxFileSize = 10485760L)
+
+
 public class EnviaYRecibe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,14 +60,25 @@ protected Boolean mayorDeEdad(String _fechaNac) {
 	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+		String nombre = request.getParameter("nombre");
 		String clave = request.getParameter("clave");
 		String genero = request.getParameter("genero");
 		String fechaNacimiento = request.getParameter("fechaNacimiento");
 		String[] pais= request.getParameterValues("pais[]");
 		String acepto = request.getParameter("acepto");
 		String comentario = request.getParameter("comentario");
-
+		
+		
+		/*
+		 Recogemos el parametro de imagen y o metemos en la varable parteArchivo
+		 De la variable parteArchivo obtenemos nombre tamaño y tipo
+		 Mas abajo validamos errores y subimos
+		 */
+		Part parteArchivo = request.getPart("imagen");
+		
+		String nombreArchivo = parteArchivo.getSubmittedFileName(); 
+		long tamanio = parteArchivo.getSize(); 
+		String tipo = parteArchivo.getContentType();
 
 
 		
@@ -108,6 +126,12 @@ protected Boolean mayorDeEdad(String _fechaNac) {
 			errorGeneral = "true";
 		}
 		
+		if (!tipo.equals("image/jpeg") && !tipo.equals("image/png") && !tipo.equals("image/gif")) { 
+			error += "IMAGEN -> La extension de foto debe ser jpg png o gif <br>";
+			errorGeneral = "true";
+		}else {
+		      parteArchivo.write(nombreArchivo);
+		}
 		
             request.getSession().setAttribute("nombre", nombre);
             request.getSession().setAttribute("clave", clave);
@@ -122,4 +146,6 @@ protected Boolean mayorDeEdad(String _fechaNac) {
             
             response.sendRedirect("formulario.jsp");
         }
-	}
+}
+
+
