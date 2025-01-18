@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<body>
 		<%@page import="java.util.*"%>
 		
 		<%!
@@ -19,5 +20,6 @@
 	<%
 		fecha = new Date();
 	%>
+</body>
 </body>
 </html>

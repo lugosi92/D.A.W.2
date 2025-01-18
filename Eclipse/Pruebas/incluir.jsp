@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>INCLUIR OTRA CLASE JSP</h1>
-
-<%@include file="Contador.jsp"%>
+<%@include file="contador.jsp"%>
 </body>
 </html>
