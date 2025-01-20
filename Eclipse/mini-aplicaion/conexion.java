@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,8 +17,8 @@ import java.sql.SQLException;
 /**
  * Servlet implementation class conexion2
  */
-@WebServlet("/conexion2")
-public class conexion2 extends HttpServlet {
+@WebServlet("/conexion")
+public class conexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
@@ -38,7 +39,7 @@ public class conexion2 extends HttpServlet {
 		} catch (ClassNotFoundException e) {
 			try {
 				//6
-				PrintWriter out = response.setWrite(;)
+				PrintWriter out = response.getWriter();
 				//2
 				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root","1234");
 				//3

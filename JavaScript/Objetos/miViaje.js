@@ -30,10 +30,10 @@ function Cliente(nombre, apellido, ciudad, telefono, miViaje) {
 //----------------------------------INSTANCIAR------------------------------
 
     
-const irlanda = new Viaje("Madrid", "Dublin","10 dias", "irlanda", 60);
+const irlanda = new Viaje("Madrid", "irlanda","10 dias", "irlanda", 60);
 const berlin = new Viaje("Madrid", "berlin", "16 días", "Alemania", 70);
 const mallorca = new Viaje("Madrid", "mallorca", "8 días", "España", 80);
-const francia = new Viaje("Madrid", "Paris", "7 días", "francia", 90);
+const francia = new Viaje("Madrid", "francia", "7 días", "francia", 90);
 
 const javier = new Cliente("javier", "Pedrosa", "Madrid", "666666666", irlanda);
 const daniel = new Cliente("daniel", "Perez", "Madrid", "777777777", berlin);
