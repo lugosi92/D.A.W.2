@@ -14,13 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Servlet implementation class conexion2
- */
 @WebServlet("/conexion")
 public class conexion extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
 	
 	/*https://www.youtube.com/watch?v=36cQjEEvK30
 	 * 1 Crear el metodo de conexion (jdbc)
@@ -31,42 +27,114 @@ public class conexion extends HttpServlet {
 	 * 5 Resultado
 	 * 6 Preparar fallos de conexion
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		try {
-			//1
-			Class.forName("com.mysql.cj.jdbc.Drive");
-		} catch (ClassNotFoundException e) {
-			try {
-				//6
-				PrintWriter out = response.getWriter();
-				//2
-				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root","1234");
-				//3
-				String nombre = request.getParameter("usuario");
-				String clave = request.getParameter("clave");
-				//4
-				PreparedStatement consulta1 = conexion.prepareStatement("Select usuario from usuario WHERE usuario = ? AND contraseña = ?");
-			
-				consulta1.setString(1, nombre);
-				consulta1.setString(1, clave);
-				ResultSet resultado = consulta1.executeQuery();
-				
-				//5
-				if(resultado.next()) {
-					RequestDispatcher rd = request.getRequestDispatcher("welcome.jsp");
-					rd.forward(request, response);
-				}else {
-					out.println("<font color = red>Login Failed!!<br>");
-					out.println("<a href=index.jsp>Try AGAIN!");
-				}
-				
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		}
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		/*
+		 Para la contraseña:
+    		• Debe introducir al menos 12 caracteres.
+    		• Sólo puede introducir 20 caracteres.
+    		• Debe introducir al menos 1 letra mayúscula.
+    		• Debe introducir al menos 1 letra minúscula.
+    		• Debe introducir al menos 1 carácter especial.
+    		• Se permiten los siguientes caracteres especiales -_/()$%&?!+*#<>=
+    		• Debe introducir al menos 1 carácter numérico
+		 */
+		String nombre = request.getParameter("usuario");
+		String clave = request.getParameter("clave");
+		
+		String error = " ";
+		String errorGeneral = "false";
+		
+		// 3. Obtener los parámetros
+		if(nombre.length() < 6 || nombre.length() > 30) {
+			error += "Usuario incorrecto (1)<br>";
+			errorGeneral = "true";
+		}
+		if(nombre.isEmpty()) {
+			error += "Usuario incorrecto (2)<br>";
+			errorGeneral = "true";
+		}
+		if(nombre.contains(" ")) {
+			error += "Usuario incorrecto (3)<br>";
+			errorGeneral = "true";
+		}
+		
+		if(!nombre.matches("[A-Za-z0-9-_]+")) {
+			error += "Usuario incorrecto (4)<br>";
+			errorGeneral = "true";
+		}
+		
+		//CONTRASEÑAS
+		if(clave.length() < 12 || clave.length() > 20) {
+			error += "Introduzca una clave valida(1)<br>";
+			errorGeneral = "true";
+		}
+		
+		if (!clave.matches(".*[A-Z].*")) {
+		    error += "Introduzca una clave valida(2)<br>";
+		    errorGeneral = "true";
+		}
+
+		if (!clave.matches(".*[a-z].*")) {
+		    error += "Introduzca una clave valida(3)<br>";
+		    errorGeneral = "true";
+		}
+
+		if (!clave.matches(".*[0-9].*")) {
+		    error += "Introduzca una clave valida(4)<br>";
+		    errorGeneral = "true";
+		}
+
+		if (!clave.matches(".*[-_/()$%&?!+*#<>=].*")) {
+		    error += "Introduzca una clave valida(5)<br>";
+		    errorGeneral = "true";
+		}
+
+		
+		if(errorGeneral == "true") {
+			request.getSession().setAttribute("error", error);
+			response.sendRedirect("index.jsp");
+		}else {
+	
+		
+		request.getSession().setAttribute("errorGeneral", errorGeneral);
+		
+		request.getSession().setAttribute("usuario", nombre);
+		request.getSession().setAttribute("clave", clave);
+
+    	
+    	try {
+            // 1. Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // 2. Crear la conexión
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "1234");
+
+            
+            // 4. Crear la consulta 
+            String sql = "SELECT * FROM usuario WHERE usuario = ? AND clave = ?";
+            // 5. Crear consulta preparada
+            PreparedStatement consulta = conexion.prepareStatement(sql);
+            consulta.setString(1, nombre);
+            consulta.setString(2, clave);
+
+            // 5. Ejecutar la consulta
+            ResultSet resultado = consulta.executeQuery();
+
+            // 6. Procesar el resultado
+            if (resultado.next()) {
+                // Login exitoso
+            	 request.getSession().setAttribute("usuarioLogeado", nombre);
+            	 response.getWriter().append("Conexion exitosa");
+            } else {
+                // Login fallido
+            	response.getWriter().append("Fallo de conexion");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    }
 }

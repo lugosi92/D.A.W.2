@@ -8,20 +8,14 @@
 </head>
 <body>
 
-<%
-	String nombre = (String) session.getAttribute("usuario");
-	String clave = (String) session.getAttribute("clave");
+<%String error = (String) session.getAttribute("error");%>	
 	
-	String error = (String) session.getAttribute("error");
-	String errorGeneral = (String) session.getAttribute("errorGeneral");
-%>	
-	
-<%if(errorGeneral == "true" ||  errorGeneral == null){%>
+
 
 <p style="color: red"><%= error %></p>
 
 
-<form action = "recepcion" method = "post">
+<form action = "conexion" method = "post">
 	
 	<label for="usuario">Usuario:</label>
 	<input type="text" name="usuario">
@@ -33,14 +27,7 @@
 	<br>
 	<button type="submit">Enviar</button>
 	
-	
-	<%}else{%>
-	
-	<p style="color: blue">Nombre: <%=nombre %></p>
-	<p style="color: blue">Clave:<%=clave %></p>
-	
-	
-	<%}%>
+
 	</form>
 </body>
 </html>
