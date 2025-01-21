@@ -15,7 +15,7 @@
 <p style="color: red"><%= error %></p>
 
 
-<form action = "conexion" method = "post">
+<form action = "recepciones" method = "post">
 	
 	<label for="usuario">Usuario:</label>
 	<input type="text" name="usuario">

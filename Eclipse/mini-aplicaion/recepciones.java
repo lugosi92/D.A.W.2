@@ -6,18 +6,32 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 /**
- * Servlet implementation class recepcion
+ * Servlet implementation class recepciones
  */
-@WebServlet("/recepcion")
-public class recepcion extends HttpServlet {
+@WebServlet("/recepciones")
+public class recepciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	/*https://www.youtube.com/watch?v=36cQjEEvK30
+	 * 1 Crear el metodo de conexion (jdbc)
+	 * 2 Crear el obejto conexion 
+	 * (Eclipse sugiere 2 try-catch para clase y conexion)
+	 * 3 Obtenemos los parametro desde donde nacen
+	 * 4 Creamos una sentencia prepradas
+	 * 5 Resultado
+	 * 6 Preparar fallos de conexion
+	 */
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public recepcion() {
+    public recepciones() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +40,7 @@ public class recepcion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+
 		/*
 		 Para la contraseña:
     		• Debe introducir al menos 12 caracteres.
@@ -44,7 +57,7 @@ public class recepcion extends HttpServlet {
 		String error = " ";
 		String errorGeneral = "false";
 		
-		//NOMBRES
+		// 3. Obtener los parámetros
 		if(nombre.length() < 6 || nombre.length() > 30) {
 			error += "Usuario incorrecto (1)<br>";
 			errorGeneral = "true";
@@ -89,16 +102,54 @@ public class recepcion extends HttpServlet {
 		    errorGeneral = "true";
 		}
 
-
-
 		
-		request.getSession().setAttribute("error", error);
+		if(errorGeneral == "true") {
+			request.getSession().setAttribute("error", error);
+			response.sendRedirect("index.jsp");
+		}else {
+	
+		
 		request.getSession().setAttribute("errorGeneral", errorGeneral);
 		
 		request.getSession().setAttribute("usuario", nombre);
 		request.getSession().setAttribute("clave", clave);
-		
-		response.sendRedirect("index.jsp");
+
+    	
+    	try {
+            // 1. Cargar el driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // 2. Crear la conexión
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "1234");
+
+            
+            // 4. Crear la consulta 
+            String sql = "SELECT * FROM usuario WHERE nombre = ? AND clave = ?";
+            // 5. Crear consulta preparada
+            PreparedStatement consulta = conexion.prepareStatement(sql);
+            consulta.setString(1, nombre);
+            consulta.setString(2, clave);
+
+            // 5. Ejecutar la consulta
+            ResultSet resultado = consulta.executeQuery();
+
+            // 6. Procesar el resultado
+            if (resultado.next()) {
+                // Login exitoso
+            	 request.getSession().setAttribute("usuarioLogeado", nombre);
+            	 response.getWriter().append("Conexion exitosa");
+            } else {
+                // Login fallido
+            	response.getWriter().append("Fallo de conexion");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    }
+
 	}
 
-}
+
