@@ -109,7 +109,7 @@ public class recepciones extends HttpServlet {
 		}else {
 	
 		
-		request.getSession().setAttribute("errorGeneral", errorGeneral);
+		
 		
 		request.getSession().setAttribute("usuario", nombre);
 		request.getSession().setAttribute("clave", clave);
@@ -120,7 +120,7 @@ public class recepciones extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // 2. Crear la conexión
-            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/usuarios", "root", "1234");
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/usuarios", "admin1", "123456");
 
             
             // 4. Crear la consulta 
@@ -136,7 +136,6 @@ public class recepciones extends HttpServlet {
             // 6. Procesar el resultado
             if (resultado.next()) {
                 // Login exitoso
-            	 request.getSession().setAttribute("usuarioLogeado", nombre);
             	 response.getWriter().append("Conexion exitosa");
             } else {
                 // Login fallido
