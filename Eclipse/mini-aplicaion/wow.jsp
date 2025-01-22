@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Bienvendio <bold>aprendiz</bold></h1>
-<form action="crearCookie.jsp" method="post">
+
+<%String nombre = (String) session.getAttribute("nombre");%>
+<h1>BIENVENDIO HECHIZO <%= nombre %></h1>
+
+<form action="crearCookie" method="post">
 
     <input type="radio" name="aprendiz" value="Alfarero" id="Alfarero">
     <label for="Alfarero">Alfarero</label>
@@ -21,6 +24,5 @@
     
     <input type="submit" value="Desconectar">
 </form>
-
 </body>
 </html>

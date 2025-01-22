@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -135,8 +137,11 @@ public class recepciones extends HttpServlet {
 
             // 6. Procesar el resultado
             if (resultado.next()) {
-                // Login exitoso
-            	 response.getWriter().append("Conexion exitosa");
+            	//Guardar sesion
+            	HttpSession session = request.getSession();
+            	session.setAttribute("nombre", nombre);
+            	// Login exitoso
+            	 response.sendRedirect("wow.jsp");
             } else {
                 // Login fallido
             	response.getWriter().append("Fallo de conexion");

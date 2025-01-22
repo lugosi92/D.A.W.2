@@ -25,12 +25,13 @@ console.log(contenido);
 
 //----------------------------------CONSTRUCTORES------------------------------
 //LECTORES
-function Lectores(numSocio, nombre, apellido, telefono, email){
+function Lectores(numSocio, nombre, apellido, telefono, email, estado){
     this.numSocio = numSocio;
     this.nombre = nombre;
     this.apellido = apellido;
     this.telefono = telefono;
     this.email = email;
+    this.estado = estado;
 }
 //LIBROS
 function Libros(codLibro, isbn, autor, titulo, editorial, ejemplares){
@@ -49,6 +50,25 @@ function Prestamos(numPrestamo, numSocio, codLibro, fechaPrestamo, fechaDevoluci
    this.fechaPrestamo = fechaPrestamo;
    this.fechaDevolucion = fechaDevolucion;
 }
+
+//----------------------------------FUNCIONES lectores-------------------------------
+
+const bancolectores = [];
+
+//altaLector: Se preguntará por los datos de un nuevo lector, se comprobará que están todos y que son correctos; a continuación, se dará de alta
+
+function  altaLector(){
+    let numSocio = prompt("Introduce el numero de socio");
+    let nombre = prompt("Introduce nombre de usuario");
+    let apellido = prompt("Introduce apellido de usuario");
+    let telefono = prompt("Introduce numero de telefono");
+    let email = prompt("Introduce email del usuario");
+    bancolectores.push(numSocio,nombre,apellido,telefono,email, true);
+}
+
+altaLector();
+console.log(bancolectores);
+
 
 
 
