@@ -33,11 +33,12 @@ public class crearCookie extends HttpServlet {
 		HttpSession session = request.getSession();
 		String nombre = (String) session.getAttribute("nombre");
 		String valor = request.getParameter("aprendiz");
-
 	
-		Cookie cookieJ = new Cookie( nombre, "valor="+valor);
-		cookieJ.setMaxAge(60); 
+		Cookie cookieJ = new Cookie( nombre,valor);
+		cookieJ.setMaxAge(600); 
 		response.addCookie(cookieJ);    
+		
+		
 		
 		response.sendRedirect("index.jsp");
 		
