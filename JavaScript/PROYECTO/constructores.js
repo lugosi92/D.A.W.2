@@ -91,5 +91,8 @@ function modifLector(){
     });
 }
 
-modifLector();
+// modifLector();
 console.log(bancolectores);
+
+//comprobarEmails: Se comprobará si los email tienen un formato correcto y 
+//se dará un listado de los que no son válidos (Lector + email)
