@@ -1,3 +1,27 @@
+
+async function leerArchivo(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = (e) => reject(e);
+        reader.readAsText(file);
+    });
+}
+
+function mostrarContenido(contenido) {
+    var elemento = document.getElementById('contenido-archivo');
+    elemento.innerHTML = contenido;
+}
+
+document.getElementById('file-input').addEventListener('change', async (e) => {
+    const archivo = e.target.files[0];
+    if (!archivo) {
+        return;
+    }
+    const contenido = await leerArchivo(archivo);
+    console.log(contenido);
+    mostrarContenido(contenido);
+
 //----------------------------------CONSTRUCTORES------------------------------
 //LECTORES
 function Lectores(numSocio, nombre, apellido, telefono, email, bajaLector, fechaBaja){
@@ -27,17 +51,48 @@ function Prestamos(numPrestamo, numSocio, codLibro, fechaPrestamo, fechaDevoluci
     this.fechaDevolucion = fechaDevolucion;
 }
 
+/*------------------------------------------------------------------------------*/
+// Separamos por lineas y retorno de carro
+const lineas = contenido.split("\r\n"); 
+const encabezado = lineas[0];
 
+if (encabezado.includes("telefono") && encabezado.includes("email")) {
+/*----------------------------------LEER CVS lectores-----------------------------*/
+console.log("CSV - LECTORES");
+ // Creamos conjunto
+ bancoLectores = new Set(lineas);
+ bancoLectores.delete("");
+ // PASAR DE CONJUNTO A ARRAY
+ arrayLectores = [...bancoLectores];
 
+ arrayLectores.forEach(linea => {
+    let dato = linea.split(",");
+    let lector = new Lectores(dato[0],dato[1],dato[2], 
+                              dato[3],dato[4], false , null );
+    arrayLectores.push(lector);
+ });
 
-//----------------------------------FUNCIONES lectores-------------------------------
+ console.log(arrayLectores);
 
-const bancolectores = [];
+/*------------------------------------------------------------------------------*/
+} else if (encabezado.includes("isbn") && encabezado.includes("ejemplares")) {
+/*----------------------------------LEER CVS libros-----------------------------*/
+console.log("CSV - LIBROS");
 
-let lector = new Lectores(1,"jesus","villaverde" ,"123456","hola@gmail.com", false, null);
-let lector2 = new Lectores(2,"ivan","soria" ,"987654","hola@gmail.com", false, null);
-bancolectores.push(lector);
-bancolectores.push(lector2);
+bancoLibros= new Set(lineas);
+bancoLibros.delete("");
+ // PASAR DE CONJUNTO A ARRAY
+ arrayLibros = [...bancoLibros];
+
+ arrayLibros.forEach(linea => {
+    let dato = linea.split(",");
+    let libro = new Libros(dato[0],dato[1],dato[2], 
+                              dato[3],dato[4], dato[5]);
+    arrayLibros.push(libro);
+ });
+}
+
+/*----------------------------------FUNCIONES lectores-----------------------------*/
 
 //altaLector: Se preguntará por los datos de un nuevo lector, se comprobará que están todos y que son correctos; a continuación, se dará de alta
 
@@ -92,7 +147,10 @@ function modifLector(){
 }
 
 // modifLector();
-console.log(bancolectores);
+
 
 //comprobarEmails: Se comprobará si los email tienen un formato correcto y 
 //se dará un listado de los que no son válidos (Lector + email)
+
+/*----------------------------------FUNCIONES libros-----------------------------*/
+}, false);
