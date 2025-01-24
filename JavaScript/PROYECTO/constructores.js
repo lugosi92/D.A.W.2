@@ -56,6 +56,7 @@ function Prestamos(numPrestamo, numSocio, codLibro, fechaPrestamo, fechaDevoluci
 const lineas = contenido.split("\r\n"); 
 const encabezado = lineas[0];
 
+
 if (encabezado.includes("telefono") && encabezado.includes("email")) {
 /*----------------------------------LEER CVS lectores-----------------------------*/
 console.log("CSV - LECTORES");
@@ -74,12 +75,15 @@ console.log("CSV - LECTORES");
 
  console.log(arrayLectores);
 
+}
 /*------------------------------------------------------------------------------*/
-} else if (encabezado.includes("isbn") && encabezado.includes("ejemplares")) {
+
+if (encabezado.includes("codLibro") && encabezado.includes("isbn")) {
 /*----------------------------------LEER CVS libros-----------------------------*/
 console.log("CSV - LIBROS");
 
 bancoLibros= new Set(lineas);
+
 bancoLibros.delete("");
  // PASAR DE CONJUNTO A ARRAY
  arrayLibros = [...bancoLibros];
@@ -89,8 +93,11 @@ bancoLibros.delete("");
     let libro = new Libros(dato[0],dato[1],dato[2], 
                               dato[3],dato[4], dato[5]);
     arrayLibros.push(libro);
+    
  });
+ console.log(arrayLibros);
 }
+
 
 /*----------------------------------FUNCIONES lectores-----------------------------*/
 
