@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1 class="titulo">Gestión de Inventario de Productos</h1>
+
+    <!-- FORMULARIO -->
+    <div class="formulario">
+        
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre">
+        <br><br>
+
+        <label for="categoria">Categoría:</label>
+        <select id="categoria">
+            <option>Electrónica</option>
+            <option>Tecnología</option>
+            <option>Hogar</option>
+        </select>
+        <br><br>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="text" id="cantidad">
+        <br><br>
+
+        <label for="precio">Precio:</label>
+        <input type="text" id="precio">
+        <br><br>
+
+        <button id="boton_añadir">Añadir Producto</button>
+        <button id="limpiar">Limpiar Formulario</button>
+    </div>
+
+    <!-- TABLA -->
+    <div class="tabla">
+        <table id="tablaProductos">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ordenador</td>
+                    <td>Electrónica</td>
+                    <td>1</td>
+                    <td>800</td>
+                    <td><button class="eliminar">Eliminar</button></td>
+                </tr>
+                <tr>
+                    <td>Tablet</td>
+                    <td>Electrónica</td>
+                    <td>10</td>
+                    <td>400</td>
+                    <td><button class="eliminar">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="actualizarGrafico">Actualizar Gráfico</button>
+    </div>
+
+    <!-- GRÁFICO -->
+    <h1 class="titulo">Gráfico de Cantidades</h1>
+    <div class="grafico"></div>
+
+    <script>
+        const form = {
+            nombre: document.getElementById('nombre'),
+            categoria: document.getElementById('categoria'),
+            cantidad: document.getElementById('cantidad'),
+            precio: document.getElementById('precio'),
+        };
+        
+        const tabla = document.getElementById('tablaProductos').querySelector('tbody');
+        const grafico = document.querySelector('.grafico');
+
+        document.getElementById('boton_añadir').addEventListener('click', () => {
+            const nombre = form.nombre.value.trim();
+            const categoria = form.categoria.value;
+            const cantidad = parseInt(form.cantidad.value, 10);
+            const precio = parseFloat(form.precio.value);
+
+            if (!nombre || cantidad <= 0 || precio <= 0) {
+                alert('Por favor, rellena todos los campos correctamente.');
+                return;
+            }
+
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${nombre}</td>
+                <td>${categoria}</td>
+                <td>${cantidad}</td>
+                <td>${precio.toFixed(2)}</td>
+                <td><button class="eliminar">Eliminar</button></td>
+            `;
+            tabla.appendChild(fila);
+
+            form.nombre.value = '';
+            form.cantidad.value = '';
+            form.precio.value = '';
+            actualizarGrafico();
+        });
+
+        document.getElementById('limpiar').addEventListener('click', () => {
+            form.nombre.value = '';
+            form.cantidad.value = '';
+            form.precio.value = '';
+        });
+
+        tabla.addEventListener('click', (e) => {
+            if (e.target.classList.contains('eliminar')) {
+                e.target.closest('tr').remove();
+                actualizarGrafico();
+            }
+        });
+
+        function actualizarGrafico() {
+            grafico.innerHTML = '';
+            const productos = Array.from(tabla.querySelectorAll('tr')).map((fila) => ({
+                nombre: fila.children[0].textContent,
+                cantidad: parseInt(fila.children[2].textContent, 10),
+            }));
+
+            productos.forEach((producto) => {
+                const barra = document.createElement('div');
+                barra.className = 'barra';
+                barra.style.height = `${producto.cantidad * 10}px`;
+                barra.textContent = producto.cantidad;
+                grafico.appendChild(barra);
+            });
+        }
+    </script>
+</body>
+</html>

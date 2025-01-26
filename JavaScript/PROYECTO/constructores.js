@@ -19,28 +19,30 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         return;
     }
     const contenido = await leerArchivo(archivo);
-    console.log(contenido);
+    // console.log(contenido);
     mostrarContenido(contenido);
 
 //----------------------------------CONSTRUCTORES------------------------------
 //LECTORES
-function Lectores(numSocio, nombre, apellido, telefono, email, bajaLector, fechaBaja){
+function Lectores(numSocio, nombre, apellido, telefono, email, bajaLector, Lector){
      this.numSocio = numSocio;
      this.nombre = nombre;
      this.apellido = apellido;
      this.telefono = telefono;
      this.email = email;
      this.bajaLector = bajaLector;
-     this.fechaBaja = fechaBaja;
+     this.Lector = Lector;
 }
 //LIBROS
-function Libros(codLibro, isbn, autor, titulo, editorial, ejemplares){
+function Libros(codLibro, isbn, autor, titulo, editorial, ejemplares, bajaLibro, fechaBajaLibro){
     this.codLibro = codLibro;
     this.isbn = isbn;
     this.autor = autor;
     this.titulo = titulo;
     this.editorial = editorial;
     this.ejemplares = ejemplares; 
+    this.bajaLibro = bajaLibro;
+    this.fechaBajaLibro = fechaBajaLibro;
 }
 //PRESTAMOS
 function Prestamos(numPrestamo, numSocio, codLibro, fechaPrestamo, fechaDevolucion){
@@ -82,16 +84,16 @@ if (encabezado.includes("codLibro") && encabezado.includes("isbn")) {
 /*----------------------------------LEER CVS libros-----------------------------*/
 console.log("CSV - LIBROS");
 
-bancoLibros= new Set(lineas);
+arrayLibros= new Set(lineas);
 
-bancoLibros.delete("");
+arrayLibros.delete("");
  // PASAR DE CONJUNTO A ARRAY
- arrayLibros = [...bancoLibros];
+ arrayLibros = [...arrayLibros];
 
  arrayLibros.forEach(linea => {
     let dato = linea.split(",");
     let libro = new Libros(dato[0],dato[1],dato[2], 
-                              dato[3],dato[4], dato[5]);
+                              dato[3],dato[4], dato[5], false, null);
     arrayLibros.push(libro);
     
  });
@@ -104,13 +106,14 @@ bancoLibros.delete("");
 //altaLector: Se preguntará por los datos de un nuevo lector, se comprobará que están todos y que son correctos; a continuación, se dará de alta
 
 function  altaLector(){
-    let numSocio = prompt("Introduce el numero de socio");
-    let nombre = prompt("Introduce nombre de usuario");
-    let apellido = prompt("Introduce apellido de usuario");
-    let telefono = prompt("Introduce numero de telefono");
-    let email = prompt("Introduce email del usuario");
+    alert("USTED VA A DAR DE ALTA A UN NUEVO SOCIO");
+    let numSocio = prompt("Introduce el NºSOCIO");
+    let nombre = prompt("Introduce NOMBRE");
+    let apellido = prompt("Introduce APELLIDO");
+    let telefono = prompt("Introduce TELEFONO");
+    let email = prompt("Introduce email");
     let lector = new Lectores(numSocio,nombre,apellido,telefono,email, false, null);
-    bancolectores.push(lector);
+    arrayLectores.push(lector);
 }
 
 // altaLector()
@@ -121,11 +124,12 @@ function  altaLector(){
 
 function bajaLector(){
 
-    let numSocio = prompt("Introduce el numeor de socio a dar de baja");
+    alert("USTED VA A DAR DE BAJA A UN NUEVO SOCIO");
+    let numSocio = prompt("Introduce el NºSOCIO a dar de baja");
 
     const fechaActual = new Date();
 
-    bancolectores.forEach(objeto => {
+    arrayLectores.forEach(objeto => {
         if(objeto.numSocio == numSocio){
             objeto.bajaLector = true;
             objeto.fechaBaja = fechaActual;
@@ -142,12 +146,13 @@ function bajaLector(){
 
 function modifLector(){
 
+    alert("USTED VA A MODIFICAR  A UN  SOCIO");
     numSocio = prompt("Introduce el numeor de socio a MODIFICAR");
 
-    bancolectores.forEach(objeto => {
+    arrayLectores.forEach(objeto => {
         if(objeto.numSocio == numSocio){
             atributo = prompt("Que valor quieres modificar");
-            nuevoValor = prompt("Introduce nuevo usuario");
+            nuevoValor = prompt("Introduce nuevo valor");
             objeto[atributo]= nuevoValor;
         }
     });
@@ -160,4 +165,76 @@ function modifLector(){
 //se dará un listado de los que no son válidos (Lector + email)
 
 /*----------------------------------FUNCIONES libros-----------------------------*/
+//altaLibro: Se preguntará por los datos de un nuevo libro, se comprobará que están todos y que son correctos; a continuación, se dará de alta
+function  altaLibro(){
+    alert("USTED VA A DAR DE ALTA A UN NUEVO LIBRO");
+    let autor = prompt("Introduzca el AUTOR");
+    let codLibro = prompt("Introduzca el CODIGO");
+    let editorial = prompt("Introduzca la EDITORIAL");
+    let ejemplares = prompt("Introduzca el EJEMPLAR");
+    let isbn = prompt("Introduzca el ISBN");
+    let titulo = prompt("Introduzca el TITULO");
+    let libro = new Libros(codLibro, isbn, autor, titulo, editorial, ejemplares, false, null);
+    arrayLibros.push(libro);
+}
+
+// altaLibro();
+
+
+//bajaLibro: La baja se realizará añadiendo un campo de baja, en la información del libro que contendrá: bajaLibro (true/false) y 
+//la fecha de baja. Se conservará toda la información del libro, para poder analizar los préstamos tanto antiguos como pendientes
+
+function bajaLibro(){
+
+    alert("USTED VA A DAR  DE BAJA UN LIBRO");
+
+    let fecha = new Date();
+
+    let codigo = prompt("INTRODUZCA EL CODIGO DEL LIBRO A DAR DE BAJA");
+
+
+    arrayLibros.forEach(libro => {
+        if(libro.codLibro == codigo){
+            libro.bajaLibro = true;
+            fechaBajaLibro = fecha;
+        }
+
+    });
+
+}
+// bajaLibro();
+
+
+//ModifLibro: Se utilizará para modificar cualquier dato del libro, sea porque ha cambiado o porque es incorrecto. 
+//Se preguntará por el dato a modificar, se introducirá el nuevo dato y se actualizará
+
+function modifLibro(){
+
+    alert("USTED VA A MODIFICAR UN LIBRO");
+    let codigo = prompt("INTRODUZCA EL CODIGO DEL LIBRO A MODIFICAR");
+
+    arrayLibros.forEach(libro => {
+        if(libro.codLibro == codigo){           
+            let atributo = prompt("Que atributo vas a modificar");
+            let nuevoValor = prompt("Introduzca el nuevo valor");
+            libro[atributo] = nuevoValor;
+        }
+    });
+}
+modifLibro();
+
+console.log(arrayLibros);
+
+
+
+
+
+
+
+
+
+
+
+
+
 }, false);
