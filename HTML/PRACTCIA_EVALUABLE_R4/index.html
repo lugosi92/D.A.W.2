@@ -26,11 +26,11 @@
         <br><br>
 
         <label for="cantidad">Cantidad:</label>
-        <input type="text" id="cantidad">
+        <input type="number" id="cantidad">
         <br><br>
 
         <label for="precio">Precio:</label>
-        <input type="text" id="precio">
+        <input type="number" id="precio">
         <br><br>
 
         <button id="boton_añadir">Añadir Producto</button>
@@ -70,75 +70,89 @@
     </div>
 
     <!-- GRÁFICO -->
-    <h1 class="titulo">Gráfico de Cantidades</h1>
-    <div class="grafico"></div>
-
-    <script>
-        const form = {
-            nombre: document.getElementById('nombre'),
-            categoria: document.getElementById('categoria'),
-            cantidad: document.getElementById('cantidad'),
-            precio: document.getElementById('precio'),
-        };
+    <div id="graficoBarras">
         
-        const tabla = document.getElementById('tablaProductos').querySelector('tbody');
-        const grafico = document.querySelector('.grafico');
+    </div>
 
-        document.getElementById('boton_añadir').addEventListener('click', () => {
-            const nombre = form.nombre.value.trim();
-            const categoria = form.categoria.value;
-            const cantidad = parseInt(form.cantidad.value, 10);
-            const precio = parseFloat(form.precio.value);
+    <!-- JQuery -->
+    <script>
+    $(document).ready(function () {
 
-            if (!nombre || cantidad <= 0 || precio <= 0) {
-                alert('Por favor, rellena todos los campos correctamente.');
-                return;
-            }
+    //Guardar valores
+    $('#boton_añadir').click(function() {
+        const nombre = $('#nombre').val();
+        const categoria = $('#categoria').val();
+        const cantidad = $('#cantidad').val();
+        const precio = $('#precio').val();
 
-            const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td>${nombre}</td>
-                <td>${categoria}</td>
-                <td>${cantidad}</td>
-                <td>${precio.toFixed(2)}</td>
-                <td><button class="eliminar">Eliminar</button></td>
+    //Crear fila
+    const nuevaFila = `
+        <tr>
+            <td>${nombre}</td>
+            <td>${categoria}</td>
+            <td>${cantidad}</td>
+            <td>${precio}</td>
+            <td><button class="eliminar">Eliminar</button></td>
+        </tr>
+    `;
+
+    //Añadir la nueva fila
+    $('#tablaProductos').append(nuevaFila);
+
+    });
+
+    //Limpiar formulario
+    $('#limpiar').click(function() {
+    $('#nombre').val('');
+    $('#cantidad').val('');
+    $('#precio').val('');
+    });
+
+    //Eliminar producto
+    $('#tablaProductos').on('click', '.eliminar', function() {
+        $(this).closest('tr').remove();
+    });
+
+    //Grafico
+    function actualizarGrafico() {
+        const cantidades = [];
+        const nombres = [];
+
+        // Obtener datos de la tabla
+        $('#tablaProductos tbody tr').each(function () {
+            const cantidad = parseInt($(this).find('td:nth-child(3)').text(), 10) || 0;
+            const nombre = $(this).find('td:nth-child(1)').text();
+            cantidades.push(cantidad);
+            nombres.push(nombre);
+        });
+
+        const total = cantidades.reduce((sum, cantidad) => sum + cantidad, 0);
+
+        // Vaciar el grafico anterior
+        $('#graficoBarras').empty();
+
+        // Crear barras dinámicas
+        cantidades.forEach((cantidad, index) => {
+            const porcentaje = total ? (cantidad / total) * 100 : 0;
+            const barra = `
+                <div class="barra" style="height: ${porcentaje}%;">
+                    ${nombres[index]} (${porcentaje.toFixed(1)}%)
+                </div>
             `;
-            tabla.appendChild(fila);
-
-            form.nombre.value = '';
-            form.cantidad.value = '';
-            form.precio.value = '';
-            actualizarGrafico();
+            $('#graficoBarras').append(barra);
         });
+    }
 
-        document.getElementById('limpiar').addEventListener('click', () => {
-            form.nombre.value = '';
-            form.cantidad.value = '';
-            form.precio.value = '';
-        });
+    // Botón para actualizar grafico
+    $('#actualizarGrafico').on('click', actualizarGrafico);
 
-        tabla.addEventListener('click', (e) => {
-            if (e.target.classList.contains('eliminar')) {
-                e.target.closest('tr').remove();
-                actualizarGrafico();
-            }
-        });
+    // Añadir producto también actualiza el grafico
+    $('#boton_añadir').on('click', actualizarGrafico);
 
-        function actualizarGrafico() {
-            grafico.innerHTML = '';
-            const productos = Array.from(tabla.querySelectorAll('tr')).map((fila) => ({
-                nombre: fila.children[0].textContent,
-                cantidad: parseInt(fila.children[2].textContent, 10),
-            }));
+    // Eliminar producto también actualiza el grafico
+    $('#tablaProductos').on('click', '.eliminar', actualizarGrafico);
 
-            productos.forEach((producto) => {
-                const barra = document.createElement('div');
-                barra.className = 'barra';
-                barra.style.height = `${producto.cantidad * 10}px`;
-                barra.textContent = producto.cantidad;
-                grafico.appendChild(barra);
-            });
-        }
+});
     </script>
 </body>
 </html>

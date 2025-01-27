@@ -19,8 +19,22 @@ th, td {
 }
 
 
-.grafico{
-    background-color: white;
-    padding: 200px;
-    margin: 0 auto;
+
+/* GRAFICO */
+#graficoBarras {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 500px;
+    border: 1px solid #333;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.barra {
+    width: 50px;
+    background-color: #4CAF50;
+    text-align: center;
+    color: white;
+    margin: 0 5px;
 }
