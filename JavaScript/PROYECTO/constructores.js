@@ -221,13 +221,34 @@ function modifLibro(){
         }
     });
 }
-modifLibro();
-
-console.log(arrayLibros);
+// modifLibro();
 
 
+//hayLibro: se pasará un isbn, un autor o un título. Si está en la lista de libros, se devolverá: isbn + autor + autor + titulo + ejemplares disponibles 
+//(como datos, no como string). En caso contrario, se devolverá un error
 
+function hayLibro(){
 
+    let dato = prompt("Introduzca el ISBN , autor o titulo");
+    let encontrado = false;
+    
+    arrayLibros.forEach(libro => {
+        if(libro.isbn == dato || libro.autor == dato || libro.titulo == dato){
+            console.log("El ISBN del libro: " + libro.isbn + "\n" +
+                        "El autor del libro: " + libro.autor + "\n" +
+                        "El titulo del libro: " + libro.titulo + "\n" +
+                        "Ejemplares disponibles: " + libro.ejemplares + "\n");
+        encontrado = true;
+        }
+    });
+
+    if(encontrado = false){
+        console.log("Referencia no encontrada");
+    }
+
+}
+
+hayLibro();
 
 
 
