@@ -1,7 +1,6 @@
 package sesiones;
 
 import jakarta.servlet.ServletException;
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,20 +8,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Servlet implementation class crearCooki
+ * Servlet implementation class recuperarSesion
  */
-@WebServlet("/sesiones")
-public class sesiones extends HttpServlet {
+@WebServlet("/recuperarSesion")
+public class recuperarSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public sesiones() {
+    public recuperarSesion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,34 +32,16 @@ public class sesiones extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		//Invalidar session existente si existe alguna
-		if(request.getSession(false) != null) {
-			request.getSession().invalidate();
-		}
-		
-		
-		//RESETEAR - CREAR
 		HttpSession laSesion = request.getSession();
 		
-	
-		laSesion.setAttribute("entero", 123);
-		laSesion.setAttribute("real", 45.68);
-		laSesion.setAttribute("texto", "Hola");
-		laSesion.setAttribute("fecha", "12-10-2024");
-	
-		Map<String, Boolean> semaforo = new HashMap<>();
-		semaforo.put("Verde", true);
-		semaforo.put("Amarrillo", true);
-		semaforo.put("Rojo", false);
-		laSesion.setAttribute("semaforo", semaforo);
+		Integer entero = (Integer) laSesion.getAttribute("entero");
+		Integer real = (Integer) laSesion.getAttribute("real");
+		String texto = (String) laSesion.getAttribute("texto");
+		String fecha = (String) laSesion.getAttribute("fecha");
+		Map<String, Boolean> semaforo =(Map<String,Boolean>) laSesion.getAttribute("semaforo");
+		Punto punto = (Punto) laSesion.getAttribute("punto");
 		
-		Punto punto1 = new Punto(3,6);
-		laSesion.setAttribute("Punto", punto1);
-		
-		laSesion.getAttributeNames();
-		
-		response.sendRedirect("recuperarSesion");
-	
+		response.sendRedirect("/mostrar.jsp");
 	}
 
 }

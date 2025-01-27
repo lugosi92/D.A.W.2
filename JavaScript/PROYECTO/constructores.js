@@ -1,4 +1,4 @@
-
+    
 async function leerArchivo(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
