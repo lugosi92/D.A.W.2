@@ -53,6 +53,29 @@ function Prestamos(numPrestamo, numSocio, codLibro, fechaPrestamo, fechaDevoluci
     this.fechaDevolucion = fechaDevolucion;
 }
 
+
+function Clasificacion(pasillo, estanteria, estante){
+    this.pasillo = pasillo;
+    this.estanteria = estanteria;
+    this.estante = estante;
+}
+
+
+/*------------------------------------------------------------------------------*/
+
+
+
+const arrayPrestamosVivos = [];
+const arrayPrestamosTotales = [];
+
+Libros.__proto__=Prestamos;
+Lectores.__proto__=Prestamos;
+
+const prestamo1 = new Prestamos(1, "456", "2253", null, null);
+const manga = new Clasificacion(7,4,6);
+
+// Prestamo solicitudcontador
+let numPrestamo = 0;
 /*------------------------------------------------------------------------------*/
 // Separamos por lineas y retorno de carro
 const lineas = contenido.split("\r\n"); 
@@ -101,7 +124,8 @@ arrayLibros.delete("");
 }
 
 
-/*----------------------------------FUNCIONES lectores-----------------------------*/
+
+/*----------------------------------------------------------------------------FUNCIONES lector-----------------------------------------------------------------------*/
 
 //altaLector: Se preguntará por los datos de un nuevo lector, se comprobará que están todos y que son correctos; a continuación, se dará de alta
 
@@ -145,7 +169,6 @@ function bajaLector(){
 // Se preguntará por el dato a modificar, se introducirá el nuevo dato y se actualizará
 
 function modifLector(){
-
     alert("USTED VA A MODIFICAR  A UN  SOCIO");
     numSocio = prompt("Introduce el numeor de socio a MODIFICAR");
 
@@ -164,7 +187,7 @@ function modifLector(){
 //comprobarEmails: Se comprobará si los email tienen un formato correcto y 
 //se dará un listado de los que no son válidos (Lector + email)
 
-/*----------------------------------FUNCIONES libros-----------------------------*/
+/*----------------------------------------------------------------------------FUNCIONES libros-----------------------------------------------------------------------*/
 //altaLibro: Se preguntará por los datos de un nuevo libro, se comprobará que están todos y que son correctos; a continuación, se dará de alta
 function  altaLibro(){
     alert("USTED VA A DAR DE ALTA A UN NUEVO LIBRO");
@@ -241,7 +264,7 @@ function hayLibro(){
         }
     });
 
-    if(encontrado = false){
+    if(encontrado == false){
         console.log("Referencia no encontrada");
     }
 
@@ -258,24 +281,124 @@ function prestamoLibro(){
     let codLibro = prompt("Introduce el codigo del libro para prestar");
     let existe = false;
 
+
+        arrayLibros.forEach(libro => {
+            if(libro.codLibro == codLibro){ 
+                libro.ejemplares = parseInt(libro.ejemplares); 
+                console.log("Lista actualizada PRESTADO");
+                libro.ejemplares -= 1;  
+                console.log(arrayLibros);
+                existe = true;
+            }
+        });
+
+    if(existe == false){
+        console.log("Libro no exsistente ");
+    }
+
+    return existe;
+}
+
+// prestamoLibro();
+
+
+
+//devolucionLibro: Se comprobará que existe el libro; en caso afirmativo, 
+// se aumentará el número de ejemplares disponibles
+
+function devolucionLibro(){
+
+    let codigo = prompt("Introduce el codigo del libro a devolver");
+    let existe = false;
+    
+        arrayLibros.forEach(libro => {
+            if(libro.codLibro == codigo){
+                libro.ejemplares = parseInt(libro.ejemplares);
+                libro.ejemplares += 1;
+                existe = true;
+                console.log("Libro devuelto con exito");
+            }
+        });
+
+    if(existe == false){
+        console.log("Libro no encontrado");
+    }
+}
+
+// devolucionLibro();
+//dondeLibro: Se preguntará por un isbn y se vevolverá: pasillo, estantería y estante
+
+function dondeLibro(){
+
+    let isbn = prompt("Introduzca el ISBN");
+    let existe = false;
+
     arrayLibros.forEach(libro => {
-        if(libro.codLibro == codLibro){ 
-            parseInt(libro.ejemplares); 
-            console.log("Lista actualizada");
-            libro.ejemplares -= 1;  
-            console.log(arrayLibros);
+        libro.__proto__=manga; 
+        if(libro.isbn == isbn){
+            console.log("LIBRO ENCONTRADO");
+            console.log("Pasillo : " + libro.pasillo + "\n" + 
+                        "Estanteria: " + libro.estanteria + "\n" + 
+                        "Estante: " + libro.estante + "\n");
             existe = true;
         }
     });
 
     if(existe == false){
-        console.log("Libro no exsistente ");
+        console.log("Libro no encontrado");
     }
+
 }
 
-// prestamoLibro()
+// dondeLibro();
 
-//devolucionLibro: Se comprobará que existe el libro; en caso afirmativo, 
-// se aumentará el número de ejemplares disponibles
+/*----------------------------------------------------------------------------FUNCIONES prestamo-----------------------------------------------------------------------*/
+//listadoTotalPrestamos: Se elaborará un listado de todos los préstamos, tanto vivos como devueltos. 
+//Se proporcionará un listado con toda la información de cada préstamo en una línea
+
+
+function solicitudPrestamo(){
+
+    let numSocio = prompt("Introduce numSocio");
+    let codLibro = prompt("Introduce el codigo del libro");
+    let fechaPrestamo = new Date();
+
+    if(prestamoLibro() == true){
+        numPrestamo++;
+        const prestamo = new Prestamos(numPrestamo,numSocio,codLibro,fechaPrestamo, null);
+        arrayPrestamosTotales.push(prestamo);
+    }
+
+    console.log(arrayPrestamosTotales);
+
+}
+solicitudPrestamo();
+
+function listadoTotalPrestamos(){
+
+
+    arrayPrestamos.forEach(prestamo => {
+
+        if(prestamo.fechaDevolcuion == null){
+            console.log("PRESTAMOS VIVOS")
+            console.log(
+                "El NºPrestamo: " + prestamo.numPrestamo + "\n" +
+                "El NºSocio: " + prestamo.numSocio + "\n" +
+                "El CODIGO DEL LIBRO: " + prestamo.codLibro + "\n" +
+                "Fecha prestamo: " + prestamo.fechaPrestamo + "\n");
+        }else{
+            console.log("PRESTAMOS DEVUELTOS");
+            console.log(
+                "El NºPrestamo: " + prestamo.numPrestamo + "\n" +
+                "El NºSocio: " + prestamo.numSocio + "\n" +
+                "El CODIGO DEL LIBRO: " + prestamo.codLibro + "\n" +
+                "Fecha prestamo: " + prestamo.fechaPrestamo + "\n" +
+                "Fecha devolucion: " + prestamo.fechaDevolucion + "\n");
+            }
+    });
+
+}
+
+
 
 }, false);
