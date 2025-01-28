@@ -228,7 +228,6 @@ function modifLibro(){
 //(como datos, no como string). En caso contrario, se devolverá un error
 
 function hayLibro(){
-
     let dato = prompt("Introduzca el ISBN , autor o titulo");
     let encontrado = false;
     
@@ -248,14 +247,35 @@ function hayLibro(){
 
 }
 
-hayLibro();
+// hayLibro();
 
+//prestamoLibro: Se comprobará si existe el libro y hay ejemplares disponibles; en caso afirmativo, 
+// se actualizarán los datos del libro reflejando el préstamo y se devolverá "prestado"; 
+// en caso contrario, no se podrá prestar el libro y de sevolverá "no existente" o "no disponible"
 
+function prestamoLibro(){
 
+    let codLibro = prompt("Introduce el codigo del libro para prestar");
+    let existe = false;
 
+    arrayLibros.forEach(libro => {
+        if(libro.codLibro == codLibro){ 
+            parseInt(libro.ejemplares); 
+            console.log("Lista actualizada");
+            libro.ejemplares -= 1;  
+            console.log(arrayLibros);
+            existe = true;
+        }
+    });
 
+    if(existe == false){
+        console.log("Libro no exsistente ");
+    }
+}
 
+// prestamoLibro()
 
-
+//devolucionLibro: Se comprobará que existe el libro; en caso afirmativo, 
+// se aumentará el número de ejemplares disponibles
 
 }, false);

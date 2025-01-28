@@ -103,15 +103,18 @@
 
     //Limpiar formulario
     $('#limpiar').click(function() {
-    $('#nombre').val('');
-    $('#cantidad').val('');
-    $('#precio').val('');
+        $('#nombre').val('');
+        $('#cantidad').val('');
+        $('#precio').val('');
     });
 
     //Eliminar producto
     $('#tablaProductos').on('click', '.eliminar', function() {
         $(this).closest('tr').remove();
     });
+
+
+
 
     //Grafico
     function actualizarGrafico() {
