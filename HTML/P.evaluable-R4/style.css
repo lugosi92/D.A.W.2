@@ -1,0 +1,40 @@
+body{
+    background-color: #f4f4f4;
+}
+
+.titulo{
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    background-color: white;
+}
+
+
+
+/* GRAFICO */
+#graficoBarras {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 500px;
+    border: 1px solid #333;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.barra {
+    width: 50px;
+    background-color: #4CAF50;
+    text-align: center;
+    color: white;
+    margin: 0 5px;
+}

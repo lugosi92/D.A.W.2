@@ -63,10 +63,7 @@ function Clasificacion(pasillo, estanteria, estante){
 
 /*------------------------------------------------------------------------------*/
 
-
-
-const arrayPrestamosVivos = [];
-const arrayPrestamosTotales = [];
+const arrayPrestamos = [];
 
 Libros.__proto__=Prestamos;
 Lectores.__proto__=Prestamos;
@@ -353,27 +350,38 @@ function dondeLibro(){
 // dondeLibro();
 
 /*----------------------------------------------------------------------------FUNCIONES prestamo-----------------------------------------------------------------------*/
-//listadoTotalPrestamos: Se elaborará un listado de todos los préstamos, tanto vivos como devueltos. 
-//Se proporcionará un listado con toda la información de cada préstamo en una línea
 
+//solicitudPrestamo: Un préstamo se solicita incluyendo el número de socio y 
+//el isbn o el código del libro. Se creará un nuevo préstamo si es posible realizarlo
 
 function solicitudPrestamo(){
 
-    let numSocio = prompt("Introduce numSocio");
-    let codLibro = prompt("Introduce el codigo del libro");
+    let decision = prompt("Introduce 1 para introducir numSocio y ISBN o introduce 2 para introducir codLibro");
+
+    if(decision == 1){
+        let numSocio = prompt("Introduce numSocio");
+        let isbn = prompt("Introduce ISBN");
+    }else if(decision == 2){
+        let codLibro = prompt("Introduce el codigo del libro");
+    }else if(decision != 1 || decision !=2){
+        prompt("Introduce un numero 1 o 2");
+    }
+    
     let fechaPrestamo = new Date();
 
     if(prestamoLibro() == true){
         numPrestamo++;
         const prestamo = new Prestamos(numPrestamo,numSocio,codLibro,fechaPrestamo, null);
-        arrayPrestamosTotales.push(prestamo);
+        arrayPrestamos.push(prestamo);
     }
 
-    console.log(arrayPrestamosTotales);
+    console.log(arrayPrestamos);
 
 }
 solicitudPrestamo();
 
+//listadoTotalPrestamos: Se elaborará un listado de todos los préstamos, tanto vivos como devueltos. 
+//Se proporcionará un listado con toda la información de cada préstamo en una línea
 function listadoTotalPrestamos(){
 
 

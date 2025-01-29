@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1 class="titulo">Gestión de Inventario de Productos</h1>
+
+    <!-- FORMULARIO -->
+    <div class="formulario">
+        
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre">
+        <br><br>
+
+        <label for="categoria">Categoría:</label>
+        <select id="categoria">
+            <option>Electrónica</option>
+            <option>Tecnología</option>
+            <option>Hogar</option>
+        </select>
+        <br><br>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad">
+        <br><br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio">
+        <br><br>
+
+        <button id="boton_añadir">Añadir Producto</button>
+        <button id="limpiar">Limpiar Formulario</button>
+    </div>
+
+    <!-- TABLA -->
+    <div class="tabla">
+        <table id="tablaProductos">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ordenador</td>
+                    <td>Electrónica</td>
+                    <td>1</td>
+                    <td>800</td>
+                    <td><button class="eliminar">Eliminar</button></td>
+                </tr>
+                <tr>
+                    <td>Tablet</td>
+                    <td>Electrónica</td>
+                    <td>10</td>
+                    <td>400</td>
+                    <td><button class="eliminar">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="actualizarGrafico">Actualizar Gráfico</button>
+    </div>
+
+    <!-- GRÁFICO -->
+    <div id="graficoBarras">
+        
+    </div>
+
+    <!-- JQuery -->
+    <script>
+    $(document).ready(function () {
+
+    //Guardar valores
+    $('#boton_añadir').click(function() {
+        const nombre = $('#nombre').val();
+        const categoria = $('#categoria').val();
+        const cantidad = $('#cantidad').val();
+        const precio = $('#precio').val();
+
+    //Crear fila
+    const nuevaFila = `
+        <tr>
+            <td>${nombre}</td>
+            <td>${categoria}</td>
+            <td>${cantidad}</td>
+            <td>${precio}</td>
+            <td><button class="eliminar">Eliminar</button></td>
+        </tr>
+    `;
+
+    //Añadir la nueva fila
+    $('#tablaProductos').append(nuevaFila);
+
+    });
+
+    //Limpiar formulario
+    $('#limpiar').click(function() {
+        $('#nombre').val('');
+        $('#cantidad').val('');
+        $('#precio').val('');
+    });
+
+    //Eliminar producto
+    $('#tablaProductos').on('click', '.eliminar', function() {
+        $(this).closest('tr').remove();
+    });
+
+
+
+
+    //Grafico
+    function actualizarGrafico() {
+        const cantidades = [];
+        const nombres = [];
+
+        // Obtener datos de la tabla
+        $('#tablaProductos tbody tr').each(function () {
+            const cantidad = parseInt($(this).find('td:nth-child(3)').text(), 10) || 0;
+            const nombre = $(this).find('td:nth-child(1)').text();
+            cantidades.push(cantidad);
+            nombres.push(nombre);
+        });
+
+        const total = cantidades.reduce((sum, cantidad) => sum + cantidad, 0);
+
+        // Vaciar el grafico anterior
+        $('#graficoBarras').empty();
+
+        // Crear barras dinámicas
+        cantidades.forEach((cantidad, index) => {
+            const porcentaje = total ? (cantidad / total) * 100 : 0;
+            const barra = `
+                <div class="barra" style="height: ${porcentaje}%;">
+                    ${nombres[index]} (${porcentaje.toFixed(1)}%)
+                </div>
+            `;
+            $('#graficoBarras').append(barra);
+        });
+    }
+
+    // Botón para actualizar grafico
+    $('#actualizarGrafico').on('click', actualizarGrafico);
+
+    // Añadir producto también actualiza el grafico
+    $('#boton_añadir').on('click', actualizarGrafico);
+
+    // Eliminar producto también actualiza el grafico
+    $('#tablaProductos').on('click', '.eliminar', actualizarGrafico);
+
+});
+    </script>
+</body>
+</html>
