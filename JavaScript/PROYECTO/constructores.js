@@ -320,6 +320,8 @@ function devolucionLibro(){
     if(existe == false){
         console.log("Libro no encontrado");
     }
+
+    return existe;
 }
 
 // devolucionLibro();
@@ -350,36 +352,6 @@ function dondeLibro(){
 // dondeLibro();
 
 /*----------------------------------------------------------------------------FUNCIONES prestamo-----------------------------------------------------------------------*/
-
-//solicitudPrestamo: Un préstamo se solicita incluyendo el número de socio y 
-//el isbn o el código del libro. Se creará un nuevo préstamo si es posible realizarlo
-
-function solicitudPrestamo(){
-
-    let decision = prompt("Introduce 1 para introducir numSocio y ISBN o introduce 2 para introducir codLibro");
-
-    if(decision == 1){
-        let numSocio = prompt("Introduce numSocio");
-        let isbn = prompt("Introduce ISBN");
-    }else if(decision == 2){
-        let codLibro = prompt("Introduce el codigo del libro");
-    }else if(decision != 1 || decision !=2){
-        prompt("Introduce un numero 1 o 2");
-    }
-    
-    let fechaPrestamo = new Date();
-
-    if(prestamoLibro() == true){
-        numPrestamo++;
-        const prestamo = new Prestamos(numPrestamo,numSocio,codLibro,fechaPrestamo, null);
-        arrayPrestamos.push(prestamo);
-    }
-
-    console.log(arrayPrestamos);
-
-}
-solicitudPrestamo();
-
 //listadoTotalPrestamos: Se elaborará un listado de todos los préstamos, tanto vivos como devueltos. 
 //Se proporcionará un listado con toda la información de cada préstamo en una línea
 function listadoTotalPrestamos(){
@@ -387,7 +359,7 @@ function listadoTotalPrestamos(){
 
     arrayPrestamos.forEach(prestamo => {
 
-        if(prestamo.fechaDevolcuion == null){
+        if(prestamo.fechaDevolucion == null){
             console.log("PRESTAMOS VIVOS")
             console.log(
                 "El NºPrestamo: " + prestamo.numPrestamo + "\n" +
@@ -406,6 +378,64 @@ function listadoTotalPrestamos(){
     });
 
 }
+
+//ListadoPrestamosVivos: Se elaborará un listado de todos los préstamos vivos. 
+// Se proporcionará un listado con toda la información de cada préstamo en una línea
+
+function ListadoPrestamosVivos(){
+    if(prestamo.fechaDevolucion == null){
+        console.log("PRESTAMOS VIVOS")
+        console.log(
+            "El NºPrestamo: " + prestamo.numPrestamo + "\n" +
+            "El NºSocio: " + prestamo.numSocio + "\n" +
+            "El CODIGO DEL LIBRO: " + prestamo.codLibro + "\n" +
+            "Fecha prestamo: " + prestamo.fechaPrestamo + "\n");
+    }
+}
+
+
+//solicitudPrestamo: Un préstamo se solicita incluyendo el número de socio y 
+//el isbn o el código del libro. Se creará un nuevo préstamo si es posible realizarlo
+
+function solicitudPrestamo(){
+
+    let numSocio = prompt("Introduce numSocio");
+    let codLibro = prompt("Introduce el codigo del libro");
+    let fechaPrestamo = new Date();
+
+    if(prestamoLibro() == true){
+        numPrestamo++;
+        const prestamo = new Prestamos(numPrestamo,numSocio,codLibro,fechaPrestamo, null);
+        arrayPrestamos.push(prestamo);
+    }
+
+    console.log(arrayPrestamos);
+
+}
+// solicitudPrestamo();
+
+//devolucionPrestamos: Cuando se devuelva un libro, se actualizará el registro del préstamo 
+//con la fecha de devolución y se actualizará el registro del libro 
+
+function devolucionPrestamos(){
+
+    let numPrestamo = prompt("Introduce numero de prestamo");
+
+    let fecha = new Date();
+
+    if(devolucionLibro() == true){
+        
+        arrayPrestamos.forEach(prestamo => {
+            if(prestamo.numPrestamo == numPrestamo){
+                prestamo.fechaDevolucion = fecha;
+                console.log("Préstamo devuelto con éxito.");
+            }
+        });
+    } else {
+        console.log("No se pudo realizar la devolución del préstamo.");
+    }
+}
+
 
 
 
