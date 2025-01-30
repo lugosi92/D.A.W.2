@@ -84,10 +84,10 @@ if (encabezado.includes("telefono") && encabezado.includes("email")) {
 
 console.log("CSV - LECTORES");
  // Creamos conjunto
- bancoLectores = new Set(lineas);
- bancoLectores.delete("");
+ arrayLectores = new Set(lineas);
+ arrayLectores.delete("");
  // PASAR DE CONJUNTO A ARRAY
- arrayLectores = [...bancoLectores];
+ arrayLectores = [...arrayLectores];
 
  arrayLectores.forEach(linea => {
     let dato = linea.split(",");
