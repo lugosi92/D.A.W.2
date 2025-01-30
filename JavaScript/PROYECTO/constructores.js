@@ -63,24 +63,25 @@ function Clasificacion(pasillo, estanteria, estante){
 
 /*------------------------------------------------------------------------------*/
 
-const arrayPrestamos = [];
+
 
 Libros.__proto__=Prestamos;
 Lectores.__proto__=Prestamos;
 
-const prestamo1 = new Prestamos(1, "456", "2253", null, null);
+//Funcion dondeLibro
 const manga = new Clasificacion(7,4,6);
 
-// Prestamo solicitudcontador
+// Prestamo solicitud contador
+const arrayPrestamos = [];
 let numPrestamo = 0;
 /*------------------------------------------------------------------------------*/
 // Separamos por lineas y retorno de carro
 const lineas = contenido.split("\r\n"); 
 const encabezado = lineas[0];
 
-
-if (encabezado.includes("telefono") && encabezado.includes("email")) {
 /*----------------------------------LEER CVS lectores-----------------------------*/
+if (encabezado.includes("telefono") && encabezado.includes("email")) {
+
 console.log("CSV - LECTORES");
  // Creamos conjunto
  bancoLectores = new Set(lineas);
@@ -98,10 +99,10 @@ console.log("CSV - LECTORES");
  console.log(arrayLectores);
 
 }
-/*------------------------------------------------------------------------------*/
 
-if (encabezado.includes("codLibro") && encabezado.includes("isbn")) {
 /*----------------------------------LEER CVS libros-----------------------------*/
+if (encabezado.includes("codLibro") && encabezado.includes("isbn")) {
+
 console.log("CSV - LIBROS");
 
 arrayLibros= new Set(lineas);
@@ -183,6 +184,32 @@ function modifLector(){
 
 //comprobarEmails: Se comprobará si los email tienen un formato correcto y 
 //se dará un listado de los que no son válidos (Lector + email)
+
+function comprobarEmails(){
+    const validarCorreo = /^[a-zA-Z0-9]+@[a-zA-Z]+\.(es|com|net|fr|it|pt|org)$/;
+
+    arrayLectores.forEach(lector => {
+        if(!validarCorreo.test(lector.email)){
+            console.log(`El lector ${lector.nombre} con correo ${lector.email} NO ES VALIDO`);
+        }
+    });
+
+}
+// comprobarEmails();
+
+//comprobarTelefonos: Se comprobará si hay teléfono y si es válido (Lector + telefono)
+function comprobarTelefonos(){
+
+    const validarTelefono = /^[6789]\d{8}$/;
+
+    arrayLectores.forEach(lector => {
+        if(!validarTelefono.test(lector.telefono)){
+            console.log(`El lector ${lector.nombre} con numero ${lector.telefono} NO ES VALIDO`);
+        }
+    });
+}
+// comprobarTelefonos();
+
 
 /*----------------------------------------------------------------------------FUNCIONES libros-----------------------------------------------------------------------*/
 //altaLibro: Se preguntará por los datos de un nuevo libro, se comprobará que están todos y que son correctos; a continuación, se dará de alta
