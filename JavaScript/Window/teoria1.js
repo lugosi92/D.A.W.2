@@ -109,3 +109,75 @@ innerHTML
 //textnode
 
 //ejecutar funcion integrada en un boton  
+
+📌 window (Objeto principal)
+│
+├── 🌐 BOM (Browser Object Model)
+│   ├── 📌 screen → Información de la pantalla
+│   │   ├── screen.width (Ancho)
+│   │   ├── screen.height (Altura)
+│   │   ├── screen.colorDepth (Colores)
+│   │
+│   ├── 🌍 location → URL actual
+│   │   ├── location.href (Dirección completa)
+│   │   ├── location.hostname (Dominio)
+│   │   ├── location.reload() (Recargar)
+│   │
+│   ├── 🔙 history → Historial del navegador
+│   │   ├── history.length (Número de páginas visitadas)
+│   │   ├── history.go(-1) (Ir atrás)
+│   │   ├── history.go(1) (Ir adelante)
+│   │
+│   ├── 🚀 navigator → Información del navegador
+│   │   ├── navigator.userAgent (Info del navegador)
+│   │   ├── navigator.cookieEnabled (Cookies activadas)
+│   │   ├── navigator.storage (Almacenamiento)
+│   │
+│   ├── 📢 console → Depuración
+│   │   ├── console.log("Mensaje") (Mostrar mensaje)
+│   │   ├── console.error("Error") (Mostrar error)
+│   │   ├── console.warn("Advertencia") (Mostrar advertencia)
+│   │
+│   ├── 📜 events → Eventos del usuario
+│       ├── click (Clic en un elemento)
+│       ├── keydown (Tecla presionada)
+│       ├── mouseover (Mouse encima de un elemento)
+│
+├── 📄 DOM (Document Object Model)
+│   ├── 📌 document → Representa el HTML
+│   │   ├── head (Encabezado)
+│   │   │   ├── meta (Metadatos)
+│   │   │   ├── title (Título de la página)
+│   │   │   ├── link (CSS y otros enlaces)
+│   │   │
+│   │   ├── body (Cuerpo del documento)
+│   │       ├── div (Contenedores)
+│   │       ├── p (Párrafos)
+│   │       ├── a (Enlaces)
+│   │       ├── img (Imágenes)
+│   │       ├── script (Código JavaScript)
+│   │
+│   ├── 🔍 Métodos de selección de elementos
+│   │   ├── getElementById("id") (Selecciona por ID)
+│   │   ├── getElementsByClassName("clase") (Selecciona por clase)
+│   │   ├── getElementsByTagName("p") (Selecciona por etiqueta)
+│   │   ├── querySelector("p.clase") (Selecciona con CSS)
+│   │
+│   ├── 🏗️ Manipulación del DOM
+│   │   ├── textContent (Modificar texto)
+│   │   ├── innerHTML (Modificar contenido HTML)
+│   │   ├── setAttribute("class", "nuevoEstilo") (Añadir atributos)
+│   │   ├── removeAttribute("class") (Eliminar atributos)
+│   │
+│   ├── 🛠️ Creación y eliminación de elementos
+│   │   ├── document.createElement("p") (Crear un elemento)
+│   │   ├── appendChild(elemento) (Añadir al DOM)
+│   │   ├── removeChild(elemento) (Eliminar del DOM)
+│   │
+│   ├── 🔁 Navegación en el DOM
+│       ├── parentNode (Elemento padre)
+│       ├── children (Lista de hijos)
+│       ├── firstChild (Primer hijo)
+│       ├── lastChild (Último hijo)
+│       ├── nextSibling (Hermano siguiente)
+│       ├── previousSibling (Hermano anterior)
