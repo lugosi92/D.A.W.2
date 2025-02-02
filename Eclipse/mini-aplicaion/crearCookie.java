@@ -31,6 +31,7 @@ public class crearCookie extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		
 		String nombre = (String) session.getAttribute("nombre");
 		String valor = request.getParameter("aprendiz");
 	

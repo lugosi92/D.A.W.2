@@ -40,6 +40,8 @@
     	String errorGeneral = (String) session.getAttribute("errorGeneral");
     
 		String nombre = (String) session.getAttribute("nombre");
+        <p>${nombre}</p>
+
     	String clave = (String) session.getAttribute("clave");
     	String genero = (String) session.getAttribute("genero");
     	String[] pais = (String[]) session.getAttribute("pais");

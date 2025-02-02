@@ -143,8 +143,24 @@ protected Boolean mayorDeEdad(String _fechaNac) {
 
             request.getSession().setAttribute("error", error);
             request.getSession().setAttribute("errorGeneral", errorGeneral);
+
+
+			 response.sendRedirect("formulario.jsp");
+
+			 // request.setAttribute("nombre", nombre);
+            // request.setAttribute("clave", clave);
+            // request.setAttribute("genero", genero);
+            // request.setAttribute("fechaNacimiento", fechaNacimiento);
+            // request.setAttribute("pais", pais);
+            // request.setAttribute("acepto", acepto);
+            // request.setAttribute("comentario", comentario);
+
+            // request.setAttribute("error", error);
+            // request.setAttribute("errorGeneral", errorGeneral);
+
+			// request.getRequestDispatcher("formulario.jsp").forward(request, response);
             
-            response.sendRedirect("formulario.jsp");
+          
         }
 }
 

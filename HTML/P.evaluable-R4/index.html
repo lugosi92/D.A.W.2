@@ -114,6 +114,27 @@
     });
 
 
+    function actualizarGrafico() {
+        let categorias = {};
+        
+        $('#tablaProductos tbody tr').each(function () {
+            let categoria = $(this).find('td:nth-child(2)').text();
+            let cantidad = parseInt($(this).find('td:nth-child(3)').text());
+            
+            if (!categorias[categoria]) {
+                categorias[categoria] = 0;
+            }
+            categorias[categoria] += cantidad;
+        });
+        
+        $('#graficoBarras').empty();
+        
+        for (let categoria in categorias) {
+            let barra = `<div class='barra' style='height: ${categorias[categoria] * 20}px;'>${categoria} (${categorias[categoria]})</div>`;
+            $('#graficoBarras').append(barra);
+        }
+    }
+
 });
     </script>
 </body>

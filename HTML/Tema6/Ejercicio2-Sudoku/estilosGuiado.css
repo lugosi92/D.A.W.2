@@ -1,0 +1,38 @@
+body {
+  background: #223;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.sudoku {
+  /*Contenido flex*/
+  margin: 0px;
+  width: 450px;
+  height: 450px;
+  border: 1px solid black;
+}
+
+
+.cuadrante {
+  /*Contenido flex*/
+  width: 450px;
+  height: 450px;
+  border: 1px solid black;
+}
+
+.fila {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  width: 100%;
+  height: 33.33%;
+}
+
+.celda {/*Contenido flex*/
+  flex: 1; 
+  font-size: 5rem; 
+  border: 1px solid black;
+  background-color: white;
+}
