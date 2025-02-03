@@ -30,6 +30,7 @@ public class creaCookie extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+
 		String nombre = request.getParameter("nombre");
 		String clave = request.getParameter("clave");
 		String pais = request.getParameter("pais");
