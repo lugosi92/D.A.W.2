@@ -1,4 +1,3 @@
-
 async function leerArchivo(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -19,28 +18,30 @@ document.getElementById('file-input').addEventListener('change', async (e) => {
         return;
     }
     const contenido = await leerArchivo(archivo);
-console.log(contenido);
+// console.log(contenido);
     mostrarContenido(contenido);
-
 
 //----------------------------------CONSTRUCTORES------------------------------
 //LECTORES
-function Lectores(numSocio, nombre, apellido, telefono, email, estado){
+function Lectores(numSocio, nombre, apellido, telefono, email, bajaLector, Lector){
     this.numSocio = numSocio;
     this.nombre = nombre;
     this.apellido = apellido;
     this.telefono = telefono;
     this.email = email;
-    this.estado = estado;
+    this.bajaLector = bajaLector;
+    this.Lector = Lector;
 }
 //LIBROS
-function Libros(codLibro, isbn, autor, titulo, editorial, ejemplares){
+function Libros(codLibro, isbn, autor, titulo, editorial, ejemplares, bajaLibro, fechaBajaLibro){
    this.codLibro = codLibro;
    this.isbn = isbn;
    this.autor = autor;
    this.titulo = titulo;
    this.editorial = editorial;
    this.ejemplares = ejemplares; 
+   this.bajaLibro = bajaLibro;
+   this.fechaBajaLibro = fechaBajaLibro;
 }
 //PRESTAMOS
 function Prestamos(numPrestamo, numSocio, codLibro, fechaPrestamo, fechaDevolucion){
@@ -51,23 +52,92 @@ function Prestamos(numPrestamo, numSocio, codLibro, fechaPrestamo, fechaDevoluci
    this.fechaDevolucion = fechaDevolucion;
 }
 
-//----------------------------------FUNCIONES lectores-------------------------------
-
-const bancolectores = [];
-
-//altaLector: Se preguntará por los datos de un nuevo lector, se comprobará que están todos y que son correctos; a continuación, se dará de alta
-
-function  altaLector(){
-    let numSocio = prompt("Introduce el numero de socio");
-    let nombre = prompt("Introduce nombre de usuario");
-    let apellido = prompt("Introduce apellido de usuario");
-    let telefono = prompt("Introduce numero de telefono");
-    let email = prompt("Introduce email del usuario");
-    bancolectores.push(numSocio,nombre,apellido,telefono,email, true);
+//CLASIFICACION
+function Clasificacion(pasillo, estanteria, estante){
+   this.pasillo = pasillo;
+   this.estanteria = estanteria;
+   this.estante = estante;
 }
 
-altaLector();
-console.log(bancolectores);
+
+/*----------------------------------LEER CVS lectores-----------------------------*/
+
+//ALMACENAMIENTO DE DATOS
+const arrayLectores = [];
+const arrayLibros = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
