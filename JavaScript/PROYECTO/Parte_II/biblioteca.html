@@ -95,44 +95,6 @@
 		<button id="devolucion-boton">Devolución</button>
 		<button id="prestamo-boton">Préstamo</button>
 	</section>
-	<script>
-
-
-		//LLAMA A UN ID, CREA UNA ETIQUETA , METE TEXTO Y LO INSTERTA
-		let altaLector = document.getElementById("alta-lector");
-		let bienvenido = document.createElement("p");
-		bienvenido.innerHTML = "Gracias Neil";
-		altaLector.appendChild(bienvenido);
-
-		//Coger etqieta y cambiar a italica
-		let h2 = altaLector.querySelector("h2"); 
-		h2.innerHTML = "<i>Alta Lector</i>";
-
-		//Quitar la p
-		altaLector.removeChild(bienvenido);
-
-		//poner en la ultima seccion 
-		let devolucionPrestamo = document.getElementById("devolucion-prestamo");
-		devolucionPrestamo.appendChild(bienvenido);
-
-		let botonMorado = document.getElementById("devolucion-boton");
-		let botonPeru = document.getElementById("prestamo-boton");
-
 	
-		botonMorado.style.backgroundColor = "purple"; 
-		botonPeru.style.backgroundColor = "peru"; 
-	
-		let letras = document.getElementById("devolucion-prestamo");
-		let label = letras.querySelectorAll("label");
-
-		for(let i = 0; i < 	label.length; i++){
-			label[i].style.color = "pink";
-			console.log(i);
-		}
-
-
-		//Gestion d evento 
-		addEventListener( )
-	</script>
 </body>
 </html>
