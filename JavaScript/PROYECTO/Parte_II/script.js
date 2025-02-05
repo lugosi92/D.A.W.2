@@ -12,14 +12,58 @@ function mostrarContenido(contenido) {
     elemento.innerHTML = contenido;
 }
 
-document.getElementById('file-input').addEventListener('change', async (e) => {
+
+/*----------------------------------LEER CVS LIBROS-----------------------------*/
+
+//ALMACENAMIENTO DE DATOS
+
+
+
+let libros = document.getElementById('importar-input-libros');
+
+libros.addEventListener('change', async (e) => {
     const archivo = e.target.files[0];
     if (!archivo) {
         return;
     }
-    const contenido = await leerArchivo(archivo);
-// console.log(contenido);
-    mostrarContenido(contenido);
+    const contenidoLibros = await leerArchivo(archivo);
+    
+    
+    const lineas = contenidoLibros.split("\r\n"); 
+    arrayLibros = new Set(lineas);  
+    arrayLibros.delete("");
+
+    console.log(arrayLibros);
+    arrayLibros = [...arrayLibros];
+    console.log(arrayLibros);
+    
+
+    arrayLibros.forEach(linea => {
+        let dato = linea.split(",");
+        let lector = new Lectores(dato[0],dato[1],dato[2], 
+                                  dato[3],dato[4], false , null );
+        arrayLibros.push(lector);
+     });
+    
+     console.log(arrayLibros);
+});
+
+// /*----------------------------------LEER CVS LECTORES-----------------------------*/
+// //ALMACENAMIENTO DE DATOS
+
+// const contenidoLectores = "";
+
+// let lectores = document.getElementById('importar-input-lectores');
+
+// lectores.addEventListener('change', async (e) => {
+//     const archivo = e.target.files[0];
+//     if (!archivo) {
+//         return;
+//     }
+//     contenidoLectores = await leerArchivo(archivo);
+//     console.log(contenidoLectores);
+
+// });
 
 //----------------------------------CONSTRUCTORES------------------------------
 //LECTORES
@@ -60,11 +104,7 @@ function Clasificacion(pasillo, estanteria, estante){
 }
 
 
-/*----------------------------------LEER CVS lectores-----------------------------*/
 
-//ALMACENAMIENTO DE DATOS
-const arrayLectores = [];
-const arrayLibros = [];
 
 
 
@@ -140,6 +180,3 @@ const arrayLibros = [];
 
 
 
-
-
-}, false);

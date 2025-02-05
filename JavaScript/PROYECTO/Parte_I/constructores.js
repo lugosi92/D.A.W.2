@@ -195,9 +195,7 @@ function comprobarEmails(){
     });
 
 }
-// comprobarEmails();
-
-//comprobarTelefonos: Se comprobará si hay teléfono y si es válido (Lector + telefono)
+// comprobarEmails();  
 function comprobarTelefonos(){
 
     const validarTelefono = /^[6789]\d{8}$/;
