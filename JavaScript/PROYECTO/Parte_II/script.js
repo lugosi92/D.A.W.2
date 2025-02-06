@@ -83,10 +83,11 @@ libros.addEventListener('change', async (e) => {
     //Recorremos el conjutnoLectores y lo agregamos en un array de objetos separando los datos por ","
     conjuntoLibros.forEach(linea => {
         let dato = linea.split(",");
-        let libro = new Libros(dato[0],dato[1],dato[2], 
-                                  dato[3],dato[4], dato[5], false, null);
-        arrayLibros.push(libro);
-        
+        if(dato[0] != "codLibro"){
+            let libro = new Libros(dato[0],dato[1],dato[2], 
+                                    dato[3],dato[4], dato[5], false, null);
+            arrayLibros.push(libro);
+        }
      });
      
 console.log(arrayLibros);
@@ -119,8 +120,11 @@ lectores.addEventListener('change', async (e) => {
     //Recorremos el conjutnoLectores y lo agregamos en un array de objetos separando los datos por ","
     conjuntoLectores.forEach(linea => {
         let dato = linea.split(",");
-        let lector = new Lectores(dato[0],dato[1],dato[2],dato[3],dato[4], false , null);
-        arrayLectores.push(lector);
+
+        if(dato[0] != "numSocio"){
+            let lector = new Lectores(dato[0],dato[1],dato[2],dato[3],dato[4], false , null);
+            arrayLectores.push(lector);
+        }
     });
     
 console.log(arrayLectores);
@@ -134,8 +138,8 @@ function altaLector(){
     //Validaciones de variables
     let regexSocio = /^8[0-9]{2}$/;
     let nombreApellido = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+)?$/;
-    const regexTelefono = /^[6789]\d{8}$/;
-    const regexEmail = /^[a-zA-Z0-9]+@[a-zA-Z]+\.(es|com|net|fr|it|pt|org)$/;
+    let regexTelefono = /^[6789]\d{8}$/;
+    let regexEmail = /^[a-zA-Z0-9]+@[a-zA-Z]+\.(es|com|net|fr|it|pt|org)$/;
     
     //Solicitud de valores
     let numSocio = prompt("Introduce el NºSOCIO entre 800-899");
@@ -159,9 +163,9 @@ function altaLector(){
 
     //Imprimri errores si viola la logica de negocio
     if(errorF == true){
-        alert("No pueden existir datos vacios")
+        alert("F --> No pueden existir datos vacios")
     }else if(errorV == true){
-        alert("El formato de algun dato es incorrecto")
+        alert("V --> El formato de algun dato es incorrecto")
     }
 
     //Si no existe errores instanciar objeto en el listado de Lectores
@@ -173,10 +177,102 @@ function altaLector(){
 
 }
 
+function bajaLector(){
+
+    let numSocio = prompt("Introduzca el NºSOCIO a dar de baja");
+
+    //Crear fecha y aplicar formato
+    let fecha = new Date();
+    let fechaEspañol = fecha.toLocaleDateString('es-ES'); 
+    
+    //Si no encuentra el NºSOCIO salta el mensaje de error
+    let encontrado = false;
+    
+    arrayLectores.forEach(lector => {
+        //Comprobar que existe
+        if(lector.numSocio == numSocio){
+            //Confirmar baja
+            lector.bajaLector = true;
+            lector.fechaBajaLibro = fechaEspañol;
+            //Imprimri datos actualizados por consola
+            console.log("DATOS ACTUALIZADOS " + lector.nombre + " HA SIDO DADO DE BAJA");
+            console.log(arrayLectores);
+            //Error no se cumplira
+            encontrado = true;
+        }
+    });
+    if(!encontrado){
+        console.log("E --> No se ha encontrado ningun socio con ese numero")
+    }
 
 
+}
 
+function modifLector(){
 
+    let numSocio = prompt("Introduzca el NºSOCIO a modficiar");
+
+    //Si no encuentra el NºSOCIO salta el mensaje de error
+    let encontrado = false;
+
+    arrayLectores.forEach(lector => {
+        if(lector.numSocio == numSocio){
+            //PEDIR VALORES Y MODIFICAR
+            atributo = prompt("Introduzca el atributo a modificar");
+            nuevoValor = prompt("Introduzca el nuevo valor");
+            lector[atributo] = nuevoValor;
+            //IMPRIMIR LISTA
+            console.log("LISTA ACTUALIZADA");
+            console.log(arrayLectores);
+            //ERROR NO SALTA
+            encontrado = true;
+        }
+    });
+    if(!encontrado){
+        console.log("E --> No se ha encontrado ningun socio con ese numero")
+    }
+
+}
+
+function verificarEmail(email){
+
+    let regexEmail = /^[a-zA-Z0-9]+@[a-zA-Z]+\.(es|com|net|fr|it|pt|org)$/;
+    return regexEmail.test(email);
+}
+
+function verificarTelefono(telefono){
+
+    let regexTelefono = /^[6789]\d{8}$/;
+    return regexTelefono.test(telefono);
+}
+
+function comprobarEmails(){
+
+   //Listado de email no correctos
+   const emailsNO = [];
+
+    arrayLectores.forEach(lector => {
+        if(verificarEmail(lector.email) == false){
+            emailsNO.push(lector);
+        }
+    });
+    console.log("Lista de lectores con correos no validos");
+    console.log(emailsNO);
+}
+
+function comprobarTelefonos(){
+
+    //Listado de telefonos no correctos
+    const telefonosNO = [];
+   
+    arrayLectores.forEach(lector => {
+        if(verificarTelefono(lector.telefono) == false){
+            telefonosNO.push(lector);
+        }
+    });
+    console.log("Lista de lectores con telefonos no validos");
+    console.log(telefonosNO);
+}
 
 
 
