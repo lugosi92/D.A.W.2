@@ -153,7 +153,7 @@ function altaLector(){
     let errorV = false;
 
     //Validar valores vacios
-    if(numSocio == null || nombre == null  || apellido == null  || telefono == null  || email == null  || nombre == null ){
+    if(numSocio == null || nombre == null  || apellido == null  || telefono == null  || email == null){
         errorF = true;
     //Validar logica de negocio
     }else if(!regexSocio.test(numSocio) || !nombreApellido.test(nombre) || !nombreApellido.test(apellido) || 
@@ -208,6 +208,17 @@ function bajaLector(){
 
 }
 
+
+/*
+*
+*
+*
+*FALTA VALIDAR ATRIBUTO EN MODIFLIBRO
+*
+*
+*
+*
+*/
 function modifLector(){
 
     let numSocio = prompt("Introduzca el NºSOCIO a modficiar");
@@ -275,23 +286,125 @@ function comprobarTelefonos(){
 }
 
 
+/*-------------------------------------------------------FUNCIONES LIBRO-------------------------------------------------*/
+
+function altaLibro(){
+
+    //Validaciones de variables
+    let regexCod = /^0[0-9]{3}$/;
+    let regexISBN = /^[a-zA-Z]{13}$/;
+    let regexAutor = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+)?$/;
+    let regexTitulo = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_*¡!@#$%&/()¿?€.,;:]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_*¡!@#$%&/()¿?€.,;:]+)*$/;
+    let regexEditorial = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+(\s[a-zA-ZáéíóúÁÉÍÓÚñÑ-]+)?$/;
+    let regexEjemplares = /^[0-9]$/;
+
+    
+    //Solicitud de valores
+    let codLibro = prompt("Introduce el codigo de libro");
+    let isbn = prompt("Introduce ISBN");
+    let autor = prompt("Introduce autor");
+    let titulo = prompt("Introduce el titulo");
+    let editorial = prompt("Introduce la editorial");
+    let ejemplares = prompt("Introduce numero de ejemplares");
+    
+
+    //Activar si existe valor nulo o no cumple con la logica de negocio
+    let errorF = false;
+    let errorV = false;
+
+    //Validar valores vacios
+    if(codLibro == null || isbn == null  || autor == null  || titulo == null  || editorial == null || ejemplares == null){
+        errorF = true;
+    //Validar logica de negocio
+    }else if(!regexCod.test(codLibro) || !regexISBN.test(isbn) || !regexAutor.test(autor) || 
+    !regexTitulo.test(titulo) || !regexEditorial.test(editorial) || !regexEjemplares.test(ejemplares)){
+        errorV = true;800
+    }
+
+    //Imprimri errores si viola la logica de negocio
+    if(errorF == true){
+        alert("F --> No pueden existir datos vacios")
+    }else if(errorV == true){
+        alert("V --> El formato de algun dato es incorrecto")
+    }
+
+    //Si no existe errores instanciar objeto en el listado de Lectores
+    if(errorF == false && errorV == false){
+        const libro = new Lectores(codLibro,isbn,autor,titulo,editorial,ejemplares, false, null);
+        arrayLibros.push(libro);
+    }
+    console.log(arrayLibros);
+
+}
 
 
+function bajaLector(){
+
+    let codLibro = prompt("Introduzca el codigo del libro a dar de baja");
+
+    //Crear fecha y aplicar formato
+    let fecha = new Date();
+    let fechaEspañol = fecha.toLocaleDateString('es-ES'); 
+    
+    //Si no encuentra el NºSOCIO salta el mensaje de error
+    let encontrado = false;
+    
+    arrayLibros.forEach(libro => {
+        //Comprobar que existe
+        if(libro.codLibro == codLibro){
+            //Confirmar baja
+            libro.bajaLibro= true;
+            libro.fechaBajaLibro = fechaEspañol;
+            //Imprimri datos actualizados por consola
+            console.log("DATOS ACTUALIZADOS " + libro.titulo + " HA SIDO DADO DE BAJA");
+            console.log(arrayLibros);
+            //Error no se cumplira
+            encontrado = true;
+        }
+    });
+    if(!encontrado){
+        console.log("E --> No se ha encontrado ningun codigo con ese numero")
+    }
 
 
+}
 
+/*
+*
+*
+*
+*FALTA VALIDAR ATRIBUTO EN MODIFLIBRO
+*
+*
+*
+*
+*/
 
+function modifLibro(){
 
+    let codLibro = prompt("Introduzca el codigo del libro a modficiar");
 
+    //Si no encuentra el codigo salta el mensaje de error
+    let encontrado = false;
 
+    arrayLibros.forEach(libro => {
+        if(libro.codLibro == codLibro){
+            //PEDIR VALORES Y MODIFICAR
+            atributo = prompt("Introduzca el atributo a modificar");
+            nuevoValor = prompt("Introduzca el nuevo valor");
+            libro[atributo] = nuevoValor;
+            //IMPRIMIR LISTA
+            console.log("LISTA ACTUALIZADA");
+            console.log(arrayLibros);
+            //ERROR NO SALTA
+            encontrado = true;
+        }
+    });
+    if(!encontrado){
+        console.log("E --> No se ha encontrado ningun codigo con ese numero")
+    }
 
-
-
-
-
-
-
-
+}
 
 
 
