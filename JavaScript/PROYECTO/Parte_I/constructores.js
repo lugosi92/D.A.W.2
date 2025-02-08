@@ -65,6 +65,7 @@ function Clasificacion(pasillo, estanteria, estante){
 
 
 
+const prestamo = new Prestamos(1,465,2253, null, null );
 Libros.__proto__=Prestamos;
 Lectores.__proto__=Prestamos;
 
