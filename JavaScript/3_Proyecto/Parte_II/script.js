@@ -463,11 +463,7 @@ function dondeLibro() {
     arrayLibros.forEach(libro => {
 
         if (libro.codLibro == codLibro) {
-            console.log("Título: " + libro.titulo +
-                "\nAutor: " + libro.autor +
-                "\nGénero: " + libro.genero +
-                "\nCódigo: " + libro.codLibro +
-                "\nUbicación: Pasillo " + libro.pasillo +
+            console.log("Pasillo " + libro.pasillo +
                 ", Estantería " + libro.estanteria +
                 ", Estante " + libro.estante);
             encontrado = true;
@@ -574,49 +570,39 @@ function devolucionPrestamos() {
     let fechaDevolucion = fecha.toLocaleDateString('es-ES');
 
     let existeLibro = false;
-    let existeLector = false;
-    let existePrestamo = false;
+    let existeLector = true;
 
-    // Comprobar si el libro existe en el array
-    arrayLibros.forEach(libro => {
-        if (libro.codLibro == codLibro) {
-            existeLibro = true;
-        }
-    });
-
-    // Comprobar si el lector existe en el array
     arrayLectores.forEach(lector => {
-        if (lector.numSocio == numSocio) {
+        if(lector.numSocio == numSocio){
             existeLector = true;
         }
     });
 
-    // Verifica si tanto el libro como el lector existen
-    if (existeLibro && existeLector) {
-        // Si ambos existen, busca el préstamo correspondiente y marca la devolución
-        arrayPrestamos.forEach(prestamo => {
-            if (prestamo.numSocio == numSocio && prestamo.codLibro == codLibro && prestamo.fechaDevolucion == null) {
-                prestamo.fechaDevolucion = fechaDevolucion;
-                console.log("Devolución realizada con éxito.");
-                console.log("Prestamo actualizado:", prestamo);
-                existePrestamo = true;
-            }
-        });
-
-        // Si no se ha encontrado un préstamo vivo
-        if (!existePrestamo) {
-            console.log("No se encontró un préstamo activo para este libro y socio.");
+    arrayLibros.forEach(libro => {
+        if(libro.codLibro == codLibro){
+            existeLibro = true;
         }
-    } else {
-        console.log("El libro o el socio no existen.");
+    });
+
+    if(existeLector && existeLibro){
+        if(devolucionLibro() == true){
+        
+            arrayPrestamos.forEach(prestamo => {
+                if(prestamo.numSocio == numSocio && prestamo.codLibro == codLibro){
+                    prestamo.fechaDevolucion = fechaDevolucion;
+                }
+            });
+            console.log(arrayPrestamos);
+        }
     }
+    
 }
 
 
 
 
 
-
+ 
 
 
 

@@ -130,3 +130,38 @@ for (const key in javier) {
 }
 
 console.log("-----6------");
+
+
+
+//CALL BACKS
+
+function operar(a,b,operacion){
+    return operacion(a,b);
+}
+
+function suma(x,y){
+    return x+y;
+}
+
+
+function resta(x,y){
+    return x -y;
+}
+
+console.log(operar(5,3,resta));
+
+
+//sincrono - sucede al mismo tiempo que otro
+//asincrono - una detras de otra 
+//bloqueante  
+
+setTimeout(despues, 3000);
+
+function despues(){
+    console.log("Terminados 3000ms");
+}
+
+console.log("Hola");
+
+
+//CALL BACKS ANINADOS (call back hall) PARA QUE SE COMPORTEN DE FORMA ASINCRONA, da lugar a las promesas
