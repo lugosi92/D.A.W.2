@@ -165,3 +165,38 @@ console.log("Hola");
 
 
 //CALL BACKS ANINADOS (call back hall) PARA QUE SE COMPORTEN DE FORMA ASINCRONA, da lugar a las promesas
+
+// Generar un número aleatorio entre 1 y 6
+const randomNumber = Math.floor(Math.random() * 6) + 1;
+
+// Crear promesa la cual resuelve si el número es par y rechaza si es impar
+const dadoPromesa = new Promise((resolve, reject) => {
+  if (randomNumber % 2 === 0)
+    resolve(`El numero '${randomNumber}' es PAR`); // Success
+  else reject(`El numero '${randomNumber}' es IMPAR`); // Error
+});
+
+// Consumir la promesa
+dadoPromesa
+  .then(
+    (message) => console.log(message) // Success
+  )
+  .catch((error) => console.error(error)) // Error
+  .finally(() => console.log("Fin de la ejecución")); // Finally
+
+function delayPromise(message, delay) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(message), delay);
+  });
+}
+
+// Encadenar promesas
+delayPromise("Construir Sala", 5000).then((message) => {
+  console.log(message);
+  delayPromise("Pintar Sala", 3000).then((message) => {
+    console.log(message);
+    delayPromise("Traer muebles", 2000).then((message) => {
+      console.log(message);
+    });
+  });
+});

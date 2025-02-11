@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño Responsive</title>
+    <style>
+
+        /* Media query para pantallas con un ancho máximo de 700px */
+@media (max-width: 700px) {
+    .cajas {
+        justify-content: space-between; /* Asegura que las cajas se distribuyan correctamente */
+        flex-wrap: wrap;
+    }
+
+    .caja {
+        width: auto;
+        margin: 0 20%;
+        height: 150px; /* Mantiene la altura constante */
+    }
+}
+
+@media (max-width: 400px) {
+    .cajas {
+        justify-content: space-between; /* Asegura que las cajas se distribuyan correctamente */
+        flex-wrap: wrap;
+    }
+
+    .caja {
+        width: auto;
+        margin: 0 25%;
+        height: 150px; /* Mantiene la altura constante */
+    }
+}
+
+
+        *{
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        .navbar{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: blueviolet;
+            color: white;
+            height: 150px;
+        }
+        .cajas{
+            display: flex;
+            height: 50%;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        .caja{
+            background-color: orange;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            height: 25%;
+
+        }
+    
+
+       /* .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+        }*/
+        .columna {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+ 
+        .columna2 {
+            background: yellow;
+            flex-grow: 1;
+            height: 500px;
+            width: 60%;
+        }
+        .columna3 {
+            background: magenta;
+            flex-grow: 1;
+            width: 40%;
+            height: 500px;
+        }
+
+        /* Media query para pantallas entre 400px y 700px */
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+            <div class="navbar">
+            <div class="texto">Barra Superior</div> 
+
+            <div class="cajas">
+                <div class="caja">Caja 1</div>
+                <div class="caja">Caja 2</div>
+                <div class="caja">Caja 3</div>
+                <div class="caja">Caja 4</div>
+            </div>
+            </div>
+            <div class="columna columna2">2 columna</div>
+            <div class="columna columna3">3 columna</div>
+        
+    </div>
+</body>
+</html>
