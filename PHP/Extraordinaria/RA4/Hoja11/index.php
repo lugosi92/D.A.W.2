@@ -8,7 +8,7 @@ $errTexto =  "Debes introducir un texto";
 $errCategoria = "Debes introducir una categoria";
 $errImagenes = "Debes introducir la imagen";
 
-$estadoTitulo = $estadoTexto = $estadoCategroia = $estadoImagen = "";
+$estadoTitulo = $estadoTexto = $estadoCategoria = $estadoImagen = "";
 
 
 
@@ -16,24 +16,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     // TITULO
-    if(isset($_POST['titulo']) && !empty($_POST['titulo'])){
-        $titulo = $_POST['titulo'];
-    }else{
+    if (isset($_POST['titulo']) && !empty(trim($_POST['titulo']))) {
+        $titulo = trim($_POST['titulo']); // Se limpia de espacios extra
+        if (!preg_match('/^[A-Z\s]{15,25}$/', $titulo)) {
+            $estadoTitulo = $errTitulo; // Mensaje de error si no cumple el patrón
+        }
+    } else {
         $estadoTitulo = $errTitulo;
     }
 
     // TEXTO
-    if(isset($_POST['texto']) && !empty($_POST['texto'])){
-        $texto = $_POST['texto'];
-    }else{
+    if (isset($_POST['texto']) && !empty(trim($_POST['texto']))) {
+        $texto = trim($_POST['texto']);
+        if (strlen($texto) < 50) {
+            $estadoTexto = $errTexto; // Error si no tiene al menos 50 caracteres
+        }
+    } else {
         $estadoTexto = $errTexto;
     }
 
+
     // CATEGORIA
-    if(isset($_POST['categoria']) && !empty($_POST['categoria'])){
+    if(isset($_POST['categoria']) && is_array($_POST['categoria'])){
         $categoria = $_POST['categoria'];
     }else{
-        $estadoCategroia = $errCategoria;
+        $estadoCategoria = $errCategoria;
     }
 
     // IMAGENES
@@ -85,10 +92,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <select name = "categoria[]">
             <option></option>
             <option value = "promociones" <?php echo (in_array( "promociones", $categoria)) ? "selected" : ""; ?>> Promociones</option>
-            <option value = "tiempo" <?php echo (in_array( "tiempo", $categoria)) ? "selected" : ""; ?>>Tiempo </option>
-            <option value = "economia" <?php echo (in_array( "economia", $categoria)) ? "selected" : ""; ?>>Economia </option>
+            <option value = "locales comerciales" <?php echo (in_array( "locales comerciales", $categoria)) ? "selected" : ""; ?>>Loclaes comerciales </option>
+            <option value = "nueva construccion" <?php echo (in_array( "nueva construccion", $categoria)) ? "selected" : ""; ?>> Nueva Construccion</option>
+            <option value = "pisos" <?php echo (in_array( "pisos", $categoria)) ? "selected" : ""; ?>>Pisos </option>
+            <option value = "naves industriales" <?php echo (in_array( "naves industriales", $categoria)) ? "selected" : ""; ?>>Naves industrailes </option>
+            <option value = "terrenos" <?php echo (in_array( "terrenos", $categoria)) ? "selected" : ""; ?>>Terrenos </option>
         </select><br>
-        <span style="color:red;"> <?php echo $estadoCategroia?></span>
+        <span style="color:red;"> <?php echo $estadoCategoria?></span>
 
     <!-- IMAGEN -->
     <label for="imagen">Imagen:</label>
