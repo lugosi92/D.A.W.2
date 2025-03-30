@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $titulo =  $texto  = $imagenes = "";
 
 $categoria = array();
@@ -11,25 +14,24 @@ $errImagenes = "Debes introducir la imagen";
 $estadoTitulo = $estadoTexto = $estadoCategoria = $estadoImagen = "";
 
 
-
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     // TITULO
-    if (isset($_POST['titulo']) && !empty(trim($_POST['titulo']))) {
-        $titulo = trim($_POST['titulo']); // Se limpia de espacios extra
+    if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
+        $titulo = $_POST['titulo']; 
         if (!preg_match('/^[A-Z\s]{15,25}$/', $titulo)) {
-            $estadoTitulo = $errTitulo; // Mensaje de error si no cumple el patrón
+            $estadoTitulo = "Deben ser caracteres en mayusuclas entren 15-25"; 
         }
     } else {
         $estadoTitulo = $errTitulo;
     }
 
     // TEXTO
-    if (isset($_POST['texto']) && !empty(trim($_POST['texto']))) {
-        $texto = trim($_POST['texto']);
+    if (isset($_POST['texto']) && !empty($_POST['texto'])) {
+        $texto = $_POST['texto'];
         if (strlen($texto) < 50) {
-            $estadoTexto = $errTexto; // Error si no tiene al menos 50 caracteres
+            $estadoTexto = "Debe contener al menos 50 caracteres";
         }
     } else {
         $estadoTexto = $errTexto;
@@ -37,17 +39,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     // CATEGORIA
-    if(isset($_POST['categoria']) && is_array($_POST['categoria'])){
+    if($_POST['categoria'] !== "" || count($_POST['categoria']) > 0) {
         $categoria = $_POST['categoria'];
     }else{
         $estadoCategoria = $errCategoria;
     }
 
-    // IMAGENES
-    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
+    // IMAGENES 'name' 'type' 'size' 'tmp_name' 'error'
+    if (empty($_FILES['imagen']) || $_FILES['imagen']['error'] == 0) {
+        
         $tamaño = $_FILES['imagen']['size'];
 
-        if ($tamaño > 256 * 1024) { // Máximo 256KB
+        if ($tamaño > 256 * 1024) { 
             $estadoImagen = "La foto es demasiado grande";
         } else {
             $temporal = $_FILES['imagen']['tmp_name'];
@@ -57,6 +60,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else {
         $estadoImagen = $errImagenes;
     }
+
+    if(empty($estadoTitulo) && empty($estadoTexto) && empty($estadoCategoria) && empty($estadoImagen)){
+
+        $_SESSION['titulo'] = $titulo;
+        $_SESSION['texto'] = $texto;
+        $_SESSION['categoria'] = $categoria;
+        $_SESSION['imagen'] = $destino;
+    
+        header('Location: mostrar.php');
+        exit();
+    }
+    
 }
 
 ?>
@@ -103,6 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <!-- IMAGEN -->
     <label for="imagen">Imagen:</label>
     <input type="file" name="imagen"><br>
+    <span style="color:red;"> <?php echo $estadoImagen?></span>
 
     <input type= "submit" value = "Insertar Noticia">
 
