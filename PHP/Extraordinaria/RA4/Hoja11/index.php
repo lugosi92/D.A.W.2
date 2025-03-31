@@ -1,6 +1,25 @@
 <?php
-
+// AAAAAAAAAAAAAAA
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 session_start();
+
+
+$host = "localhost";
+$dbname = 'noticias';
+$usuario = 'admin3';
+$clave = '1234';
+
+$estadoConexion = "";
+
+try {
+    $bd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $usuario, $clave);
+    $estadoConexion = "Conexion realizada con exito";
+
+} catch(PDOException $e){
+    $estadoConexion = "Error de conexion: ". $e->getMessage();
+}
+
+
 
 $titulo =  $texto  = $imagenes = "";
 
@@ -39,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     // CATEGORIA
-    if($_POST['categoria'] !== "" || count($_POST['categoria']) > 0) {
+    if(isset($_POST['categoria']) && !empty($_POST['categoria'])) {
         $categoria = $_POST['categoria'];
     }else{
         $estadoCategoria = $errCategoria;
@@ -62,6 +81,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty($estadoTitulo) && empty($estadoTexto) && empty($estadoCategoria) && empty($estadoImagen)){
+        try{
+            $ins = $bd->prepare("INSERT INTO publicaciones(titulo, texto, categorias, imagen) VALUES (:titulo, :texto, :categorias, :imagen)");
+            $ins->execute([
+                ':titulo' => $titulo,
+                ':texto' => $texto,
+                ':imagen' => $destino
+            ]);
+
+            echo "Noticias insertadas con exito";
+        
 
         $_SESSION['titulo'] = $titulo;
         $_SESSION['texto'] = $texto;
@@ -70,10 +99,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
         header('Location: mostrar.php');
         exit();
+
+    }catch(PDOException $e){
+        echo "Error al insertar: " . $e->getMessage();
     }
     
 }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -91,6 +123,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <form action="<?php $_SERVER["PHP_SELF"]; ?>" method="post"  enctype="multipart/form-data">
 
+    <span> <?php echo $estadoConexion;?> </span>
+
+
     <!-- CAMPOS DE TEXTO -->
     <label>Titulo: </label><br>
     <input type="text" name="titulo" value = <?php echo isset($_POST['titulo']) ? $_POST['titulo'] : ''; ?> ><br>
@@ -104,7 +139,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <!-- SELECT -->
     <label>Categoria: </label>
-        <select name = "categoria[]">
+        <select name = "categoria[]" multiple>
             <option></option>
             <option value = "promociones" <?php echo (in_array( "promociones", $categoria)) ? "selected" : ""; ?>> Promociones</option>
             <option value = "locales comerciales" <?php echo (in_array( "locales comerciales", $categoria)) ? "selected" : ""; ?>>Loclaes comerciales </option>
