@@ -1,6 +1,6 @@
 <?php
-// AAAAAAAAAAAAAAA
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+// NOTICIAS DE PISOS
+//  LA SUBIDA DEL ALQUILER Y LA ENTRADA DEL EURO DIGITAL EN EURPOA
 session_start();
 
 
@@ -92,14 +92,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             ]);
             $publicacion_id = $bd->lastInsertId();
 
-            foreach ($categorias as $categoria) {
-
-                // INSERTAR EN CATGEORIA
-                $categoria = $bd->prepare("INSERT INTO categorias (nombre) VALUES (:categoria)");
-                $categoria->execute([
-                    ':categoria' => $categorias
-                ]);
-                $categoria = $bd->lastInsertId();
+            //INSERTAR EN PUBLICACIONES_CATEGORIA
+            foreach ($categorias as $categoria_id) {
 
                 // INSERTAR EN CATEGOIRA_PUBLICACION
                 $categoira_publicacion = $bd->prepare("INSERT INTO publicaciones_categorias (publicacion_id, categoria_id) VALUES (:publicacion_id, :categoria_id)");
@@ -161,12 +155,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <label>Categoria: </label>
         <select name = "categoria[]" multiple>
             <option></option>
-            <option value = "promociones" <?php echo (in_array( "promociones", $categorias)) ? "selected" : ""; ?>> Promociones</option>
-            <option value = "locales comerciales" <?php echo (in_array( "locales comerciales", $categorias)) ? "selected" : ""; ?>>Loclaes comerciales </option>
-            <option value = "nueva construccion" <?php echo (in_array( "nueva construccion", $categorias)) ? "selected" : ""; ?>> Nueva Construccion</option>
-            <option value = "pisos" <?php echo (in_array( "pisos", $categorias)) ? "selected" : ""; ?>>Pisos </option>
-            <option value = "naves industriales" <?php echo (in_array( "naves industriales", $categorias)) ? "selected" : ""; ?>>Naves industrailes </option>
-            <option value = "terrenos" <?php echo (in_array( "terrenos", $categorias)) ? "selected" : ""; ?>>Terrenos </option>
+            <option value = "1" <?php echo (in_array( "promociones", $categorias)) ? "selected" : ""; ?>> Promociones</option>
+            <option value = "2" <?php echo (in_array( "locales comerciales", $categorias)) ? "selected" : ""; ?>>Loclaes comerciales </option>
+            <option value = "3" <?php echo (in_array( "nueva construccion", $categorias)) ? "selected" : ""; ?>> Nueva Construccion</option>
+            <option value = "4" <?php echo (in_array( "pisos", $categorias)) ? "selected" : ""; ?>>Pisos </option>
+            <option value = "5" <?php echo (in_array( "naves industriales", $categorias)) ? "selected" : ""; ?>>Naves industrailes </option>
+            <option value = "6" <?php echo (in_array( "terrenos", $categorias)) ? "selected" : ""; ?>>Terrenos </option>
         </select><br>
         <span style="color:red;"> <?php echo $estadoCategoria?></span>
 
