@@ -1,16 +1,28 @@
 <?php
-// AAAAAAAAAAAAAAA
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
 session_start();
 
+$id = $nombre = $titulo =  $texto  = $imagenes = "";
+
+$categorias = array();
+
+$errId = "Id incorrecto";
+$errNombre = "Nombre incorrecto";
+$errTitulo = "Debes introducir un titulo";
+$errTexto =  "Debes introducir un texto";
+$errCategoria = "Debes introducir una categoria";
+$errImagenes = "Debes introducir la imagen";
+
+$estadoId = $estadoNombre = $estadoTitulo = $estadoTexto = $estadoCategoria = $estadoImagen = "";
 
 $host = "localhost";
-$dbname = 'noticias';
-$usuario = 'khaled';
-$clave = '1234';
+$dbname = 'noticias2';
+$usuario = 'root';
+$clave = '';
 
 $estadoConexion = "";
 
+// CONEXION
 try {
     $bd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $usuario, $clave);
     $estadoConexion = "Conexion realizada con exito";
@@ -19,27 +31,32 @@ try {
     $estadoConexion = "Error de conexion: ". $e->getMessage();
 }
 
-
-
-$titulo =  $texto  = $imagenes = "";
-
-$categorias = array();
-
-$errTitulo = "Debes introducir un titulo";
-$errTexto =  "Debes introducir un texto";
-$errCategoria = "Debes introducir una categoria";
-$errImagenes = "Debes introducir la imagen";
-
-$estadoTitulo = $estadoTexto = $estadoCategoria = $estadoImagen = "";
-
-
+// LOGICA
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+    // ID
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
+        $id= $_POST['id']; 
+        if (!preg_match('/^[1-9]$/', $id)) {
+            $estadoId = "ID incorrecto"; 
+        }
+    } else {
+        $estadoId = $errId;
+    }
 
+    // NOMBRE
+    if (isset($_POST['nombre']) && !empty($_POST['nombre'])) {
+        $nombre = $_POST['nombre'];
+        if (!preg_match('/^[A-Za-z0-9 ]*$/', $nombre)) {
+            $estadoNombre = "Deben ser su nombre"; 
+        }
+    } else {
+        $estadoNombre = $errNombre;
+    }
     // TITULO
     if (isset($_POST['titulo']) && !empty($_POST['titulo'])) {
         $titulo = $_POST['titulo']; 
-        if (!preg_match('/^[A-Z\s]{15,25}$/', $titulo)) {
+        if (!preg_match('/^[A-Za-z ]*$/', $titulo)) {
             $estadoTitulo = "Deben ser caracteres en mayusuclas entren 15-25"; 
         }
     } else {
@@ -47,6 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // TEXTO
+    //   Las contrucciones en la zona sur han aumentado drasticamente, la economia mejora. .
     if (isset($_POST['texto']) && !empty($_POST['texto'])) {
         $texto = $_POST['texto'];
         if (strlen($texto) < 50) {
@@ -84,11 +102,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         try{
 
             // INSERTAR EN PUBLICACION
-            $publicacion = $bd->prepare("INSERT INTO publicaciones(titulo, texto,imagen) VALUES (:titulo, :texto, :imagen)");
+            $publicacion = $bd->prepare("INSERT INTO publicaciones(nombre, titulo, texto,imagen, cliente_id ) VALUES (:nombre, :titulo, :texto, :imagen, :id)");
             $publicacion->execute([
+                ':nombre' => $nombre,
                 ':titulo' => $titulo,
                 ':texto' => $texto,
-                ':imagen' => $destino
+                ':imagen' => $destino,
+                ':cliente_id' => $id
             ]);
             $publicacion_id = $bd->lastInsertId();
 
@@ -97,9 +117,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // INSERTAR EN CATGEORIA
                 $categoria = $bd->prepare("INSERT INTO categorias (nombre) VALUES (:categoria)");
                 $categoria->execute([
-                    ':categoria' => $categorias
+                    ':categoria' => $categoria
                 ]);
-                $categoria = $bd->lastInsertId();
+                $categoria_id = $bd->lastInsertId();
 
                 // INSERTAR EN CATEGOIRA_PUBLICACION
                 $categoira_publicacion = $bd->prepare("INSERT INTO publicaciones_categorias (publicacion_id, categoria_id) VALUES (:publicacion_id, :categoria_id)");
@@ -111,7 +131,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             echo "Noticias insertadas con exito";
         
-
+        $_SESSION['id'] = $id;
+        $_SESSION['nombre'] = $nombre;
         $_SESSION['titulo'] = $titulo;
         $_SESSION['texto'] = $texto;
         $_SESSION['categoria'] = $categorias;
@@ -147,6 +168,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
     <!-- CAMPOS DE TEXTO -->
+    <label>ID: </label><br>
+    <input type="text" name="id" value = <?php echo isset($_POST['id']) ? $_POST['id'] : ''; ?> ><br>
+    <span style="color:red;"> <?php echo $estadoId;?> </span>
+
+
+    <!-- CAMPOS DE TEXTO -->
+    <label>Nombre: </label><br>
+    <input type="text" name="nombre" value = <?php echo isset($_POST['nombre']) ? $_POST['nombre'] : ''; ?> ><br>
+    <span style="color:red;"> <?php echo $estadoNombre;?> </span>
+
+
+    <!-- CAMPOS DE TEXTO -->
     <label>Titulo: </label><br>
     <input type="text" name="titulo" value = <?php echo isset($_POST['titulo']) ? $_POST['titulo'] : ''; ?> ><br>
     <span style="color:red;"> <?php echo $estadoTitulo;?> </span>
@@ -162,7 +195,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <select name = "categoria[]" multiple>
             <option></option>
             <option value = "promociones" <?php echo (in_array( "promociones", $categorias)) ? "selected" : ""; ?>> Promociones</option>
-            <option value = "locales comerciales" <?php echo (in_array( "locales comerciales", $categorias)) ? "selected" : ""; ?>>Loclaes comerciales </option>
+            <option value = "locales comerciales" <?php echo (in_array( "locales comerciales", $categorias)) ? "selected" : ""; ?>>Locales comerciales </option>
             <option value = "nueva construccion" <?php echo (in_array( "nueva construccion", $categorias)) ? "selected" : ""; ?>> Nueva Construccion</option>
             <option value = "pisos" <?php echo (in_array( "pisos", $categorias)) ? "selected" : ""; ?>>Pisos </option>
             <option value = "naves industriales" <?php echo (in_array( "naves industriales", $categorias)) ? "selected" : ""; ?>>Naves industrailes </option>
