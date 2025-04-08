@@ -1,25 +1,26 @@
 <?php
 
 require_once "conexion.php";
+require_once "funciones/comprobar_usuario.php";
+
 session_start();
 
-$usuario = $clave = "";
+$correo = $clave = $estadoLog =  "";
 
-$errLog = "";
+$errLog = "Usuario o contraseña incorrecta";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if(isset())
-    $usuario = comprobar_usuario($_POST['usuario'], $_POST['clave']);
 
-        if(!$usuario){
-            $err = TRUE;
-            $usuario = $_POST['usuario'];
+    $login = comprobar_usuario($_POST['correo'], $_POST['clave']);
+
+        if(!$login){
+            $estadoLog = $errLog;
         }else{
-            $_SESSION['usuario'] = $usuario;
+            $_SESSION['correo'] = $_POST['correo'];
             $_SESSION['carrito'] = [];
-
-        header("Location: categorías.php");
+        
+        header("Location: cabecera.php");
         return;
         }
 }
@@ -30,21 +31,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+     <!-- IMPORTAR CSS -->
+     <link rel="stylesheet" href="css/login.css">
+
+
 </head>
 <body>
 
 
-    <form action = "<?php $_SERVER["PHP_SELF"];?>" method = "POST">
+    <form action = "<?php echo  $_SERVER["PHP_SELF"];?>" method = "POST">
 
-        <!-- USUARIO -->
-        <label>Usuario</label>
-        <input type = "text" name = "titulo" id = "usuario"
-         value = "<?php ?>">
+    <span style="color:red;"> <?php echo $estadoLog;?> </span>
+    
+        <!-- CORREO -->
+        <label>Correo</label>
+        <input type = "text" name = "correo" id = "correo"
+         value = "<?php echo isset($_POST['correo']) ? $_POST['correo'] : ''; ?>">
         
         <!-- CLAVE -->
-        <label for = "clave">Clave</label>
-        <input type = "password" name = "clave" id = "clave"
-         value = "<?php ?>">
+        <label">Clave</label>
+        <input type = "password" name = "clave" id = "clave";>
 
 
         <input type = "submit">
