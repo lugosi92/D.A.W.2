@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['correo'] = $_POST['correo'];
             $_SESSION['carrito'] = [];
         
-        header("Location: cabecera.php");
+        header("Location: categorias.php");
         return;
         }
 }

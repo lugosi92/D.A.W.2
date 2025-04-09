@@ -22,10 +22,9 @@ comprobar_sesion();
     <hl>Lista de categorías</hl>
 
 <?php
-$categorias = cargar_categorias();
-if ($categorias === FALSE) {
-    echo "<p class='error'>Error al conectar con la base datóse/
-P> ";
+
+if (!cargar_categorias()) {
+    echo "Error al conectar con la base datos";
 } else {
     echo "<ul>"; //abrir la lista
     foreach ($categorias as $cat) {

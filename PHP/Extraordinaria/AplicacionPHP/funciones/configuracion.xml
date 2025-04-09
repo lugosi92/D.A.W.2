@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuracion>
+  <ip>127.0.0.1</ip>
+  <nombre>bendis</nombre>
+  <usuario>adminAplicacion</usuario>
+  <clave>1234</clave>
+</configuracion>

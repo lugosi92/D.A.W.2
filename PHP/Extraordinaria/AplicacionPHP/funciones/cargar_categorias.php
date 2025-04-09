@@ -2,11 +2,11 @@
 
 function cargar_categorias(){
     
-	$res = leer_config(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
+	$resultado = leer_config(dirname(__FILE__)."configuracion.xml", dirname(__FILE__)."configuracion.xsd");
 	$bd = new PDO($res[0], $res[1], $res[2]);
-	$ins = "select codCat, nombre from categorias";
+	$ins = "select codCategoria, nombre from categoria";
 
-	$resul = $bd->query($ins);	
+	$resultado = $bd->query($ins);	
 
     
 	if (!$resul || $resul->rowCount() === 0) {

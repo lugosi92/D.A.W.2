@@ -3,10 +3,12 @@ function leer_config($nombre, $esquema){
 	$config = new DOMDocument();
 	$config->load($nombre);
 	$res = $config->schemaValidate($esquema);
+
 	if ($res===FALSE){ 
 	   throw new InvalidArgumentException("Revise fichero de configuración");
 	} 		
-	$datos = simplexml_load_file($nombre);	
+
+	$empleados = simplexml_load_file($nombre);	
 	$ip = $datos->xpath("//ip");
 	$nombre = $datos->xpath("//nombre");
 	$usu = $datos->xpath("//usuario");
