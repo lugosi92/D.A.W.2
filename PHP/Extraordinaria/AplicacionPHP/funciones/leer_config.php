@@ -1,34 +1,26 @@
 <?php
-function leer_config($nombre, $esquema){
+function leer_config($xml, $xsd){
+	// Crea el objeto DOM para manipular el XML
 	$config = new DOMDocument();
-	$config->load($nombre);
-	$res = $config->schemaValidate($esquema);
+	$config->load($xml);
 
-	if ($res===FALSE){ 
-	   throw new InvalidArgumentException("Revise fichero de configuración");
-	} 		
-
-	$empleados = simplexml_load_file($nombre);	
-	$ip = $datos->xpath("//ip");
-	$nombre = $datos->xpath("//nombre");
-	$usu = $datos->xpath("//usuario");
-	$clave = $datos->xpath("//clave");	
-	$cad = sprintf("mysql:dbname=%s;host=%s", $nombre[0], $ip[0]);
-	$resul = [];
-	$resul[] = $cad;
-	$resul[] = $usu[0];
-	$resul[] = $clave[0];
-	return $resul;
-}
-function comprobar_usuario($nombre, $clave){
-	$res = leer_config(dirname(__FILE__)."/configuracion.xml", dirname(__FILE__)."/configuracion.xsd");
-	$bd = new PDO($res[0], $res[1], $res[2]);
-	$ins = "select codRes, correo from restaurantes where correo = '$nombre' 
-			and clave = '$clave'";
-	$resul = $bd->query($ins);	
-	if($resul->rowCount() === 1){		
-		return $resul->fetch();		
-	}else{
-		return FALSE;
+	// Valida el XML frente al esquema XSD
+	if (!$config->schemaValidate($xsd)){ 
+		throw new InvalidArgumentException("Revise fichero de configuración");
 	}
+
+	// Carga el XML con SimpleXML para extraer fácilmente los datos
+	$datos = simplexml_load_file($xml);
+
+	// Utiliza XPath para extraer los valores de las etiquetas
+	$ip = $datos->xpath("//ip")[0];
+	$nombre = $datos->xpath("//nombre")[0];
+	$usu = $datos->xpath("//usuario")[0];
+	$clave = $datos->xpath("//clave")[0];
+
+	// Crea la cadena de conexión PDO. Por ejemplo, "mysql:dbname=aplicacion;host=127.0.0.1"
+	$cad = sprintf("mysql:dbname=%s;host=%s", $nombre, $ip);
+
+	// Devuelve un array con la cadena de conexión, el usuario y la clave
+	return [$cad, $usu, $clave];
 }

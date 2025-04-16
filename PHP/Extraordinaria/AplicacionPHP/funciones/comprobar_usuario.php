@@ -13,9 +13,16 @@ function comprobar_usuario($usuario, $clave) {
     // Obtiene el resultado como array asociativo si existe
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($resultado) {
-        return $resultado;
+      // Si el usuario existe y la clave es correcta
+      if ($resultado) {
+        // Guardamos el correo y codRestaurante en la sesión
+        $_SESSION['correo'] = $resultado['correo']; // Guardamos el correo
+        $_SESSION['codRestaurante'] = $resultado['codRestaurante']; // Guardamos el código del restaurante
+        
+        return $resultado; // Devolvemos el resultado si es necesario
     } else {
-        return false;
+        return false; // Si no se encuentra el usuario, retornamos false
     }
 }
+
+?>

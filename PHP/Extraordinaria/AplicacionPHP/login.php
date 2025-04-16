@@ -32,9 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
      <!-- IMPORTAR CSS -->
-     <link rel="stylesheet" href="css/login.css">
-
-
+     <link rel="stylesheet" href="css/styles.css">
+     <link rel="stylesheet" href="css/login.css">   
 </head>
 <body>
 
@@ -49,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          value = "<?php echo isset($_POST['correo']) ? $_POST['correo'] : ''; ?>">
         
         <!-- CLAVE -->
-        <label">Clave</label>
-        <input type = "password" name = "clave" id = "clave";>
+        <label>Clave</label>
+        <input type = "password" name = "clave" id = "clave">
 
 
         <input type = "submit">
-
+    </form>
 </body>
 </html>
 

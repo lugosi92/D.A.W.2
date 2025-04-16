@@ -16,21 +16,26 @@ comprobar_sesion();
 <head>
     <meta charset="UTF-8">
     <title>Lista de categorías</title>
+    <link rel="stylesheet" href="css/categorias.css">
 </head>
 
 <body>
-    <hl>Lista de categorías</hl>
+    <h1>Lista de categorías</hl>
 
 <?php
 
-if (!cargar_categorias()) {
+ $resultado  = cargar_categorias();
+
+
+// Conectarse con XML
+if (!$resultado) {
     echo "Error al conectar con la base datos";
 } else {
-    echo "<ul>"; //abrir la lista
-    foreach ($categorias as $cat) {
-        /*$cat['nombre] $cat['codCat']*/
-        $url = "productos.php?categoria=" . $cat['codCat'];
-        echo "<li><a href='$url'>" . $cat['nombre'] . "</a></li>";
+    echo "<ul>";
+    foreach ($resultado as $res) {
+        // Se crea una url con el parametro de categoria 
+        $url = "productos.php?categoria=" . $res['codCategoria']; 
+        echo "<li><a href='$url'>" . $res['nombre'] . "</a></li>";
     }
     echo "</ul>";
 }
