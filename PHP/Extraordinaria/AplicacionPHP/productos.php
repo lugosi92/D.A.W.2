@@ -19,6 +19,9 @@ comprobar_sesion();
 $categoria = cargar_categoria($_GET['categoria']);
 $productos = cargar_productos_categoria($_GET['categoria']);
 
+$carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+
+
 if (!$categoria || !$productos) {
     echo "<p class='error'>Error al conectar con la base de datos</p>";
     exit;
@@ -38,21 +41,25 @@ foreach ($productos as $producto) {
     $peso = $producto['peso'];
     $stock = $producto['stock'];
 
+    // Restar lo que hay en el carrito
+    $en_carrito = isset($carrito[$cod]) ? $carrito[$cod] : 0;
+    $stock_mostrado = $stock - $en_carrito;
+
     echo "<tr>
         <td>$nom</td>
         <td>$des</td>
         <td>$peso</td>
-        <td>$stock</td>
+        <td>$stock_mostrado</td>
         <td>
             <form action='añadir.php' method='POST'>
-                <input name='unidades' type='number' min='1' value='1' required>
+                <input name='unidades' type='number' min='1' max='$stock_mostrado' value='0' required>
                 <input type='hidden' name='cod' value='$cod'>
                 <input type='submit' value='Comprar'>
             </form>
         </td>
     </tr>";
-
 }
+
 echo "</table>";
 
 

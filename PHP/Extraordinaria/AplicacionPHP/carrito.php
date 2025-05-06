@@ -31,6 +31,10 @@ echo "<form action='confirmar_pedido.php' method='post'>";
 echo "<button type='submit'>Confirmar Pedido</button>";
 echo "</form>";
 
+// Botón para volver a categorías
+echo "<form action='categorias.php' method='get'>";
+echo "<button type='submit'>Seguir comprando</button>";
+echo "</form>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
