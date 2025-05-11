@@ -5,24 +5,30 @@ require_once "funciones/comprobar_usuario.php";
 
 session_start();
 
-$correo = $clave = $estadoLog =  "";
-
+$estadoLog = "";
 $errLog = "Usuario o contraseña incorrecta";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $usuario = $_POST['correo'];
+    $clave = $_POST['clave'];
 
-    $login = comprobar_usuario($_POST['correo'], $_POST['clave']);
+    $login = comprobar_usuario($usuario, $clave);
 
-        if(!$login){
-            $estadoLog = $errLog;
-        }else{
-            $_SESSION['correo'] = $_POST['correo'];
-            $_SESSION['carrito'] = [];
-        
+    if (!$login) {
+        $estadoLog = $errLog;
+    } else {
+        $_SESSION['correo'] = $usuario; 
+        $_SESSION['carrito'] = [];
+
+        $_SESSION['usuario'] = [
+            'correo' => $login['correo'],
+            'es_admin' => $login['es_admin'] 
+        ];
+
         header("Location: categorias.php");
-        return;
-        }
+        exit;
+    }
 }
 ?>
 <!DOCTYPE html>

@@ -40,6 +40,7 @@ foreach ($productos as $producto) {
     $des = $producto['descripcion'];
     $peso = $producto['peso'];
     $stock = $producto['stock'];
+    $precio = number_format($producto['precio'], 2);
 
     // Restar lo que hay en el carrito
     $en_carrito = isset($carrito[$cod]) ? $carrito[$cod] : 0;
@@ -50,6 +51,7 @@ foreach ($productos as $producto) {
         <td>$des</td>
         <td>$peso</td>
         <td>$stock_mostrado</td>
+        <td>$precio €</td>
         <td>
             <form action='añadir.php' method='POST'>
                 <input name='unidades' type='number' min='1' max='$stock_mostrado' value='0' required>

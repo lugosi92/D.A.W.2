@@ -2,7 +2,7 @@
 function cargar_producto($cod) {
     
     require 'conexion.php';
-    $sql = "SELECT nombre FROM productos WHERE codProducto = ?";
+    $sql = "SELECT nombre, precio FROM productos WHERE codProducto = ?";
     $stmt = $bd ->prepare($sql);
     $stmt->execute([$cod]);
     return $stmt->fetch();

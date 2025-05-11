@@ -8,6 +8,12 @@ comprobar_sesion();
     <nav>
         <a href="categorias.php" style="margin: 0 10px;">Home</a>
         <a href="carrito.php" style="margin: 0 10px;">Ver carrito</a>
-        <a href="logout.php" style="margin: 0 10px;">Cerrar sesión</a>
+        <a href="login.php" style="margin: 0 10px;">Cerrar sesión</a>
+        
+        <?php
+        if (isset($_SESSION['es_admin']) && $_SESSION['es_admin']) {
+            echo "<a href='admin_productos.php' class='btn-admin' style='margin: 0 10px;'>Administrar productos</a>";
+        }
+        ?>
     </nav>
 </header>
