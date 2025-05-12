@@ -10,26 +10,31 @@ $errLog = "Usuario o contraseña incorrecta";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $usuario = $_POST['correo'];
+    $correo = $_POST['correo'];
     $clave = $_POST['clave'];
 
-    $login = comprobar_usuario($usuario, $clave);
+    $usuario = comprobar_usuario($correo, $clave); // Aquí ya es el array asociativo
 
-    if (!$login) {
-        $estadoLog = $errLog;
+    if (!$usuario) {
+        $estadoLog = "Usuario o contraseña incorrecta";
     } else {
-        $_SESSION['correo'] = $usuario; 
+        $_SESSION['correo'] = $usuario['correo'];
         $_SESSION['carrito'] = [];
 
         $_SESSION['usuario'] = [
-            'correo' => $login['correo'],
-            'es_admin' => $login['es_admin'] 
+            'correo' => $usuario['correo'],
+            'es_admin' => $usuario['es_admin']
         ];
 
-        header("Location: categorias.php");
+        if ($usuario['es_admin']) {
+            header("Location: panel.php");
+        } else {
+            header("Location: categorias.php");
+        }
         exit;
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
